@@ -8,7 +8,7 @@ namespace PetShopApp.Moldels
     class UserClientModel : PersonModel
     {
         #region Properties
-        private OrderModel order;
+        private OrderModel activeOrder;
         private WishlistModel wishlist;
         private ShoppingCarModel car;
         private List<OrderModel> orderRecord;
@@ -16,8 +16,8 @@ namespace PetShopApp.Moldels
         #region Getters/Setters
         public OrderModel Order
         {
-            get { return order; }
-            set { order = value; OnPropertyChanged(); }
+            get { return activeOrder; }
+            set { activeOrder = value; OnPropertyChanged(); }
         }
         public WishlistModel Wishlist
         {
