@@ -22,8 +22,10 @@ namespace PetShopApp.Moldels
                 throw new System.ArgumentException("UserClientModel received a null car argument");
             }
             this.car = car;
+            car.User = this;
         }
         #endregion
+
         #region Getters/Setters
         public OrderModel Order
         {

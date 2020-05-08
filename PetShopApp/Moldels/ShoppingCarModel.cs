@@ -14,17 +14,6 @@ namespace PetShopApp.Moldels
         public UserClientModel User { get; set; }
         #endregion
 
-        #region Initialize
-        public ShoppingCarModel(UserClientModel user)
-        {
-            if (user == null)
-            {
-                throw new System.ArgumentException("ShoppingCarModel received a null UserClientModel argument");
-            }
-            this.User = user;
-        }
-        #endregion
-
         #region Getters/Setters
         public List<ProductModel> Products
         {
