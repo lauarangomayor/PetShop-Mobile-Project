@@ -16,6 +16,17 @@ namespace PetShopApp.Moldels
         private CategoryModel category;
         private ProductStateModel state;
         #endregion
+        #region Initialize
+        public ProductModel(CategoryModel category, ProductStateModel state)
+        {
+            if (category == null | state == null)
+            {
+                throw new System.ArgumentException("ProductModel received a null argument");
+            }
+            this.category = category;
+            this.state = state;
+        }
+        #endregion
         #region Getters/Setters
         public string Name
         {

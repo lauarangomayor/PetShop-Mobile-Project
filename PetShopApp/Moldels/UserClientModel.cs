@@ -13,6 +13,17 @@ namespace PetShopApp.Moldels
         private ShoppingCarModel car;
         private List<OrderModel> orderRecord;
         #endregion
+
+        #region Initialize
+        public UserClientModel(ShoppingCarModel car)
+        {
+            if (car == null)
+            {
+                throw new System.ArgumentException("UserClientModel received a null car argument");
+            }
+            this.car = car;
+        }
+        #endregion
         #region Getters/Setters
         public OrderModel Order
         {

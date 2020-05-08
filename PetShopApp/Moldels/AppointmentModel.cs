@@ -15,6 +15,18 @@ namespace PetShopApp.Moldels
         private UserVetModel vet;
         public PetModel Pacient { get; set; }
         #endregion
+
+        #region Initialize
+        public AppointmentModel(UserVetModel vet)
+        {
+            if (vet == null)
+            {
+                throw new System.ArgumentException("AppointmentModel received a null vet argument");
+            }
+            this.vet = vet;
+        }
+        #endregion
+
         #region Getters/Setters
         public string Date
         {
