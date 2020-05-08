@@ -19,7 +19,7 @@ namespace PetShopApp.Moldels
         {
             if (car == null)
             {
-                throw new System.ArgumentException("UserClientModel received a null car argument");
+                throw new System.ArgumentException("UserClientModel received a null ShoppingCarModel argument");
             }
             this.car = car;
             car.User = this;
