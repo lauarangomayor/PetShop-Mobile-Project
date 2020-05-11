@@ -10,19 +10,19 @@ namespace PetShopApp.Moldels
         #region Properties
         private OrderModel activeOrder;
         private WishlistModel wishlist;
-        private ShoppingCarModel car;
+        private ShoppingCartModel cart;
         private List<OrderModel> orderRecord;
         #endregion
 
         #region Initialize
-        public UserClientModel(ShoppingCarModel car)
+        public UserClientModel(ShoppingCartModel cart)
         {
-            if (car == null)
+            if (cart == null)
             {
-                throw new System.ArgumentException("UserClientModel received a null ShoppingCarModel argument");
+                throw new System.ArgumentException("UserClientModel received a null ShoppingCartModel argument");
             }
-            this.car = car;
-            car.User = this;
+            this.cart = cart;
+            cart.User = this;
         }
         #endregion
 
@@ -37,7 +37,7 @@ namespace PetShopApp.Moldels
             get { return wishlist; }
             set { wishlist = value; OnPropertyChanged(); }
         }
-        public ShoppingCarModel Car
+        public ShoppingCartModel Car
         {
             get { return car; }
             set { car = value; OnPropertyChanged(); }

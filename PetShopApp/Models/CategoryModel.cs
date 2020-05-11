@@ -1,4 +1,6 @@
-﻿using SQLite;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,20 +11,15 @@ namespace PetShopApp.Moldels
     {
         #region Properties
         [PrimaryKey, AutoIncrement]
+        [JsonIgnore]
         public int ID { get; set; }
-
-        private string name;
+        [JsonProperty("categoryid")]
+        public long CategoryId { get; set; }
+        [JsonProperty("categoryname")]
+        public string Name; 
         #endregion
         #region Getters/Setters
-        public string Name
-        {
-            get { return name; }
-            set
-            {
-                name = value;
-                OnPropertyChanged();
-            }
-        }
+      
         #endregion
     }
 }

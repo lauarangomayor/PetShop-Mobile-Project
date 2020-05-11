@@ -12,7 +12,8 @@ namespace PetShopApp.Moldels
         public int ID { get; set; }
         private string name;
         private string specie;
-        private string birthdate; 
+        private string birthdate;
+        private string generalInfo;
         public UserClientModel Owner { get; set; }
                 
         #endregion
@@ -31,6 +32,12 @@ namespace PetShopApp.Moldels
         {
             get { return birthdate; }
             set { birthdate = value; OnPropertyChanged(); }
+        }
+
+        public string GeneralInfo
+        {
+            get { return generalInfo; }
+            set { generalInfo = value; OnPropertyChanged(); }
         }
         #endregion
     }

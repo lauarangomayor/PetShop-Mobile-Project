@@ -11,6 +11,8 @@ namespace PetShopApp.Moldels
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
+        public string DocumentId { get; set; }
+
         public string Name { get; set; }
 
         public string Telephone { get; set; }
@@ -19,7 +21,7 @@ namespace PetShopApp.Moldels
 
         private string password;
 
-        private int email;
+        private string email;
 
         #endregion
         #region Getters/Setters
@@ -30,6 +32,16 @@ namespace PetShopApp.Moldels
             set
             {
                 password= value;
+                OnPropertyChanged(); //Notify to the interface that the passord has changed.
+            }
+        }
+
+        public string Email
+        {
+            get { return email; }
+            set
+            {
+                email = value;
                 OnPropertyChanged(); //Notify to the interface that the passord has changed.
             }
         }

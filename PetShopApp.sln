@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShopApp.Android", "PetSh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShopApp.iOS", "PetShopApp.iOS\PetShopApp.iOS.csproj", "{26140300-8C0E-4414-8E70-AA6FD34915E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShopApp", "PetShopApp\PetShopApp.csproj", "{178FBA55-62FB-4D0B-987B-0C723A5A4B4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShopApp", "PetShopApp\PetShopApp.csproj", "{178FBA55-62FB-4D0B-987B-0C723A5A4B4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
