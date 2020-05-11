@@ -14,17 +14,17 @@ namespace PetShopApp.Moldels
         private string description;
         private float price;
         private CategoryModel category;
-        private ProductStateModel state;
+        private int stock;
         #endregion
         #region Initialize
-        public ProductModel(CategoryModel category, ProductStateModel state)
+        public ProductModel(CategoryModel category, int stock)
         {
-            if (category == null | state == null)
+            if (category == null | stock < 0)
             {
-                throw new System.ArgumentException("ProductModel received a null argument");
+                throw new System.ArgumentException("ProductModel received a null category or an invalid stock argument");
             }
             this.category = category;
-            this.state = state;
+            this.stock = stock;
         }
         #endregion
         #region Getters/Setters
@@ -48,10 +48,10 @@ namespace PetShopApp.Moldels
             get { return category; }
             set {category = value; OnPropertyChanged();}
         }
-        public ProductStateModel State
+        public int Stock
         {
-            get { return state; }
-            set { state = value; OnPropertyChanged(); }
+            get { return stock; }
+            set { stock = value; OnPropertyChanged(); }
         }
 
         #endregion
