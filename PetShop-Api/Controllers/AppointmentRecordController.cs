@@ -70,7 +70,7 @@ namespace PetShop_Api.Controllers
             }
             catch(Exception e){
                 bool appoitmentRecordExist = dBContext.AppointmentsRecords.Any(e => e.IdAppointmentRecord == id);
-                if (appoitmentRecordExist){
+                if (!appoitmentRecordExist){
                     return NotFound();
                 }
                 return StatusCode(410);
@@ -78,7 +78,7 @@ namespace PetShop_Api.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public async Task<ActionResult<AppointmentModel>> DeleteAppoitmentRecord(long id){
+        public async Task<IActionResult> DeleteAppoitmentRecord(long id){
             try{
                 var appointmentRecord = await dBContext.AppointmentsRecords.FindAsync(id);
                 if (appointmentRecord == null){

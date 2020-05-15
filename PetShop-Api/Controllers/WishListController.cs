@@ -3,74 +3,68 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using PetShop_Api.Models;
+using Microsoft.Extensions.Logging;
 
-namespace PetShop_Api.Controllers
-{
+namespace PetShop_Api.Controllers{
     [ApiController]
-    [Route("[controller]")]
-    public class PetController : ControllerBase
-    {
+    [Route("wishList")]
+    public class WishListController : ControllerBase{
         #region Properties
         private readonly PetshopDBContext dBContext;
         #endregion
         #region Constructor
-        public PetController(PetshopDBContext dBContext){
+        public WishListController(PetshopDBContext dBContext){
             this.dBContext = dBContext;
         }
         #endregion
-        #region Methods
+        #region Method
         [HttpGet("get/{id}")]
-        public async Task<ActionResult<PetModel>> GetPet(long id){
+        public async Task<ActionResult<WishListModel>> GetWishList(long id){
             try{
-                var pet = await dBContext.Pets.FindAsync(id);
-                if (pet == null){
+                var wishList = await dBContext.WishLists.FindAsync(id);
+                if (wishList == null){
                     return NotFound();
                 }
-                return Ok(pet);
+                return Ok(wishlist);
             }
             catch(Exception e){
                 return StatusCode(410);
             }
-                
         }
-
         [HttpGet("all")]
-        public async Task<ActionResult<List<PetModel>>> GetAllPets(){
+        public async Task<ActionResult<WishListModel>> GetAllWishLists(){
             try{
-                return await dBContext.Pets.ToListAsync();
+                return await dBContext.WishLists.ToListAsync();
             }
             catch(Exception e){
                 return StatusCode(410);
             }
         }
-
         [HttpPost("create")]
-        public async Task<ActionResult<PetModel>> CreatePet(PetModel pet){
+        public async Task<ActionResult<WishListModel>> CreateWishList(WishListModel wishList){
             try {
-                dBContext.Pets.Add(pet);
+                dBContext.WishLists.Add(wishList);
                 await dBContext.SaveChangesAsync();
-                return CreatedAtAction(nameof(GetPet), pet.IdPet);
+                return CreatedAtAction(nameof(GetWishList), wishList.IdWishList);
             }
             catch(Exception e){
                 return StatusCode(410);
             }
         }
-
         [HttpPut("update/{id}")]
-        public async Task<ActionResult> UpdatePet(PetModel pet, long id){
-            try{
-                if (id != pet.IdPet){
+        public async Task<IActionResult> UpdateWishList(WishListModel wishList,long id){
+            try {
+                if (id != wishList.IdWishList){
                     return BadRequest();
                 }
-                dBContext.Entry(pet).State = EntityState.Modified;
+                dBContext.Entry(wishList).State = EntityState.Modified;
                 await dBContext.SaveChangesAsync();
                 return NoContent();
+                
             }
-            catch(Exception e){
-                bool petExist = dBContext.Pets.Any(e => e.IdPet == id);
-                if (!petExist){
+            catch (Exception e){
+                bool wishListExist = dBContext.WishLists.Any(e => e.IdWishList == id);
+                if (!wishListExist){
                     return NotFound();
                 }
                 return StatusCode(410);
@@ -78,17 +72,18 @@ namespace PetShop_Api.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> DeletePet(long id){
-            try{
-                var pet = await dBContext.Pets.FindAsync(id);
-                if (pet == null){
+        public async Task<IActionResult> DeleteWishList(long id)
+        {
+            try {
+                var wishList = await dBContext.WishLists.FindAsync(id);
+                if (wishList == null){
                     return NotFound();
                 }
-                dBContext.Pets.Remove(pet);
+                dBContext.WishLists.Remove(wishList);
                 await dBContext.SaveChangesAsync();
                 return NoContent();
             }
-            catch(Exception e){
+            catch (Exception e){
                 return StatusCode(410);
             }
         }

@@ -77,7 +77,7 @@ namespace PetShop_Api.Controllers
             }
             catch (Exception e){
                 bool specieExist = dBContext.Species.Any(e => e.IdSpecie == id);
-                if (specieExist){
+                if (!specieExist){
                     return NotFound();
                 }
                 return StatusCode(410);
@@ -85,7 +85,7 @@ namespace PetShop_Api.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public async Task<ActionResult<SpecieModel>> DeleteSpecie(long id)
+        public async Task<IActionResult> DeleteSpecie(long id)
         {
             try {
                 var specie = await dBContext.Species.FindAsync(id);
