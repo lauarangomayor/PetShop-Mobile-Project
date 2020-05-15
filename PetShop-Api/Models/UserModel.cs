@@ -6,7 +6,7 @@ namespace PetShop_Api.Models
     public class UserModel
     {
         [Key]
-        public long IdPerson {get; set;}
+        public long IdUser {get; set;}
         public string DocumentId {get;set;}
         public string Name {get; set;}
         public string Telephone{get;set;}

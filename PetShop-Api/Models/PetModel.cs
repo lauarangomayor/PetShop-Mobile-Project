@@ -9,9 +9,11 @@ namespace PetShop_Api.Models
         [Key]
         public long IdPet {get; set;}
         public string Name {get; set;}
+        public long IdSpecie{get;set;}
         public SpecieModel Specie {get;set;}
         public string GeneralInfo{get;set;}
         public DateTime Birthdate{get;set;}
+        public long IdUser{get;set;}
         public UserModel User {get;set;}
 
         public List<AppointmentModel> Appointments{get;set;}

@@ -8,6 +8,7 @@ namespace PetShop_Api.Models
         [Key]
         public long IdOrder_Products {get; set;}
         public long IdOrder {get;set;}
+        public long IdProduct{get;set;}
         public ProductModel Product {get; set;}
         
     }

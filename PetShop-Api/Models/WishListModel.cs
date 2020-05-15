@@ -7,6 +7,7 @@ namespace PetShop_Api.Models
     {
         [Key]
         public long IdWishList {get; set;}
+        public long IdUser{get;set;}
         public UserModel User {get;set;}
         public List<WishList_ProductsModel> WishLists_Products{get;set;}
     }

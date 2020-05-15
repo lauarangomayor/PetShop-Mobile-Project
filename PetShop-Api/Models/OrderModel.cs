@@ -9,6 +9,8 @@ namespace PetShop_Api.Models
         public long IdOrder {get; set;}
         public double TotalValue {get;set;}
         public string IdPerson {get; set;}
+        public long IdStateOrder{get;set;}
+        public long IdUser{get;set;}
         public UserModel User {get;set;}
         public StateOrderModel StateOrder {get;set;}
 

@@ -7,10 +7,11 @@ namespace PetShop_Api.Models
     {
         [Key]
         public long IdVeterinarian {get; set;}
+        public long IdUser{get;set;}
 
         public UserModel User {get;set;}
 
-        public List<Specialties_VetsModel> Specialties_VetsModel {get;set;}
+        public List<Specialties_VetsModel> Specialties_Vets {get;set;}
 
         public List<AppointmentModel> Appointments {get;set;}
     }

@@ -7,7 +7,9 @@ namespace PetShop_Api.Models
     {
         [Key]
         public long IdSpecialties_Vets {get; set;}
+        public long IdVeterinarian{get;set;}
         public VeterinarianModel Veterinarian {get;set;}
+        public long IdSpecialty{get;set;}
         public SpecialtyModel Specialty {get; set;}
         
     }
