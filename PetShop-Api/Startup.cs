@@ -28,7 +28,9 @@ namespace PetShop_Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddDbContextPool<PetshopDBContext> (options => options
             .UseMySql("Server=veterinariadb.c5zn0tpz4e5k.us-east-2.rds.amazonaws.com;Port=3306;Database=DBPetshop;User=admin;Password=Moviles123;"
             ,MySqlOptions => MySqlOptions.ServerVersion(new Version (10,2,21), ServerType.MariaDb)));
