@@ -32,7 +32,7 @@ namespace PetShop_Api.Controllers
             try
             {
                 var order_products = await dBContext.Orders_Products
-                                           .Include(p => p.IdProduct)
+                                           .Include(p => p.Product)
                                            .FirstAsync(op => op.IdOrder_Products == id);
                 if (order_products == null)
                 {
@@ -54,7 +54,7 @@ namespace PetShop_Api.Controllers
         {
             try
             {
-                return await dBContext.Orders_Products.ToListAsync();
+                return await dBContext.Orders_Products.Include(p => p.Product).ToListAsync();
             }
             catch(Exception e)
             {
