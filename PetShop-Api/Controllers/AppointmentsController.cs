@@ -24,7 +24,10 @@ namespace PetShop_Api.Controllers
         [HttpGet("get/{id}")]
         public async Task<ActionResult<AppointmentModel>> GetAppointment(long id){
             try{
-                var appointment = await dBContext.Appointments.FindAsync(id);
+                var appointment = await dBContext.Appointments
+                                                .Include(p => p.Pet)
+                                                .Include(v => v.Veterinarian)
+                                                .FirstAsync(a => a.IdAppointment == id);
                 if (appointment == null){
                     return NotFound();
                 }
@@ -32,14 +35,17 @@ namespace PetShop_Api.Controllers
             }
             catch(Exception e){
                 return StatusCode(410);
-            }
-                
+            }      
+            
         }
 
         [HttpGet("all")]
         public async Task<ActionResult<List<AppointmentModel>>> GetAllAppointments(){
             try{
-                return await dBContext.Appointments.ToListAsync();
+                return await dBContext.Appointments
+                                    .Include(p => p.Pet)
+                                    .Include(v => v.Veterinarian)
+                                    .ToListAsync();
             }
             catch(Exception e){
                 return StatusCode(410);
@@ -51,7 +57,7 @@ namespace PetShop_Api.Controllers
             try {
                 dBContext.Appointments.Add(appointment);
                 await dBContext.SaveChangesAsync();
-                return Ok(appointment);
+                return CreatedAtAction(nameof(GetAppointment), appointment.IdAppointment);
             }
             catch(Exception e){
                 return StatusCode(410);

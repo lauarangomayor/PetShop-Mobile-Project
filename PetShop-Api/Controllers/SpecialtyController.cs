@@ -9,7 +9,7 @@ using PetShop_Api.Models;
 
 namespace PetShop_Api.Controllers{
     [ApiController]
-    [Route("specialty")]
+    [Route("[controller]")]
     public class SpecialtyController : ControllerBase{
         #region Properties
         private readonly PetshopDBContext dBContext;

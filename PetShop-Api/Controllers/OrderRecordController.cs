@@ -10,7 +10,7 @@ using PetShop_Api.Models;
 namespace PetShop_Api.Controllers
 {
     [ApiController]
-    [Route("orderRecord")]
+    [Route("[controller]")]
     public class OrderRecordController : ControllerBase
     {
         #region Properties
