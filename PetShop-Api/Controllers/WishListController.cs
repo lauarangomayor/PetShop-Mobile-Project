@@ -35,7 +35,7 @@ namespace PetShop_Api.Controllers{
             }
         }
         [HttpGet("all")]
-        public async Task<ActionResult<WishListModel>> GetAllWishLists(){
+        public async Task<ActionResult<List<WishListModel>>> GetAllWishLists(){
             try {
                 var wishLists = await dBContext.WishLists.ToListAsync();
                 if (wishLists.Count() == 0){
@@ -48,7 +48,7 @@ namespace PetShop_Api.Controllers{
             }
         }
         [HttpPost("create")]
-        public async Task<ActionResult<List<WishListModel>>> CreateWishList(WishListModel wishList){
+        public async Task<ActionResult<WishListModel>> CreateWishList(WishListModel wishList){
             try {
                 dBContext.WishLists.Add(wishList);
                 await dBContext.SaveChangesAsync();
