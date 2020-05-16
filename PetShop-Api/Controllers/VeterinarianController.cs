@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using PetShop_Api.Models;
 
 namespace PetShop_Api.Controllers{
     [ApiController]
@@ -32,7 +34,7 @@ namespace PetShop_Api.Controllers{
             }
         }
         [HttpGet("all")]
-        public async Task<ActionResult<VeterinarianModel>> GetAllVeterinarians(){
+        public async Task<ActionResult<List<VeterinarianModel>>> GetAllVeterinarians(){
             try{
                 return await dBContext.Veterinarians.ToListAsync();
             }
