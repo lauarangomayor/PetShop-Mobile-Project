@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using PetShop_Api.Models;
+
 
 namespace PetShop_Api.Controllers{
     [ApiController]
@@ -25,7 +28,7 @@ namespace PetShop_Api.Controllers{
                 if (wishList == null){
                     return NotFound();
                 }
-                return Ok(wishlist);
+                return Ok(wishList);
             }
             catch(Exception e){
                 return StatusCode(410);
@@ -33,10 +36,14 @@ namespace PetShop_Api.Controllers{
         }
         [HttpGet("all")]
         public async Task<ActionResult<WishListModel>> GetAllWishLists(){
-            try{
-                return await dBContext.WishLists.ToListAsync();
+            try {
+                var wishLists = await dBContext.WishLists.ToListAsync();
+                if (wishLists.Count() == 0){
+                    return NotFound();
+                }
+                return Ok(wishLists);
             }
-            catch(Exception e){
+            catch (Exception e){
                 return StatusCode(410);
             }
         }

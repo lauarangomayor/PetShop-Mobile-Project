@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using PetShop_Api.Models;
 
 namespace PetShop_Api.Controllers{
     [ApiController]
@@ -33,10 +34,14 @@ namespace PetShop_Api.Controllers{
         }
         [HttpGet("all")]
         public async Task<ActionResult<VeterinarianModel>> GetAllVeterinarians(){
-            try{
-                return await dBContext.Veterinarians.ToListAsync();
+            try {
+                var veterinarians = await dBContext.Veterinarians.ToListAsync();
+                if (veterinarians.Count() == 0){
+                    return NotFound();
+                }
+                return Ok(veterinarians);
             }
-            catch(Exception e){
+            catch (Exception e){
                 return StatusCode(410);
             }
         }

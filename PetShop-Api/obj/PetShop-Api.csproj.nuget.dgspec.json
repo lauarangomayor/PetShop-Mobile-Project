@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\VeronicaT\\Desktop\\Universidad 2020-1\\Moviles\\Proyecto\\PetShop\\PetShop-Api\\PetShop-Api.csproj": {}
+    "C:\\Users\\juanl\\OneDrive\\Escritorio\\Universidad\\Moviles\\Proyecto\\PetShop-Mobile-Project\\PetShop-Api\\PetShop-Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\VeronicaT\\Desktop\\Universidad 2020-1\\Moviles\\Proyecto\\PetShop\\PetShop-Api\\PetShop-Api.csproj": {
+    "C:\\Users\\juanl\\OneDrive\\Escritorio\\Universidad\\Moviles\\Proyecto\\PetShop-Mobile-Project\\PetShop-Api\\PetShop-Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\VeronicaT\\Desktop\\Universidad 2020-1\\Moviles\\Proyecto\\PetShop\\PetShop-Api\\PetShop-Api.csproj",
+        "projectUniqueName": "C:\\Users\\juanl\\OneDrive\\Escritorio\\Universidad\\Moviles\\Proyecto\\PetShop-Mobile-Project\\PetShop-Api\\PetShop-Api.csproj",
         "projectName": "PetShop-Api",
-        "projectPath": "C:\\Users\\VeronicaT\\Desktop\\Universidad 2020-1\\Moviles\\Proyecto\\PetShop\\PetShop-Api\\PetShop-Api.csproj",
-        "packagesPath": "C:\\Users\\VeronicaT\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\VeronicaT\\Desktop\\Universidad 2020-1\\Moviles\\Proyecto\\PetShop\\PetShop-Api\\obj\\",
+        "projectPath": "C:\\Users\\juanl\\OneDrive\\Escritorio\\Universidad\\Moviles\\Proyecto\\PetShop-Mobile-Project\\PetShop-Api\\PetShop-Api.csproj",
+        "packagesPath": "C:\\Users\\juanl\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\juanl\\OneDrive\\Escritorio\\Universidad\\Moviles\\Proyecto\\PetShop-Mobile-Project\\PetShop-Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\VeronicaT\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\juanl\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -42,6 +42,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -71,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
