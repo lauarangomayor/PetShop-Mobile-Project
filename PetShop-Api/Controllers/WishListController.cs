@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PetShop_Api.Models;
 
-
 namespace PetShop_Api.Controllers{
     [ApiController]
     [Route("wishList")]
@@ -67,7 +66,7 @@ namespace PetShop_Api.Controllers{
                 dBContext.Entry(wishList).State = EntityState.Modified;
                 await dBContext.SaveChangesAsync();
                 return NoContent();
-                
+
             }
             catch (Exception e){
                 bool wishListExist = dBContext.WishLists.Any(e => e.IdWishList == id);
@@ -96,4 +95,4 @@ namespace PetShop_Api.Controllers{
         }
         #endregion
     }
-}
+} 
