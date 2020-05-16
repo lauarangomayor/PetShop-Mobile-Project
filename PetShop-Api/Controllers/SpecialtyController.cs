@@ -34,7 +34,7 @@ namespace PetShop_Api.Controllers{
             }
         }
         [HttpGet("all")]
-        public async Task<ActionResult<SpecialtyModel>> GetAllSpecialties(){
+        public async Task<ActionResult<List<SpecialtyModel>>> GetAllSpecialties(){
              try {
                 var specialties = await dBContext.WishLists.ToListAsync();
                 if (specialties.Count() == 0){

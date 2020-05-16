@@ -48,7 +48,7 @@ namespace PetShop_Api.Controllers{
             }
         }
         [HttpPost("create")]
-        public async Task<ActionResult<WishListModel>> CreateWishList(WishListModel wishList){
+        public async Task<ActionResult<List<WishListModel>>> CreateWishList(WishListModel wishList){
             try {
                 dBContext.WishLists.Add(wishList);
                 await dBContext.SaveChangesAsync();

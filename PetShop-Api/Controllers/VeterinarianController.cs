@@ -34,7 +34,7 @@ namespace PetShop_Api.Controllers{
             }
         }
         [HttpGet("all")]
-        public async Task<ActionResult<VeterinarianModel>> GetAllVeterinarians(){
+        public async Task<ActionResult<List<VeterinarianModel>>> GetAllVeterinarians(){
             try {
                 var veterinarians = await dBContext.Veterinarians.ToListAsync();
                 if (veterinarians.Count() == 0){
