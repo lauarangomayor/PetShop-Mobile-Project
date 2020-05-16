@@ -51,7 +51,7 @@ namespace PetShop_Api.Controllers
             try {
                 dBContext.Pets.Add(pet);
                 await dBContext.SaveChangesAsync();
-                return CreatedAtAction(nameof(GetPet), pet.IdPet);
+                return Ok(pet);
             }
             catch(Exception e){
                 return StatusCode(410);

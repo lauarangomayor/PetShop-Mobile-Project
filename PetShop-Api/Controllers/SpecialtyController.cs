@@ -35,14 +35,10 @@ namespace PetShop_Api.Controllers{
         }
         [HttpGet("all")]
         public async Task<ActionResult<List<SpecialtyModel>>> GetAllSpecialties(){
-             try {
-                var specialties = await dBContext.WishLists.ToListAsync();
-                if (specialties.Count() == 0){
-                    return NotFound();
-                }
-                return Ok(specialties);
+            try{
+                return await dBContext.Specialties.ToListAsync();
             }
-            catch (Exception e){
+            catch(Exception e){
                 return StatusCode(410);
             }
         }
@@ -51,7 +47,7 @@ namespace PetShop_Api.Controllers{
             try {
                 dBContext.Specialties.Add(specialty);
                 await dBContext.SaveChangesAsync();
-                return CreatedAtAction(nameof(GetSpecialty), specialty.IdSpecialty);
+                return Ok(specialty);
             }
             catch(Exception e){
                 return StatusCode(410);

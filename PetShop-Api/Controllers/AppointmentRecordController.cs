@@ -51,7 +51,7 @@ namespace PetShop_Api.Controllers
             try {
                 dBContext.AppointmentsRecords.Add(appointmentRecord);
                 await dBContext.SaveChangesAsync();
-                return CreatedAtAction(nameof(GetAppointmentRecord), appointmentRecord.IdAppointmentRecord);
+                return Ok(appointmentRecord);
             }
             catch(Exception e){
                 return StatusCode(410);

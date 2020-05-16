@@ -55,7 +55,10 @@ namespace PetShop_Api.Controllers
         {
             try
             {
-                return await dBContext.Orders.ToListAsync();
+                return await dBContext.Orders
+                                        .Include(so => so.IdStateOrder)
+                                        .Include(u => u.IdUser)
+                                        .ToListAsync();
             }
             catch(Exception e)
             {

@@ -32,7 +32,8 @@ namespace PetShop_Api.Controllers
             try
             {
                 var specialties_vets= await dBContext.Specialties_Vets
-                                           .Include(s => s.IdSpecialty)
+                                           .Include(s => s.Specialty)
+                                           .Include(s => s.Veterinarian)
                                            .FirstAsync(sv => sv.IdSpecialties_Vets == id);
                 if (specialties_vets == null)
                 {
@@ -53,7 +54,10 @@ namespace PetShop_Api.Controllers
         {
             try
             {
-                return await dBContext.Specialties_Vets.ToListAsync();
+                return await dBContext.Specialties_Vets
+                                            .Include(s => s.Specialty)
+                                            .Include(s => s.Veterinarian)
+                                            .ToListAsync();
             }
             catch(Exception e)
             {

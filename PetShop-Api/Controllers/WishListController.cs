@@ -23,7 +23,7 @@ namespace PetShop_Api.Controllers{
         [HttpGet("get/{id}")]
         public async Task<ActionResult<WishListModel>> GetWishList(long id){
             try{
-                var wishList = await dBContext.WishLists.FindAsync(id);
+                var wishList = await dBContext.WishLists.Include(u => u.User).FirstAsync(w => w.IdWishList == id);
                 if (wishList == null){
                     return NotFound();
                 }
@@ -51,7 +51,7 @@ namespace PetShop_Api.Controllers{
             try {
                 dBContext.WishLists.Add(wishList);
                 await dBContext.SaveChangesAsync();
-                return CreatedAtAction(nameof(GetWishList), wishList.IdWishList);
+                return Ok(wishList);
             }
             catch(Exception e){
                 return StatusCode(410);
