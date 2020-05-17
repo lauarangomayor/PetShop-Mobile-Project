@@ -44,7 +44,7 @@ namespace PetShop_Api.Models
         modelBuilder.Entity<ProductModel>()
                     .HasOne(c => c.Category)
                     .WithMany(p => p.Products)
-                    .HasForeignKey(c => c.IdProduct);
+                    .HasForeignKey(c => c.IdCategory);
         modelBuilder.Entity<ProductModel>()
                     .HasOne(sp => sp.StateProduct)
                     .WithMany(p => p.Products)
