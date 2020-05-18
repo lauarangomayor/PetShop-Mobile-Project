@@ -22,6 +22,7 @@ namespace PetShop_Api.Models
                     .HasOne(p => p.Pet)
                     .WithMany(a => a.Appointments)
                     .HasForeignKey(p => p.IdPet);
+
         modelBuilder.Entity<AppointmentModel>()
                     .HasOne(p => p.Veterinarian)
                     .WithMany(a => a.Appointments)
@@ -36,15 +37,21 @@ namespace PetShop_Api.Models
                     .HasOne(u => u.User)
                     .WithMany(p => p.Pets)
                     .HasForeignKey(u => u.IdUser);
+
         modelBuilder.Entity<PetModel>()
                     .HasOne(s => s.Specie)
                     .WithMany(p => p.Pets)
+
                     .HasForeignKey(s => s.IdSpecie);
-        
+        modelBuilder.Entity<UserModel>()
+                    .HasMany(p => p.Pets)
+                    .WithOne(u => u.User);
+
         modelBuilder.Entity<ProductModel>()
                     .HasOne(c => c.Category)
                     .WithMany(p => p.Products)
                     .HasForeignKey(c => c.IdCategory);
+
         modelBuilder.Entity<ProductModel>()
                     .HasOne(sp => sp.StateProduct)
                     .WithMany(p => p.Products)
@@ -54,6 +61,7 @@ namespace PetShop_Api.Models
                     .HasOne(s => s.Specialty)
                     .WithMany(sv => sv.Specialties_Vets)
                     .HasForeignKey(s => s.IdSpecialty);
+
         modelBuilder.Entity<Specialties_VetsModel>()
                     .HasOne(s => s.Veterinarian)
                     .WithMany(sv => sv.Specialties_Vets)
@@ -68,6 +76,7 @@ namespace PetShop_Api.Models
                     .HasOne(w => w.WishList)
                     .WithMany(wp => wp.WishLists_Products)
                     .HasForeignKey(w => w.IdWishList);
+                    
         modelBuilder.Entity<WishList_ProductsModel>()
                     .HasOne(w => w.Product)
                     .WithMany(wp => wp.WishLists_Products)
