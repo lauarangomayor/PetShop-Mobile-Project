@@ -23,22 +23,22 @@ namespace PetShop_Api.Controllers
         }
         #endregion
         #region Method
+ 
         [HttpGet("get/{id}")] //http://localhost:5000/Product/get/1
-        public async Task<ActionResult<ProductModel>> GetProduct(long id)
-        {
-            try {
-                var product = await dBContext.Products.FindAsync(id);
-                if (product == null){
+        public async Task<ActionResult<ProductModel>> GetProduct(long id){ //Trae la categoria asociada a el producto con ese id
+            try{
+                var categoryproduct = await dBContext.Products.Include(c => c.Category).Include(sp => sp.StateProduct)
+                .FirstAsync(p => p.IdProduct == id);
+                if (categoryproduct == null){
                     return NotFound();
                 }
-                return Ok(product);
+                return Ok(categoryproduct);
             }
-            catch (Exception e){
+            catch(Exception e){
                 return StatusCode(410);
             }
         }
 
-        
         [HttpGet("all")]//http://localhost:5000/Product/all
         public async Task<ActionResult<List<ProductModel>>> GetAllProducts(){
             try {
@@ -85,7 +85,7 @@ namespace PetShop_Api.Controllers
             }
         }
 
-        [HttpDelete("delete/{id}")] //http://localhost:5000/Category/delete/1
+        [HttpDelete("delete/{id}")] //http://localhost:5000/Product/delete/1
         public async Task<IActionResult> DeleteProduct(long id)
         {
             try {
@@ -102,6 +102,7 @@ namespace PetShop_Api.Controllers
             }
         }
         
+       
 
         #endregion
 
