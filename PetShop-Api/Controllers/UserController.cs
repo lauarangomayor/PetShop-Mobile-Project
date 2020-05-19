@@ -31,7 +31,9 @@ namespace PetShop_Api.Controllers
         {
             try
             {
-                var user = await dBContext.Users.FindAsync(id);
+                var user = await dBContext.Users
+                                        .Include(p => p.Pets)
+                                        .FirstAsync(u => u.IdUser == id);
                 if (user == null)
                 {
                     return NotFound(); //Return code 404
@@ -52,7 +54,9 @@ namespace PetShop_Api.Controllers
         {
             try
             {
-                return await dBContext.Users.ToListAsync();
+                return await dBContext.Users
+                                    .Include(p => p.Pets)
+                                    .ToListAsync();
             }
             catch(Exception e)
             {
