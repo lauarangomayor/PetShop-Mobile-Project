@@ -9,7 +9,7 @@ namespace PetShop_Api.Models
         public long IdOrderRecord {get; set;}
         public long IdOrder {get;set;}
         public double TotalValue {get; set;}
-        public long IdUser {get;set;}
+        public long IdClient {get;set;}
 
     }
 }

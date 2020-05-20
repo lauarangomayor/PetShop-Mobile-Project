@@ -11,7 +11,24 @@ namespace PetShop_Api.Models
 
     public DbSet<StateOrderModel> StatesOrder {get;set;}
     public DbSet<OrderModel> Orders {get;set;}
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public DbSet<AppointmentModel> Appointments{get;set;}
+    public DbSet<AppointmentRecord> AppointmentsRecords{get;set;}
+    public DbSet<CategoryModel> Categories{get;set;}
+    public DbSet<Order_ProductsModel> Orders_Products{get;set;}
+    public DbSet<OrderRecordModel> OrdersRecords{get;set;}
+    public DbSet<PetModel> Pets{get;set;}
+    public DbSet<ProductModel> Products{get;set;}
+    public DbSet<SpecialtyModel> Specialties{get;set;}
+    public DbSet<SpecieModel> Species{get;set;}
+    public DbSet<StateProductModel> StatesProducts{get;set;}
+    public DbSet<UserModel> Users{get;set;}
+    public DbSet<ClientModel> Clients{get;set;}
+    public DbSet<VeterinarianModel> Veterinarians{get;set;}
+    public DbSet<WishList_ProductsModel> WishLists_Products{get;set;}
+    public DbSet<WishListModel> WishLists{get;set;}
+    public DbSet<Specialties_VetsModel> Specialties_Vets{get;set;}
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<OrderModel>()
                     .HasOne(so => so.StateOrder)
@@ -29,9 +46,9 @@ namespace PetShop_Api.Models
                     .HasForeignKey(p => p.IdPet);
 
         modelBuilder.Entity<AppointmentModel>()
-                    .HasOne(p => p.Veterinarian)
+                    .HasOne(v => v.Veterinarian)
                     .WithMany(a => a.Appointments)
-                    .HasForeignKey(p => p.IdVeterinarian);
+                    .HasForeignKey(v => v.IdVeterinarian);
 
         modelBuilder.Entity<Order_ProductsModel>()
                     .HasOne(p => p.Product)
@@ -98,22 +115,6 @@ namespace PetShop_Api.Models
                     .WithMany(w => w.WishLists)
                     .HasForeignKey(c => c.IdClient);
     }
-    public DbSet<AppointmentModel> Appointments{get;set;}
-    public DbSet<AppointmentRecord> AppointmentsRecords{get;set;}
-    public DbSet<CategoryModel> Categories{get;set;}
-    public DbSet<Order_ProductsModel> Orders_Products{get;set;}
-    public DbSet<OrderRecordModel> OrdersRecords{get;set;}
-    public DbSet<PetModel> Pets{get;set;}
-    public DbSet<ProductModel> Products{get;set;}
-    public DbSet<SpecialtyModel> Specialties{get;set;}
-    public DbSet<SpecieModel> Species{get;set;}
-    public DbSet<StateProductModel> StatesProducts{get;set;}
-    public DbSet<UserModel> Users{get;set;}
-    public DbSet<ClientModel> Clients{get;set;}
-    public DbSet<VeterinarianModel> Veterinarians{get;set;}
-    public DbSet<WishList_ProductsModel> WishLists_Products{get;set;}
-    public DbSet<WishListModel> WishLists{get;set;}
-    public DbSet<Specialties_VetsModel> Specialties_Vets{get;set;}
 
    }
 
