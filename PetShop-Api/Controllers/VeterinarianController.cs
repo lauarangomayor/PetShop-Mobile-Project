@@ -23,8 +23,9 @@ namespace PetShop_Api.Controllers{
         [HttpGet("get/{id}")]
         public async Task<ActionResult<VeterinarianModel>> GetVeterinarian(long id){
             try{
-                var veterinarian = await dBContext.Veterinarians.Include(u => u.User)
-                .FirstAsync(v => v.IdVeterinarian == id);
+                var veterinarian = await dBContext.Veterinarians
+                                                  .Include(u => u.User)
+                                                  .FirstAsync(v => v.IdVeterinarian == id);
                 if (veterinarian == null){
                     return NotFound();
                 }
@@ -37,7 +38,9 @@ namespace PetShop_Api.Controllers{
         [HttpGet("all")]
         public async Task<ActionResult<List<VeterinarianModel>>> GetAllVeterinarians(){
             try {
-                var veterinarians = await dBContext.Veterinarians.Include(u => u.User).ToListAsync();
+                var veterinarians = await dBContext.Veterinarians
+                                                   .Include(u => u.User)
+                                                   .ToListAsync();
                 if (veterinarians.Count() == 0){
                     return NotFound();
                 }

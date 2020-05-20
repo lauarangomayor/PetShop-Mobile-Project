@@ -19,9 +19,9 @@ namespace PetShop_Api.Models
                     .HasForeignKey(so => so.IdStateOrder);
         
         modelBuilder.Entity<OrderModel>()
-                    .HasOne(u => u.User)
+                    .HasOne(c => c.Client)
                     .WithMany(o => o.Orders)
-                    .HasForeignKey(u => u.IdUser);
+                    .HasForeignKey(c => c.IdClient);
 
         modelBuilder.Entity<AppointmentModel>()
                     .HasOne(p => p.Pet)
@@ -39,18 +39,24 @@ namespace PetShop_Api.Models
                     .HasForeignKey(p => p.IdProduct);  
 
         modelBuilder.Entity<PetModel>()
-                    .HasOne(u => u.User)
+                    .HasOne(c => c.Client)
                     .WithMany(p => p.Pets)
-                    .HasForeignKey(u => u.IdUser);
+                    .HasForeignKey(c => c.IdClient);
 
         modelBuilder.Entity<PetModel>()
                     .HasOne(s => s.Specie)
                     .WithMany(p => p.Pets)
                     .HasForeignKey(s => s.IdSpecie);
 
-        modelBuilder.Entity<UserModel>()
+        /*modelBuilder.Entity<UserModel>()
                     .HasMany(p => p.Pets)
                     .WithOne(u => u.User);
+        */
+        
+        modelBuilder.Entity<ClientModel>()
+                    .HasOne(u => u.User)
+                    .WithMany(c => c.Clients)
+                    .HasForeignKey(u => u.IdUser);
 
         modelBuilder.Entity<ProductModel>()
                     .HasOne(c => c.Category)
@@ -88,9 +94,9 @@ namespace PetShop_Api.Models
                     .HasForeignKey(w => w.IdProduct);
 
         modelBuilder.Entity<WishListModel>()
-                    .HasOne(u => u.User)
+                    .HasOne(c => c.Client)
                     .WithMany(w => w.WishLists)
-                    .HasForeignKey(u => u.IdUser);
+                    .HasForeignKey(c => c.IdClient);
     }
     public DbSet<AppointmentModel> Appointments{get;set;}
     public DbSet<AppointmentRecord> AppointmentsRecords{get;set;}
@@ -103,6 +109,7 @@ namespace PetShop_Api.Models
     public DbSet<SpecieModel> Species{get;set;}
     public DbSet<StateProductModel> StatesProducts{get;set;}
     public DbSet<UserModel> Users{get;set;}
+    public DbSet<ClientModel> Clients{get;set;}
     public DbSet<VeterinarianModel> Veterinarians{get;set;}
     public DbSet<WishList_ProductsModel> WishLists_Products{get;set;}
     public DbSet<WishListModel> WishLists{get;set;}

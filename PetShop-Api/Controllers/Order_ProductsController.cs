@@ -32,8 +32,8 @@ namespace PetShop_Api.Controllers
             try
             {
                 var order_products = await dBContext.Orders_Products
-                                           .Include(p => p.Product)
-                                           .FirstAsync(op => op.IdOrder_Products == id);
+                                                    .Include(p => p.Product)
+                                                    .FirstAsync(op => op.IdOrder_Products == id);
                 if (order_products == null)
                 {
                     return NotFound(); //Return code 404
@@ -50,11 +50,13 @@ namespace PetShop_Api.Controllers
 
         [HttpGet("all")] //http:localhost:5000/order_products/all
         //Return all the orders_products from de DB
-        public async Task<ActionResult<List<Order_ProductsModel>>> AllOrder_Products()
+        public async Task<ActionResult<List<Order_ProductsModel>>> GetAllOrder_Products()
         {
             try
             {
-                return await dBContext.Orders_Products.Include(p => p.Product).ToListAsync();
+                return await dBContext.Orders_Products
+                                        .Include(p => p.Product)
+                                        .ToListAsync();
             }
             catch(Exception e)
             {

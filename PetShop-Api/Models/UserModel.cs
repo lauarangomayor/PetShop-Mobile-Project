@@ -14,13 +14,5 @@ namespace PetShop_Api.Models
         public string Email{get;set;}
         public string Password{get;set;}
         public int UserType{get;set;}
-
-        public List<OrderModel> Orders {get;set;}
-
-        public List<PetModel> Pets {get;set;}
-
-        //public List<VeterinarianModel> Veterinarians {get;set;}
-
-        public List<WishListModel> WishLists{get;set;}
     }
 }

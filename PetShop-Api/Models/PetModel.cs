@@ -13,8 +13,8 @@ namespace PetShop_Api.Models
         public SpecieModel Specie {get;set;}
         public string GeneralInfo{get;set;}
         public DateTime Birthdate{get;set;}
-        public long IdUser{get;set;}
-        public UserModel User {get;set;}
+        public long IdClient {get;set;}
+        public ClientModel Client {get;set;}
 
         public List<AppointmentModel> Appointments{get;set;}
 

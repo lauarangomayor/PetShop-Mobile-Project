@@ -11,7 +11,7 @@ namespace PetShop_Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class OrderController : ControllerBase
+    public class ClientController : ControllerBase
     {
         #region Properties
         private readonly PetshopDBContext dBContext;
@@ -19,27 +19,26 @@ namespace PetShop_Api.Controllers
         #endregion Properties
 
         #region Builder 
-        public OrderController(PetshopDBContext dBContext)
+        public ClientController(PetshopDBContext dBContext)
         {
             this.dBContext = dBContext;
         }
         #endregion Builder
 
         #region Methods 
-        [HttpGet("get/{id}")] //http:localhost:5000/order/get/{id}
-        public async Task<ActionResult<OrderModel>> GetOrder(long id)
+        [HttpGet("get/{id}")] //http:localhost:5000/user/get/{id}
+        public async Task<ActionResult<ClientModel>> GetClient(long id)
         {
             try
             {
-                var order = await dBContext.Orders
-                                           .Include(so => so.StateOrder)
-                                           .Include(c => c.Client)
-                                           .FirstAsync(o => o.IdOrder == id);
-                if (order == null)
+                var client = await dBContext.Clients                                                  
+                                            .Include(u => u.User)
+                                            .FirstAsync(v => v.IdClient == id);
+                if (client == null)
                 {
                     return NotFound(); //Return code 404
                 }
-                return Ok(order); //Return code 200
+                return Ok(client); //Return code 200
             }
             catch(Exception e)
             {
@@ -49,16 +48,15 @@ namespace PetShop_Api.Controllers
           
         }
 
-        [HttpGet("all")] //http:localhost:5000/order/all
-        //Return all the order from de DB
-        public async Task<ActionResult<List<OrderModel>>> GetAllOrder()
+        [HttpGet("all")] //http:localhost:5000/user/all
+        //Return all the user from de DB
+        public async Task<ActionResult<List<ClientModel>>> GetAllClient()
         {
             try
             {
-                return await dBContext.Orders
-                                        .Include(so => so.StateOrder)
-                                        .Include(c => c.Client) 
-                                        .ToListAsync();
+                return await dBContext.Clients
+                                      .Include(u => u.User)
+                                      .ToListAsync();
             }
             catch(Exception e)
             {
@@ -67,15 +65,15 @@ namespace PetShop_Api.Controllers
           
         }
 
-        [HttpPost("create")] //http:localhost:5000/order/create
-        public async Task<ActionResult<OrderModel>> CreateOrder(OrderModel order)
+        [HttpPost("create")] //http:localhost:5000/user/create
+        public async Task<ActionResult<ClientModel>> CreateClient(ClientModel client)
         {
             try
             {
-                dBContext.Orders.Add(order);
+                dBContext.Clients.Add(client);
                 await dBContext.SaveChangesAsync();
 
-                return Ok(order);
+                return Ok(client);
             }
             catch(Exception e)
             {
@@ -83,27 +81,27 @@ namespace PetShop_Api.Controllers
             }            
         }
 
-        [HttpPut("update/{id}")] //http:localhost:5000/order/update
-        public async Task<IActionResult> UpdateOrder(long id, OrderModel order)
+        [HttpPut("update/{id}")] //http:localhost:5000/user/update
+        public async Task<IActionResult> UpdateClient(long id, ClientModel client)
         {
             
             try
             {
-                if (id != order.IdOrder)
+                if (id != client.IdClient)
                 {
                     return BadRequest();
                 }
                 else
                 {
-                    dBContext.Entry(order).State = EntityState.Modified; //
+                    dBContext.Entry(client).State = EntityState.Modified; //
                     await dBContext.SaveChangesAsync();
                     return NoContent();
                 }
             }
             catch(Exception e)
             {
-                bool existOrder = dBContext.Orders.Any(e => e.IdOrder == id);
-                if (!existOrder)
+                bool existClient = dBContext.Clients.Any(e => e.IdClient == id);
+                if (!existClient)
                 {
                     return NotFound();
                 }
@@ -115,18 +113,18 @@ namespace PetShop_Api.Controllers
             }            
         }
 
-        [HttpDelete("delete/{id}")] //http:localhost:5000/order/delete/id
-        public async Task<IActionResult> DeleteOrder(long id)
+        [HttpDelete("delete/{id}")] //http:localhost:5000/user/delete/id
+        public async Task<IActionResult> DeleteClient(long id)
         {
             
             try
             {
-                var order = await dBContext.Orders.FindAsync(id);  
-                if (order == null)
+                var client = await dBContext.Clients.FindAsync(id);  
+                if (client == null)
                 {
                     return NotFound(); //Return code 404
                 }
-                dBContext.Orders.Remove(order);
+                dBContext.Clients.Remove(client);
                 await dBContext.SaveChangesAsync();
                 return NoContent(); //Return code 204 
             }

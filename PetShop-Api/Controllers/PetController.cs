@@ -25,7 +25,7 @@ namespace PetShop_Api.Controllers
         public async Task<ActionResult<PetModel>> GetPet(long id){
             try{
                 var pet = await dBContext.Pets
-                                        .Include(u => u.User)
+                                        .Include(c => c.Client)
                                         .FirstAsync(p => p.IdPet == id);
                 if (pet == null){
                     return NotFound();
@@ -42,7 +42,7 @@ namespace PetShop_Api.Controllers
         public async Task<ActionResult<List<PetModel>>> GetAllPets(){
             try{
                 return await dBContext.Pets
-                                    .Include(u => u.User)
+                                    .Include(c => c.Client)
                                     .ToListAsync();
             }
             catch(Exception e){

@@ -50,7 +50,7 @@ namespace PetShop_Api.Controllers
         }
 
         [HttpGet("all")] 
-        public async Task<ActionResult<List<Specialties_VetsModel>>> AllSpecialties_Vets()
+        public async Task<ActionResult<List<Specialties_VetsModel>>> GetAllSpecialties_Vets()
         {
             try
             {

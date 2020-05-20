@@ -27,8 +27,10 @@ namespace PetShop_Api.Controllers
         [HttpGet("get/{id}")] //http://localhost:5000/Product/get/1
         public async Task<ActionResult<ProductModel>> GetProduct(long id){ //Trae la categoria asociada a el producto con ese id
             try{
-                var categoryproduct = await dBContext.Products.Include(c => c.Category).Include(sp => sp.StateProduct)
-                .FirstAsync(p => p.IdProduct == id);
+                var categoryproduct = await dBContext.Products
+                                                    .Include(c => c.Category)
+                                                    .Include(sp => sp.StateProduct)
+                                                    .FirstAsync(p => p.IdProduct == id);
                 if (categoryproduct == null){
                     return NotFound();
                 }
@@ -42,7 +44,10 @@ namespace PetShop_Api.Controllers
         [HttpGet("all")]//http://localhost:5000/Product/all
         public async Task<ActionResult<List<ProductModel>>> GetAllProducts(){
             try {
-                var products = await dBContext.Products.ToListAsync();
+                var products = await dBContext.Products
+                                              .Include(c => c.Category)
+                                              .Include(sp => sp.StateProduct)
+                                              .ToListAsync();
                 if (products.Count() == 0){
                     return NotFound();
                 }

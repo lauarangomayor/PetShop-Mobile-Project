@@ -48,7 +48,7 @@ namespace PetShop_Api.Controllers
 
         [HttpGet("all")] //http:localhost:5000/statesOrder/all
         //Return all the StatesOrder from de DB
-        public async Task<ActionResult<List<StateOrderModel>>> AllStatesOrder()
+        public async Task<ActionResult<List<StateOrderModel>>> GetAllStatesOrder()
         {
             try
             {

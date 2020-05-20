@@ -31,9 +31,7 @@ namespace PetShop_Api.Controllers
         {
             try
             {
-                var user = await dBContext.Users
-                                        .Include(p => p.Pets)
-                                        .FirstAsync(u => u.IdUser == id);
+                var user = await dBContext.Users.FindAsync(id);
                 if (user == null)
                 {
                     return NotFound(); //Return code 404
@@ -50,13 +48,11 @@ namespace PetShop_Api.Controllers
 
         [HttpGet("all")] //http:localhost:5000/user/all
         //Return all the user from de DB
-        public async Task<ActionResult<List<UserModel>>> AllUser()
+        public async Task<ActionResult<List<UserModel>>> GetAllUser()
         {
             try
             {
-                return await dBContext.Users
-                                    .Include(p => p.Pets)
-                                    .ToListAsync();
+                return await dBContext.Users.ToListAsync();
             }
             catch(Exception e)
             {

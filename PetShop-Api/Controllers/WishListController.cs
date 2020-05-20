@@ -23,7 +23,9 @@ namespace PetShop_Api.Controllers{
         [HttpGet("get/{id}")]
         public async Task<ActionResult<WishListModel>> GetWishList(long id){
             try{
-                var wishList = await dBContext.WishLists.Include(u => u.User).FirstAsync(w => w.IdWishList == id);
+                var wishList = await dBContext.WishLists
+                                              .Include(c => c.Client)
+                                              .FirstAsync(w => w.IdWishList == id);
                 if (wishList == null){
                     return NotFound();
                 }
@@ -36,7 +38,9 @@ namespace PetShop_Api.Controllers{
         [HttpGet("all")]
         public async Task<ActionResult<List<WishListModel>>> GetAllWishLists(){
             try {
-                var wishLists = await dBContext.WishLists.ToListAsync();
+                var wishLists = await dBContext.WishLists
+                                               .Include(c => c.Client)
+                                               .ToListAsync();
                 if (wishLists.Count() == 0){
                     return NotFound();
                 }
