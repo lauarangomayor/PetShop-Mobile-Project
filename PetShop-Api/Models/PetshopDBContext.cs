@@ -17,7 +17,12 @@ namespace PetShop_Api.Models
                     .HasOne(so => so.StateOrder)
                     .WithMany(o => o.Orders)
                     .HasForeignKey(so => so.IdStateOrder);
-                    
+        
+        modelBuilder.Entity<OrderModel>()
+                    .HasOne(u => u.User)
+                    .WithMany(o => o.Orders)
+                    .HasForeignKey(u => u.IdUser);
+
         modelBuilder.Entity<AppointmentModel>()
                     .HasOne(p => p.Pet)
                     .WithMany(a => a.Appointments)
@@ -41,8 +46,8 @@ namespace PetShop_Api.Models
         modelBuilder.Entity<PetModel>()
                     .HasOne(s => s.Specie)
                     .WithMany(p => p.Pets)
-
                     .HasForeignKey(s => s.IdSpecie);
+
         modelBuilder.Entity<UserModel>()
                     .HasMany(p => p.Pets)
                     .WithOne(u => u.User);

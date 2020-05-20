@@ -19,7 +19,7 @@ namespace PetShop_Api.Models
 
         public List<PetModel> Pets {get;set;}
 
-        public List<VeterinarianModel> Veterinarians {get;set;}
+        //public List<VeterinarianModel> Veterinarians {get;set;}
 
         public List<WishListModel> WishLists{get;set;}
     }

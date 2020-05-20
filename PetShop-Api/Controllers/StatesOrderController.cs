@@ -11,7 +11,7 @@ namespace PetShop_Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class StateOrderController : ControllerBase
+    public class StatesOrderController : ControllerBase
     {
         #region Properties
         private readonly PetshopDBContext dBContext;
@@ -19,7 +19,7 @@ namespace PetShop_Api.Controllers
         #endregion Properties
 
         #region Builder 
-        public StateOrderController(PetshopDBContext dBContext)
+        public StatesOrderController(PetshopDBContext dBContext)
         {
             this.dBContext = dBContext;
         }

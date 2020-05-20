@@ -8,7 +8,7 @@ namespace PetShop_Api.Models
     {
         [Key]
         public long IdAppointmentRecord {get; set;}
-        public long  Appointment {get;set;}
+        public long  IdAppointment {get;set;}
         public DateTime AppointmentDate {get; set;}
         public long IdVet {get;set;}
         public long IdPet{get;set;}
