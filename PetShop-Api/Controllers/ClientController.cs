@@ -56,6 +56,7 @@ namespace PetShop_Api.Controllers
             {
                 return await dBContext.Clients
                                       .Include(u => u.User)
+                                      .Include(p => p.Pets)
                                       .ToListAsync();
             }
             catch(Exception e)

@@ -65,11 +65,6 @@ namespace PetShop_Api.Models
                     .WithMany(p => p.Pets)
                     .HasForeignKey(s => s.IdSpecie);
 
-        /*modelBuilder.Entity<UserModel>()
-                    .HasMany(p => p.Pets)
-                    .WithOne(u => u.User);
-        */
-        
         modelBuilder.Entity<ClientModel>()
                     .HasOne(u => u.User)
                     .WithMany(c => c.Clients)
