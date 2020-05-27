@@ -40,6 +40,25 @@ namespace PetShop_Api.Controllers
                 return StatusCode(410);
             }
         }
+    
+        [HttpGet("getProductsByCategoryId/{id}")]
+        public async Task<ActionResult<ProductModel>> GetProductsByCategoryId(long id)
+        {
+            try {
+                var product = await dBContext.Products
+                                             .Where(p => p.IdCategory == id)
+                                             .Include(c => c.Category)
+                                             .Include(sp => sp.StateProduct)
+                                             .ToListAsync();
+                if (product == null){
+                    return NotFound();
+                }
+                return Ok(product);
+            }
+            catch (Exception e){
+                return StatusCode(410);
+            }
+        }
 
         [HttpGet("all")]//http://localhost:5000/Product/all
         public async Task<ActionResult<List<ProductModel>>> GetAllProducts(){
