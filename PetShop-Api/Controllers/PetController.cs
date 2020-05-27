@@ -26,6 +26,7 @@ namespace PetShop_Api.Controllers
             try{
                 var pet = await dBContext.Pets
                                         .Include(c => c.Client)
+                                        .Include(s => s.Specie)
                                         .FirstAsync(p => p.IdPet == id);
                 if (pet == null){
                     return NotFound();
@@ -43,6 +44,7 @@ namespace PetShop_Api.Controllers
             try{
                 return await dBContext.Pets
                                     .Include(c => c.Client)
+                                    .Include(s => s.Specie)
                                     .ToListAsync();
             }
             catch(Exception e){

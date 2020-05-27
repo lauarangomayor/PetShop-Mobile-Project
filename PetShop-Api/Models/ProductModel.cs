@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
+using System.Runtime.Serialization;
 namespace PetShop_Api.Models
 {
     public class ProductModel
@@ -15,9 +15,9 @@ namespace PetShop_Api.Models
         public double UnitPrice{get;set;}
         public long IdStateProduct{get;set;}
         public StateProductModel StateProduct {get;set;}
-
+        [IgnoreDataMember]
         public List<Order_ProductsModel> Orders_Products{get;set;}
-
+        [IgnoreDataMember]
         public List<WishList_ProductsModel> WishLists_Products{get;set;}
     }
 }

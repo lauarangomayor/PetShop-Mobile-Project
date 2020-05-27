@@ -101,7 +101,7 @@ namespace PetShop_Api.Controllers
                 return StatusCode(410);
             }
         }
-        
+        [HttpGet("getProductsByCategoryId/{id}")]
         public async Task<ActionResult<ProductModel>> GetProductsByCategoryId(long id)
         {
             try {
