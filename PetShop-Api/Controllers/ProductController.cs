@@ -23,18 +23,18 @@ namespace PetShop_Api.Controllers
         }
         #endregion
         #region Method
- 
+
         [HttpGet("get/{id}")] //http://localhost:5000/Product/get/1
         public async Task<ActionResult<ProductModel>> GetProduct(long id){ //Trae la categoria asociada a el producto con ese id
             try{
-                var categoryproduct = await dBContext.Products
+                var product = await dBContext.Products
                                                     .Include(c => c.Category)
                                                     .Include(sp => sp.StateProduct)
                                                     .FirstAsync(p => p.IdProduct == id);
-                if (categoryproduct == null){
+                if (product == null){
                     return NotFound();
                 }
-                return Ok(categoryproduct);
+                return Ok(product);
             }
             catch(Exception e){
                 return StatusCode(410);
@@ -107,11 +107,8 @@ namespace PetShop_Api.Controllers
             }
         }
         
-       
 
         #endregion
-
-        
 
     }
 }

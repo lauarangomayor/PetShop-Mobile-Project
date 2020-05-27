@@ -16,7 +16,7 @@ namespace PetShop_Api.Controllers
         private readonly PetshopDBContext dBContext;
 
         #endregion
-        #region Constrcutor
+        #region Constructor
         public CategoryController (PetshopDBContext dBContext)
         {
             this.dBContext = dBContext;
@@ -24,7 +24,7 @@ namespace PetShop_Api.Controllers
         #endregion
         #region Method
         [HttpGet("get/{id}")] //http://localhost:5000/Category/get/1
-        public async Task<ActionResult<CategoryModel>> GetCategoty(long id)
+        public async Task<ActionResult<CategoryModel>> GetCategory(long id)
         {
             try {
                 var category = await dBContext.Categories.FindAsync(id);
@@ -58,7 +58,7 @@ namespace PetShop_Api.Controllers
             try {
                 dBContext.Categories.Add(category);
                 await dBContext.SaveChangesAsync();
-                return CreatedAtAction(nameof(GetCategoty), category.IdCategory);
+                return CreatedAtAction(nameof(GetCategory), category.IdCategory);
             }
             catch (Exception e){
                 return StatusCode(410);
@@ -102,9 +102,25 @@ namespace PetShop_Api.Controllers
             }
         }
         
-
-        #endregion
+        public async Task<ActionResult<ProductModel>> GetProductsByCategoryId(long id)
+        {
+            try {
+                var product = await dBContext.Products
+                                             .Where(p => p.IdCategory == id)
+                                             .Include(c => c.Category)
+                                             .Include(sp => sp.StateProduct)
+                                             .ToListAsync();
+                if (product == null){
+                    return NotFound();
+                }
+                return Ok(product);
+            }
+            catch (Exception e){
+                return StatusCode(410);
+            }
+        }
    
 
+        #endregion
     }
 }
