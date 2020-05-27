@@ -1,23 +1,20 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.Serialization;
+
 namespace PetShop_Api.Models
 {
-    public class ClientModel
+    public class UserModel
     {
         [Key]
-        public long IdClient {get; set;}
-        
-        public long IdUser{get;set;}
-
-        public UserModel User {get;set;}
-        [IgnoreDataMember]
-        public List<OrderModel> Orders {get;set;}
-        [IgnoreDataMember]
-        public List<PetModel> Pets {get;set;}
-
-        //public List<VeterinarianModel> Veterinarians {get;set;}
-        [IgnoreDataMember]
-        public List<WishListModel> WishLists{get;set;}
+        public long IdUser {get; set;}
+        public string DocumentId {get;set;}
+        public string Name {get; set;}
+        public string Telephone{get;set;}
+        public string Address{get;set;}
+        public string Email{get;set;}
+        public string Password{get;set;}
+        public int UserType{get;set;}
+        public List <ClientModel> Clients {get;set;}
+        public List <VeterinarianModel> Veterinarians {get;set;}
     }
 }
