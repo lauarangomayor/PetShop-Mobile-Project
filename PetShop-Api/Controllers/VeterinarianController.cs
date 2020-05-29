@@ -36,8 +36,8 @@ namespace PetShop_Api.Controllers{
                 return StatusCode(410);
             }
         }
-        [HttpGet("getVeteriansBySpecialtyId/{id}")]
-        public async Task<ActionResult<List<VeterinarianModel>>> GetVeteriansBySpecialtyId(long id){
+        [HttpGet("getVeterinariansBySpecialtyId/{id}")]
+        public async Task<ActionResult<List<VeterinarianModel>>> GetVeterinariansBySpecialtyId(long id){
           try{
                 var veterinarians = await dBContext.Specialties_Vets
                                                   .Where(s => s.IdSpecialty == id)
