@@ -45,15 +45,43 @@ namespace PetShop_Api.Controllers
         public async Task<ActionResult<ProductModel>> GetProductsByCategoryId(long id)
         {
             try {
-                var product = await dBContext.Products
+                var products = await dBContext.Products
                                              .Where(p => p.IdCategory == id)
                                              .Include(c => c.Category)
                                              .Include(sp => sp.StateProduct)
                                              .ToListAsync();
-                if (product == null){
+                if (products == null){
                     return NotFound();
                 }
-                return Ok(product);
+                return Ok(products);
+            }
+            catch (Exception e){
+                return StatusCode(410);
+            }
+        }
+    
+        [HttpGet("getWishListProductsByClientId/{id}")]
+        public async Task<ActionResult<ProductModel>> GetWishListProductsByClientId(long id)
+        {
+            try {
+                
+                var idWishlist =  await dBContext.WishLists
+                                           .Where(w => w.IdClient == id)
+                                           .Select(w => w.IdWishList).FirstAsync();
+
+                var products = await dBContext.WishLists_Products
+                                                .Where(wp => wp.IdWishList == idWishlist)
+                                                .Join(dBContext.Products,
+                                                      pWP => pWP.IdProduct,
+                                                      p => p.IdProduct,
+                                                      (pWP, p) => new {p.IdProduct,p.Name,p.Description,
+                                                                       p.IdCategory,p.Category,p.QuantityAvailable, 
+                                                                       p.UnitPrice, p.IdStateProduct,p.StateProduct}
+                                                     ).ToListAsync();
+                if (products == null){
+                    return NotFound();
+                }
+                return Ok(products);
             }
             catch (Exception e){
                 return StatusCode(410);
