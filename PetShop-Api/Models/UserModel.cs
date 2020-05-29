@@ -12,6 +12,7 @@ namespace PetShop_Api.Models
         public string Telephone{get;set;}
         public string Address{get;set;}
         public string Email{get;set;}
+        [IgnoreDataMember]
         public string Password{get;set;}
         public int UserType{get;set;}
         [IgnoreDataMember]

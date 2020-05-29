@@ -20,6 +20,7 @@ namespace PetShop_Api.Controllers{
         }
         #endregion
         #region Method
+        
         [HttpGet("get/{id}")]
         public async Task<ActionResult<VeterinarianModel>> GetVeterinarian(long id){
             try{
@@ -30,6 +31,23 @@ namespace PetShop_Api.Controllers{
                     return NotFound();
                 }
                 return Ok(veterinarian);
+            }
+            catch(Exception e){
+                return StatusCode(410);
+            }
+        }
+        [HttpGet("getVeteriansBySpecialtyId/{id}")]
+        public async Task<ActionResult<List<VeterinarianModel>>> GetVeteriansBySpecialtyId(long id){
+          try{
+                var veterinarians = await dBContext.Specialties_Vets
+                                                  .Where(s => s.IdSpecialty == id)
+                                                  .Join(dBContext.Veterinarians,vSV => vSV.IdVeterinarian, v => v.IdVeterinarian,
+                                                  (vSV,v)=> new {v.IdVeterinarian,v.IdUser,v.User})
+                                                  .ToListAsync();
+                if (veterinarians == null){
+                    return NotFound();
+                }
+                return Ok(veterinarians);
             }
             catch(Exception e){
                 return StatusCode(410);
