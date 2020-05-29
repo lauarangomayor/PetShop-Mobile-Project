@@ -44,6 +44,28 @@ namespace PetShop_Api.Controllers
             }            
         }
 
+        [HttpGet("getOrdersRecordByClientId/{id}")]
+        public async Task<ActionResult<OrderRecordModel>> GetOrdersRecordByClientId(long id)
+        {
+            try
+            {
+                var orderRecord = await dBContext.OrdersRecords
+                                           .Where(or => or.IdClient == id)
+                                           .ToListAsync();
+                if (orderRecord == null)
+                {
+                    return NotFound(); //Return code 404
+                }
+                return Ok(orderRecord); //Return code 200
+            }
+            catch(Exception e)
+            {
+                return StatusCode(410);//BD Error code
+            }
+            
+          
+        }
+
         [HttpGet("all")] //http:localhost:5000/order/all
         //Return all the order from de DB
         public async Task<ActionResult<List<OrderRecordModel>>> GetAllOrderRecord()
