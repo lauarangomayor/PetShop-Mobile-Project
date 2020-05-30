@@ -38,6 +38,39 @@ namespace PetShop_Api.Controllers
             }      
             
         }
+        [HttpGet("getAppointmentsByPetId/{id}")]
+        public async Task<ActionResult<List<AppointmentModel>>> GetAppointmentsByPetId(long idPet){
+            try{
+                var appointments = await dBContext.Appointments
+                                                .Where(a => a.IdPet == idPet)
+                                                .Include(v => v.Veterinarian)
+                                                .ToListAsync();
+                if (appointments == null){
+                    return NotFound();
+                }
+                return Ok(appointments);
+            }
+            catch(Exception e){
+                return StatusCode(410);
+            }
+        }
+
+        [HttpGet("getAppointmentsByVetId/{id}")]
+        public async Task<ActionResult<List<AppointmentModel>>> getAppointmentsByVetId(long idVet){
+            try{
+                var appointments = await dBContext.Appointments
+                                                .Where(a => a.IdVeterinarian == idVet)
+                                                .Include(p => p.Pet)
+                                                .ToListAsync();
+                if (appointments == null){
+                    return NotFound();
+                }
+                return Ok(appointments);
+            }
+            catch(Exception e){
+                return StatusCode(410);
+            }
+        }
 
         [HttpGet("all")]
         public async Task<ActionResult<List<AppointmentModel>>> GetAllAppointments(){

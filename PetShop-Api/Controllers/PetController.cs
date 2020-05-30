@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PetShop_Api.Models;
 
 namespace PetShop_Api.Controllers
@@ -37,6 +39,52 @@ namespace PetShop_Api.Controllers
                 return StatusCode(410);
             }
                 
+        }
+
+        [HttpGet("getPetsByClientId/{id}")]
+        public async Task<ActionResult<OrderModel>> GetPetsByClientId(long id)
+        {
+            try
+            {
+                var pets = await dBContext.Pets
+                                           .Where(p => p.IdClient == id)
+                                           .Include(s => s.Specie)
+                                           .ToListAsync();
+                if (pets == null)
+                {
+                    return NotFound();
+                }
+                return Ok(pets);
+            }
+            catch(Exception e)
+            {
+                return StatusCode(410);
+            }          
+        }
+
+        [HttpGet("getPetsResumeByClientId/{id}")]
+        public async Task<ActionResult<List<JsonObject>>> GetPetsResume(long id)
+        {
+            try{
+                var pets = await dBContext.Pets
+                                    .Where(p => p.IdClient == id)
+                                    .ToListAsync();
+                if (pets == null)
+                {
+                    return NotFound();
+                }
+                dynamic resume = new JObject();
+                List<dynamic> dynamicList = new List<dynamic>();
+                foreach (var pet in pets){
+                    resume.idPet = pet.IdPet;
+                    resume.name = pet.Name;
+                    dynamicList.Add(resume);
+                }
+                return Ok(JsonConvert.SerializeObject( dynamicList ));
+            }
+            catch(Exception e){
+                return StatusCode(410);
+            }
         }
 
         [HttpGet("all")]

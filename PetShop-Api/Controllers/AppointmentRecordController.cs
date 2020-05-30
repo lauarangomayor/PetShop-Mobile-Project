@@ -36,6 +36,38 @@ namespace PetShop_Api.Controllers
                 
         }
 
+        [HttpGet("getAppointmentRecordByPetId/{id}")]
+        public async Task<ActionResult<List<AppointmentModel>>> GetAppointmentRecordByPetId(long idPet){
+            try{
+                var appointmentRecord = await dBContext.AppointmentsRecords
+                                                    .Where(ar => ar.IdPet == idPet)
+                                                    .ToListAsync();
+                if (appointmentRecord == null){
+                    return NotFound();
+                }
+                return Ok(appointmentRecord);
+            }
+            catch(Exception e){
+                return StatusCode(410);
+            }
+        }
+
+        [HttpGet("getAppointmentRecordByVetId/{id}")]
+        public async Task<ActionResult<List<AppointmentModel>>> GetAppointmentRecordByVetId(long idVet){
+            try{
+                var appointmentRecord = await dBContext.Appointments
+                                                .Where(ar => ar.IdVeterinarian == idVet)
+                                                .ToListAsync();
+                if (appointmentRecord == null){
+                    return NotFound();
+                }
+                return Ok(appointmentRecord);
+            }
+            catch(Exception e){
+                return StatusCode(410);
+            }
+        }
+
         [HttpGet("all")]
         public async Task<ActionResult<List<AppointmentRecord>>> GetAllAppointmentRecords(){
             try{
