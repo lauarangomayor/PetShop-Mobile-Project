@@ -68,19 +68,13 @@ namespace PetShop_Api.Controllers
             try{
                 var pets = await dBContext.Pets
                                     .Where(p => p.IdClient == id)
+                                    .Select(p => new { p.IdPet, p.Name })
                                     .ToListAsync();
                 if (pets == null)
                 {
                     return NotFound();
                 }
-                dynamic resume = new JObject();
-                List<dynamic> dynamicList = new List<dynamic>();
-                foreach (var pet in pets){
-                    resume.idPet = pet.IdPet;
-                    resume.name = pet.Name;
-                    dynamicList.Add(resume);
-                }
-                return Ok(JsonConvert.SerializeObject( dynamicList ));
+                return Ok(pets);
             }
             catch(Exception e){
                 return StatusCode(410);
