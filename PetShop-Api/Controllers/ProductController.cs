@@ -40,9 +40,56 @@ namespace PetShop_Api.Controllers
                 return StatusCode(410);
             }
         }
-    
+
+                [HttpGet("getWishListProductsByClientId/{id}")]
+        public async Task<ActionResult<ProductModel>> GetWishListProductsByClientId(long id)
+        {
+            try {
+                
+                var idWishlist =  await dBContext.WishLists
+                                           .Where(w => w.IdClient == id)
+                                           .Select(w => w.IdWishList).FirstAsync();
+
+                var products = await dBContext.WishLists_Products
+                                                .Where(wp => wp.IdWishList == idWishlist)
+                                                .Join(dBContext.Products,
+                                                      pWP => pWP.IdProduct,
+                                                      p => p.IdProduct,
+                                                      (pWP, p) => new {p.IdProduct,p.Name,p.Description,
+                                                                       p.IdCategory,p.Category,p.QuantityAvailable, 
+                                                                       p.UnitPrice, p.IdStateProduct,p.StateProduct}
+                                                     ).ToListAsync();
+                if (products == null){
+                    return NotFound();
+                }
+                return Ok(products);
+            }
+            catch (Exception e){
+                return StatusCode(410);
+            }
+        }
+
+
+        [HttpGet("GetProductsByStateId/{id}")]
+        public async Task<ActionResult<ProductModel>> GetProductsByStateId(long id) //Trae todos los productos con ese id estado 
+        {
+            try {
+                var products = await dBContext.Products
+                                             .Where(p => p.IdStateProduct == id)
+                                             .Include(c => c.StateProduct)
+                                             .Include(sp => sp.Category)
+                                             .ToListAsync();
+                if (products == null){
+                    return NotFound();
+                }
+                return Ok(products);
+            }
+            catch (Exception e){
+                return StatusCode(410);
+            }
+        }
         [HttpGet("getProductsByCategoryId/{id}")]
-        public async Task<ActionResult<ProductModel>> GetProductsByCategoryId(long id)
+        public async Task<ActionResult<ProductModel>> GetProductsByCategoryId(long id) //Trae todos los productos con ese id categoria
         {
             try {
                 var products = await dBContext.Products
@@ -60,23 +107,16 @@ namespace PetShop_Api.Controllers
             }
         }
     
-        [HttpGet("getWishListProductsByClientId/{id}")]
-        public async Task<ActionResult<ProductModel>> GetWishListProductsByClientId(long id)
+        [HttpGet("getProductResume/{id}")]
+        public async Task<ActionResult<ProductModel>> GetAllProductsResume(long id) //Trae el resumen (id, foto, nombre, precio) de todos los productos
         {
             try {
-                
-                var idWishlist =  await dBContext.WishLists
-                                           .Where(w => w.IdClient == id)
-                                           .Select(w => w.IdWishList).FirstAsync();
 
-                var products = await dBContext.WishLists_Products
-                                                .Where(wp => wp.IdWishList == idWishlist)
-                                                .Join(dBContext.Products,
-                                                      pWP => pWP.IdProduct,
-                                                      p => p.IdProduct,
-                                                      (pWP, p) => new {p.IdProduct,p.Name,p.Description,
-                                                                       p.IdCategory,p.Category,p.QuantityAvailable, 
-                                                                       p.UnitPrice, p.IdStateProduct,p.StateProduct}
+                var products = await dBContext.Products
+                                                .Where(p => p.IdProduct == id)
+                                                .Select( p => new {p.IdProduct,p.Name,p.Description,
+                                                        p.IdCategory,p.Category,p.QuantityAvailable, 
+                                                        p.UnitPrice, p.IdStateProduct,p.StateProduct}
                                                      ).ToListAsync();
                 if (products == null){
                     return NotFound();
