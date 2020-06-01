@@ -39,10 +39,10 @@ namespace PetShop_Api.Controllers
             
         }
         [HttpGet("getAppointmentsByPetId/{id}")]
-        public async Task<ActionResult<List<AppointmentModel>>> GetAppointmentsByPetId(long idPet){
+        public async Task<ActionResult<List<AppointmentModel>>> GetAppointmentsByPetId(long id){
             try{
                 var appointments = await dBContext.Appointments
-                                                .Where(a => a.IdPet == idPet)
+                                                .Where(a => a.IdPet == id)
                                                 .Include(v => v.Veterinarian)
                                                 .ToListAsync();
                 if (appointments == null){
@@ -56,10 +56,10 @@ namespace PetShop_Api.Controllers
         }
 
         [HttpGet("getAppointmentsByVetId/{id}")]
-        public async Task<ActionResult<List<AppointmentModel>>> getAppointmentsByVetId(long idVet){
+        public async Task<ActionResult<List<AppointmentModel>>> getAppointmentsByVetId(long id){
             try{
                 var appointments = await dBContext.Appointments
-                                                .Where(a => a.IdVeterinarian == idVet)
+                                                .Where(a => a.IdVeterinarian == id)
                                                 .Include(p => p.Pet)
                                                 .ToListAsync();
                 if (appointments == null){
@@ -126,6 +126,31 @@ namespace PetShop_Api.Controllers
                 dBContext.Appointments.Remove(appointment);
                 await dBContext.SaveChangesAsync();
                 return NoContent();
+            }
+            catch(Exception e){
+                return StatusCode(410);
+            }
+        }
+
+        [HttpPost("moveAppointmentToRecord/{id}")]
+        public async Task<IActionResult> MoveAppointmentToRecord(long id){
+            try{
+                var appointment = await dBContext.Appointments.FindAsync(id);
+                if (appointment == null){
+                    return NotFound();
+                }
+                // Create a record
+                AppointmentRecord ar = new AppointmentRecord();
+                ar.IdAppointment = appointment.IdAppointment;
+                ar.AppointmentDate = appointment.Date;
+                ar.IdVet = appointment.IdVeterinarian;
+                ar.IdPet = appointment.IdPet;
+                dBContext.AppointmentsRecords.Add(ar);
+
+                // Delete from Appointments
+                dBContext.Appointments.Remove(appointment);
+                await dBContext.SaveChangesAsync();
+                return Ok(ar);
             }
             catch(Exception e){
                 return StatusCode(410);

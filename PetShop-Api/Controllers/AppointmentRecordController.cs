@@ -37,10 +37,10 @@ namespace PetShop_Api.Controllers
         }
 
         [HttpGet("getAppointmentRecordByPetId/{id}")]
-        public async Task<ActionResult<List<AppointmentModel>>> GetAppointmentRecordByPetId(long idPet){
+        public async Task<ActionResult<List<AppointmentModel>>> GetAppointmentRecordByPetId(long id){
             try{
                 var appointmentRecord = await dBContext.AppointmentsRecords
-                                                    .Where(ar => ar.IdPet == idPet)
+                                                    .Where(ar => ar.IdPet == id)
                                                     .ToListAsync();
                 if (appointmentRecord == null){
                     return NotFound();
@@ -53,10 +53,10 @@ namespace PetShop_Api.Controllers
         }
 
         [HttpGet("getAppointmentRecordByVetId/{id}")]
-        public async Task<ActionResult<List<AppointmentModel>>> GetAppointmentRecordByVetId(long idVet){
+        public async Task<ActionResult<List<AppointmentModel>>> GetAppointmentRecordByVetId(long id){
             try{
                 var appointmentRecord = await dBContext.Appointments
-                                                .Where(ar => ar.IdVeterinarian == idVet)
+                                                .Where(ar => ar.IdVeterinarian == id)
                                                 .ToListAsync();
                 if (appointmentRecord == null){
                     return NotFound();
