@@ -105,18 +105,16 @@ namespace PetShop_Api.Controllers
             catch (Exception e){
                 return StatusCode(410);
             }
-        }
+        }   
     
-        [HttpGet("getProductResume/{id}")]
-        public async Task<ActionResult<ProductModel>> GetAllProductsResume(long id) //Trae el resumen (id, foto, nombre, precio) de todos los productos
+        [HttpGet("GetAllProductsResume/{id}")]
+        public async Task<ActionResult<ProductModel>> GetAllProductsResume() //Trae el resumen (id, foto, nombre, precio) de todos los productos
         {
             try {
 
                 var products = await dBContext.Products
-                                                .Where(p => p.IdProduct == id)
-                                                .Select( p => new {p.IdProduct,p.Name,p.Description,
-                                                        p.IdCategory,p.Category,p.QuantityAvailable, 
-                                                        p.UnitPrice, p.IdStateProduct,p.StateProduct}
+                                                .Select(p => new {p.Name,p.Description,p.QuantityAvailable, 
+                                                        p.UnitPrice}
                                                      ).ToListAsync();
                 if (products == null){
                     return NotFound();
