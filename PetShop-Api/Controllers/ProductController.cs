@@ -41,7 +41,7 @@ namespace PetShop_Api.Controllers
             }
         }
 
-                [HttpGet("getWishListProductsByClientId/{id}")]
+        [HttpGet("getWishListProductsByClientId/{id}")]
         public async Task<ActionResult<ProductModel>> GetWishListProductsByClientId(long id)
         {
             try {
@@ -69,6 +69,28 @@ namespace PetShop_Api.Controllers
             }
         }
 
+        [HttpGet("getOrderProductsByOrderId/{id}")]
+        public async Task<ActionResult<ProductModel>> GetOrderProductsByOrderId(long id)
+        {
+            try {
+                var products = await dBContext.Orders_Products
+                                                .Where(op => op.IdOrder == id)
+                                                .Join(dBContext.Products,
+                                                      pOP => pOP.IdProduct,
+                                                      p => p.IdProduct,
+                                                      (pOP, p) => new {p.IdProduct,p.Name,p.Description,
+                                                                       p.IdCategory,p.Category,p.QuantityAvailable, 
+                                                                       p.UnitPrice, p.IdStateProduct,p.StateProduct}
+                                                     ).ToListAsync();
+                if (products == null){
+                    return NotFound();
+                }
+                return Ok(products);
+            }
+            catch (Exception e){
+                return StatusCode(410);
+            }
+        }
 
         [HttpGet("GetProductsByStateId/{id}")]
         public async Task<ActionResult<ProductModel>> GetProductsByStateId(long id) //Trae todos los productos con ese id estado 
@@ -88,6 +110,8 @@ namespace PetShop_Api.Controllers
                 return StatusCode(410);
             }
         }
+
+        
         [HttpGet("getProductsByCategoryId/{id}")]
         public async Task<ActionResult<ProductModel>> GetProductsByCategoryId(long id) //Trae todos los productos con ese id categoria
         {
