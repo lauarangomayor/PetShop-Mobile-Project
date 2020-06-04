@@ -12,7 +12,7 @@ namespace PetShop_Api.Models
     public DbSet<StateOrderModel> StatesOrder {get;set;}
     public DbSet<OrderModel> Orders {get;set;}
     public DbSet<AppointmentModel> Appointments{get;set;}
-    public DbSet<AppointmentRecord> AppointmentsRecords{get;set;}
+    public DbSet<AppointmentRecordModel> AppointmentsRecords{get;set;}
     public DbSet<CategoryModel> Categories{get;set;}
     public DbSet<Order_ProductsModel> Orders_Products{get;set;}
     public DbSet<OrderRecordModel> OrdersRecords{get;set;}

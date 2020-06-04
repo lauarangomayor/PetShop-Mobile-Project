@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PetShop_Api.Models
 {
-    public class AppointmentRecord
+    public class AppointmentRecordModel
     {
         [Key]
         public long IdAppointmentRecord {get; set;}

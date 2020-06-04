@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,8 +9,11 @@ namespace PetShop_Api.Models
         [Key]
         public long IdOrder {get; set;}
         public double TotalValue {get;set;}
+        public DateTime OrderDate{get;set;}
         public long IdStateOrder{get;set;}
+        
         public long IdClient {get;set;}
+        
         public ClientModel Client {get;set;}
         public StateOrderModel StateOrder {get;set;}
 

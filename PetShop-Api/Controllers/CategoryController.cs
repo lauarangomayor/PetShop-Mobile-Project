@@ -54,11 +54,11 @@ namespace PetShop_Api.Controllers
         }
 
         [HttpPost("create")]//http://localhost:5000/Category/create
-        public async Task<ActionResult<CategoryModel>> PostCategory(CategoryModel category){
+        public async Task<ActionResult<CategoryModel>> CreateCategory(CategoryModel category){
             try {
                 dBContext.Categories.Add(category);
                 await dBContext.SaveChangesAsync();
-                return CreatedAtAction(nameof(GetCategory), category.IdCategory);
+                return Ok(category);
             }
             catch (Exception e){
                 return StatusCode(410);

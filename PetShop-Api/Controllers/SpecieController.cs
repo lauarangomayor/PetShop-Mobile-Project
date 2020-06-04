@@ -53,11 +53,11 @@ namespace PetShop_Api.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult<SpecieModel>> PostSpecie(SpecieModel specie){
+        public async Task<ActionResult<SpecieModel>> CreateSpecie(SpecieModel specie){
             try {
                 dBContext.Species.Add(specie);
                 await dBContext.SaveChangesAsync();
-                return CreatedAtAction(nameof(GetSpecie), specie.IdSpecie);
+                return Ok(specie);
             }
             catch (Exception e){
                 return StatusCode(410);

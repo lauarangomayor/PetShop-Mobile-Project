@@ -22,7 +22,7 @@ namespace PetShop_Api.Controllers
         #endregion
         #region Methods
         [HttpGet("get/{id}")]
-        public async Task<ActionResult<AppointmentRecord>> GetAppointmentRecord(long id){
+        public async Task<ActionResult<AppointmentRecordModel>> GetAppointmentRecord(long id){
             try{
                 var appointmentRecord = await dBContext.AppointmentsRecords.FindAsync(id);
                 if (appointmentRecord == null){
@@ -69,7 +69,7 @@ namespace PetShop_Api.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<ActionResult<List<AppointmentRecord>>> GetAllAppointmentRecords(){
+        public async Task<ActionResult<List<AppointmentRecordModel>>> GetAllAppointmentRecords(){
             try{
                 return await dBContext.AppointmentsRecords.ToListAsync();
             }
@@ -79,7 +79,7 @@ namespace PetShop_Api.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult<AppointmentRecord>> CreateAppointment(AppointmentRecord appointmentRecord){
+        public async Task<ActionResult<AppointmentRecordModel>> CreateAppointment(AppointmentRecordModel appointmentRecord){
             try {
                 dBContext.AppointmentsRecords.Add(appointmentRecord);
                 await dBContext.SaveChangesAsync();
@@ -91,7 +91,7 @@ namespace PetShop_Api.Controllers
         }
 
         [HttpPut("update/{id}")]
-        public async Task<ActionResult> UpdateAppointmentRecord(AppointmentRecord appointmentRecord, long id){
+        public async Task<ActionResult> UpdateAppointmentRecord(AppointmentRecordModel appointmentRecord, long id){
             try{
                 if (id != appointmentRecord.IdAppointmentRecord){
                     return BadRequest();

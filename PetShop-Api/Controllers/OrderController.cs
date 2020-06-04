@@ -159,6 +159,31 @@ namespace PetShop_Api.Controllers
                 return StatusCode(410);                    
             }            
         }
+
+        [HttpPost("moveOrderToRecord/{id}")]
+        public async Task<IActionResult> MoveOrderToRecord(long id){
+            try{
+                var order = await dBContext.Orders.FindAsync(id);
+                if (order == null){
+                    return NotFound();
+                }
+                // Create a record
+                OrderRecordModel or = new OrderRecordModel();
+                or.IdOrder = order.IdOrder;
+                or.TotalValue = order.TotalValue;
+                or.OrderDate = order.OrderDate;
+                or.IdClient = order.IdClient;
+                dBContext.OrdersRecords.Add(or);
+
+                // Delete from Appointments
+                dBContext.Orders.Remove(order);
+                await dBContext.SaveChangesAsync();
+                return Ok(or);
+            }
+            catch(Exception e){
+                return StatusCode(410);
+            }
+        }
         #endregion Methods
     }
 }

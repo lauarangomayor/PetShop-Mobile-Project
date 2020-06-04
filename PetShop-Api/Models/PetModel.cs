@@ -15,6 +15,7 @@ namespace PetShop_Api.Models
         public DateTime Birthdate{get;set;}
         public long IdClient {get;set;}
         public ClientModel Client {get;set;}
+        public string ImagePath{get;set;}
         [IgnoreDataMember]
         public List<AppointmentModel> Appointments{get;set;}
 

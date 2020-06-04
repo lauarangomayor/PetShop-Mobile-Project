@@ -90,7 +90,7 @@ namespace PetShop_Api.Controllers
             try {
                 dBContext.Appointments.Add(appointment);
                 await dBContext.SaveChangesAsync();
-                return CreatedAtAction(nameof(GetAppointment), appointment.IdAppointment);
+                return Ok(appointment);
             }
             catch(Exception e){
                 return StatusCode(410);
@@ -140,7 +140,7 @@ namespace PetShop_Api.Controllers
                     return NotFound();
                 }
                 // Create a record
-                AppointmentRecord ar = new AppointmentRecord();
+                AppointmentRecordModel ar = new AppointmentRecordModel();
                 ar.IdAppointment = appointment.IdAppointment;
                 ar.AppointmentDate = appointment.Date;
                 ar.IdVet = appointment.IdVeterinarian;

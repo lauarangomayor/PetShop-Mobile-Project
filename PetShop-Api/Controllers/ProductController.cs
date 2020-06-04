@@ -129,14 +129,10 @@ namespace PetShop_Api.Controllers
         [HttpGet("all")]//http://localhost:5000/Product/all
         public async Task<ActionResult<List<ProductModel>>> GetAllProducts(){
             try {
-                var products = await dBContext.Products
+                return await dBContext.Products
                                               .Include(c => c.Category)
                                               .Include(sp => sp.StateProduct)
                                               .ToListAsync();
-                if (products.Count() == 0){
-                    return NotFound();
-                }
-                return Ok(products);
             }
             catch (Exception e){
                 return StatusCode(410);
@@ -144,11 +140,11 @@ namespace PetShop_Api.Controllers
         }
 
         [HttpPost("create")]//http://localhost:5000/Product/create
-        public async Task<ActionResult<ProductModel>> PostProduct(ProductModel product){
+        public async Task<ActionResult<ProductModel>> CreateProduct(ProductModel product){
             try {
                 dBContext.Products.Add(product);
                 await dBContext.SaveChangesAsync();
-                return CreatedAtAction(nameof(GetProduct), product.IdProduct);
+                return Ok(product);
             }
             catch (Exception e){
                 return StatusCode(410);

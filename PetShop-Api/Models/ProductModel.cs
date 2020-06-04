@@ -15,6 +15,7 @@ namespace PetShop_Api.Models
         public double UnitPrice{get;set;}
         public long IdStateProduct{get;set;}
         public StateProductModel StateProduct {get;set;}
+        public string ImagePath{get;set;}
         [IgnoreDataMember]
         public List<Order_ProductsModel> Orders_Products{get;set;}
         [IgnoreDataMember]

@@ -10,6 +10,7 @@ namespace PetShop_Api.Models
         public long IdOrder {get;set;}
         public long IdProduct{get;set;}
         public ProductModel Product {get; set;}
+        public int QuantityBought{get;set;}
         
     }
 }
