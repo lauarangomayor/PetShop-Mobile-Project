@@ -131,8 +131,8 @@ namespace PetShop_Api.Controllers
             }
         }   
     
-        [HttpGet("GetAllProductsResume/{id}")]
-        public async Task<ActionResult<ProductModel>> GetAllProductsResume() //Trae el resumen (id, foto, nombre, precio) de todos los productos
+        [HttpGet("getProductsResume/{id}")]
+        public async Task<ActionResult<ProductModel>> GetProductsResume() //Trae el resumen (id, foto, nombre, precio) de todos los productos
         {
             try {
 
