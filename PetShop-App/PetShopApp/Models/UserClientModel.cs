@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PetShopApp.Moldels
 {
-    class UserClientModel : PersonModel
+    public class UserClientModel : PersonModel
     {
         #region Properties
         private OrderModel activeOrder;

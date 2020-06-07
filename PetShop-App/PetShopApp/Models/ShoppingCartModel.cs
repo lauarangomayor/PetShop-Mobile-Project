@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PetShopApp.Moldels
 {
-    class ShoppingCartModel : NotificationObject
+    public class ShoppingCartModel : NotificationObject
     {
         #region Properties
         [PrimaryKey, AutoIncrement]

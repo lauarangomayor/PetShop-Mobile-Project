@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace PetShopApp.Moldels
 {
-    class NotificationObject : INotifyPropertyChanged
+    public class NotificationObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

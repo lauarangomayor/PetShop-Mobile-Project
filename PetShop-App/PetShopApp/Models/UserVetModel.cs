@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PetShopApp.Moldels
 {
-    class UserVetModel : PersonModel
+    public class UserVetModel : PersonModel
     {
         #region Properties
         private List<AppointmentModel> appointments;

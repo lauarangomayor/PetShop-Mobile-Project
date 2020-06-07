@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PetShopApp.Moldels
 {
-    class AppointmentModel : NotificationObject
+    public class AppointmentModel : NotificationObject
     {
         #region Properties
         [PrimaryKey, AutoIncrement]
