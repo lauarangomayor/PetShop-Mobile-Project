@@ -39,8 +39,8 @@ namespace PetShopApp.Moldels
         }
         public ShoppingCartModel Car
         {
-            get { return car; }
-            set { car = value; OnPropertyChanged(); }
+            get { return cart; }
+            set { cart = value; OnPropertyChanged(); }
         }
         public List<OrderModel> OrderRecord
         {

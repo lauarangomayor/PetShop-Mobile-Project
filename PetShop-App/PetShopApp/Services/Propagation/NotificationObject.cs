@@ -4,7 +4,7 @@ using System.Text;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
 
-namespace PetShopApp.Moldels
+namespace PetShopApp.Services.Propagation
 {
     public class NotificationObject : INotifyPropertyChanged
     {
