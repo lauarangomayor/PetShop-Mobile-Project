@@ -43,14 +43,14 @@ namespace PetShop_Api.Controllers
                 return StatusCode(410);//BD Error code
             }            
         }
-
-        [HttpGet("getOrdersRecordByClientId/{id}")]
-        public async Task<ActionResult<OrderRecordModel>> GetOrdersRecordByClientId(long id)
+        [HttpGet("getSalesByTimePeriod/{date1}&{date2}")] //http://localhost:5000/orderRecord/GetSalesByTimePeriod/01.01.2010&01.01.2015
+        public async Task<ActionResult<OrderRecordModel>> GetSalesByTimePeriod(String date1,String date2)
         {
             try
             {
                 var orderRecord = await dBContext.OrdersRecords
-                                           .Where(or => or.IdClient == id)
+                                           .Where(or => or.OrderDate > DateTime.Parse(date1) && 
+                                                        or.OrderDate < DateTime.Parse(date2))
                                            .ToListAsync();
                 if (orderRecord == null)
                 {

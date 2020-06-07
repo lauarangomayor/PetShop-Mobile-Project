@@ -175,7 +175,7 @@ namespace PetShop_Api.Controllers
                 or.IdClient = order.IdClient;
                 dBContext.OrdersRecords.Add(or);
 
-                // Delete from Appointments
+                // Delete from Orders
                 dBContext.Orders.Remove(order);
                 await dBContext.SaveChangesAsync();
                 return Ok(or);
