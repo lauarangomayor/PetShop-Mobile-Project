@@ -3,14 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using PetShopApp.Services.Propagation;
+using PetShopApp.Models;
 
 namespace PetShopApp.Moldels
 {
-    public class OrderModel : NotificationObject
+    public class OrderModel : BaseModel
     {
         #region Properties
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
         private int state;
         #endregion
         #region Getters/Setters

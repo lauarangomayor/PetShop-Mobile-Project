@@ -3,9 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace PetShopApp.Moldels
 {
-    public class UserClientModel : PersonModel
+    public class UserClientModel : UserModel
     {
         #region Properties
         private OrderModel activeOrder;

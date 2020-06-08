@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PetShopApp.ViewModels
 {
-    class VetViewModel
+    public class VetViewModel : ViewModelBase
     {
     }
 }
