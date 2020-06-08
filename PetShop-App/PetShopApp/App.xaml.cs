@@ -10,7 +10,7 @@ namespace PetShopApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new PetShopTabbedPage();
         }
 
         protected override void OnStart()
