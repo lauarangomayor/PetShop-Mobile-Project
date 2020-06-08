@@ -4,12 +4,67 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="PetShopApp.Views.LogginView">
+             x:Class="PetShopApp.Views.LogginView"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!--Estilos de la pagina-->
+            <Style TargetType="Label" x:Key="Title">
+
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="FontSize" Value="30"></Setter>
+                <Setter Property="FontFamily" Value="Times New Roman"></Setter>
+                <Setter Property="Margin" Value="0,08"></Setter>
+                <Setter Property="Padding" Value="90,0"></Setter>
+            </Style>
+            <Style TargetType="Label" x:Key="LoginText">
+                <Setter Property="Margin" Value="10,40,10,10"></Setter>
+                <Setter Property="FontSize" Value="Large"></Setter>
+            </Style>
+            <Style TargetType="BoxView" x:Key="LineUp">
+                <Setter Property="HeightRequest" Value="3"></Setter>
+                <Setter Property="BackgroundColor" Value="Black"></Setter>
+            </Style>
+            <Style TargetType="Button" x:Key="ButtonStyle">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="FontSize" Value="Large"></Setter>
+                <Setter Property="Padding" Value="25"></Setter>
+                <Setter Property="BackgroundColor" Value="#096085"></Setter>
+                <Setter Property="TextColor" Value="WhiteSmoke"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <!--<BoxView BackgroundColor="Accent" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"/>-->
+            <StackLayout VerticalOptions="FillAndExpand">
+                <Frame Padding="0" Margin="0">
+                    <StackLayout BackgroundColor="White" Padding="0" Margin="0">
+
+                        <Label Text="Nombre" Style="{StaticResource Title}"></Label>
+
+
+                        <BoxView Style="{StaticResource LineUp}"></BoxView>
+                    </StackLayout>
+                </Frame>
+                <StackLayout HorizontalOptions="FillAndExpand" Padding="40,50" VerticalOptions="Center">
+                    <Label Text="Email:" Style="{StaticResource LoginText}"/>
+                    <Entry HorizontalOptions="FillAndExpand"/>
+                    <Label Text="Contraseña:" Style="{StaticResource LoginText}"/>
+                    <Entry HorizontalOptions="FillAndExpand" IsPassword="True"/>
+                    <Button Text="Ingresar" Style="{StaticResource ButtonStyle}" Margin="0,55,0,15"/>
+                    <Label LineBreakMode="WordWrap" HorizontalOptions="CenterAndExpand" FontSize="Body">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="¿No tienes cuenta? Crea una " TextColor="Black"/>
+                                <Span Text="aquí" TextColor="#096085"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
