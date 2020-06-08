@@ -48,5 +48,5 @@ namespace PetShopApp.Services.Navigation
             }
         }
     }
-}
+
 }
