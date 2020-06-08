@@ -1,20 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="clr-namespace:PetShopApp.Views"
-             mc:Ignorable="d"
-             x:Class="PetShopApp.PetShopTabbedPage"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:views="clr-namespace:PetShopApp.Views"
+            mc:Ignorable="d"
+            x:Class="PetShopApp.Views.ShopTabbedPage"
             NavigationPage.HasNavigationBar="False"
             BarBackgroundColor="Transparent"
-            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" 
-             android:TabbedPage.ToolbarPlacement="Bottom"
+            android:TabbedPage.ToolbarPlacement="Bottom"
             android:TabbedPage.BarItemColor ="Black"
             android:TabbedPage.BarSelectedItemColor="#096085">
+            
 
     <TabbedPage.Children>
-        <NavigationPage Title="Inicio" Icon="home.png">
+        <NavigationPage Title="Inicio" Icon="Home.png">
             <x:Arguments>
                 <views:HomeView ></views:HomeView>
             </x:Arguments>
@@ -29,7 +30,7 @@
                 <views:ProfileView></views:ProfileView>
             </x:Arguments>
         </NavigationPage>
-        
+
 
         <!--<NavigationPage Title="Perfil" Icon="browser.png">
             <x:Arguments>
@@ -42,4 +43,4 @@
 
 
 
-</TabbedPage>
+    </TabbedPage>
