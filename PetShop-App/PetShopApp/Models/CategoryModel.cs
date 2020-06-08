@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using PetShopApp.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,9 @@ using PetShopApp.Services.Propagation;
 
 namespace PetShopApp.Moldels
 {
-    public class CategoryModel : NotificationObject
+    public class CategoryModel : BaseModel
     {
         #region Properties
-        [PrimaryKey, AutoIncrement]
-        [JsonIgnore]
-        public int ID { get; set; }
         [JsonProperty("categoryid")]
         public long CategoryId { get; set; }
         [JsonProperty("categoryname")]

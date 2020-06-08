@@ -3,14 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using PetShopApp.Services.Propagation;
+using PetShopApp.Models;
 
 namespace PetShopApp.Moldels
 {
-    public class ShoppingCartModel : NotificationObject
+    public class ShoppingCartModel : BaseModel
     {
         #region Properties
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
         private List<ProductModel> products;
         public UserClientModel User { get; set; }
         #endregion

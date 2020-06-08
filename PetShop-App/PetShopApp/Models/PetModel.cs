@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using PetShopApp.Services.Propagation;
+using PetShopApp.Models;
 
 namespace PetShopApp.Moldels
 {
-    public class PetModel : NotificationObject
+    public class PetModel : BaseModel
     {
         #region Properties 
         [PrimaryKey, AutoIncrement]
