@@ -11,10 +11,10 @@ using Xamarin.Forms.Xaml;
 namespace PetShopApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginView : ContentPage
+    public partial class StartPageView : ContentPage
     {
-        LoginViewModel context = new LoginViewModel();
-        public LoginView()
+        StartPageViewModel context = new StartPageViewModel();
+        public StartPageView()
         {
             InitializeComponent();
             BindingContext = context;

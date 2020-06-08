@@ -4,7 +4,8 @@ using System.Text;
 
 namespace PetShopApp.ViewModels
 {
-    class LoginViewModel
+    public class LoginViewModel : ViewModelBase
     {
+
     }
 }

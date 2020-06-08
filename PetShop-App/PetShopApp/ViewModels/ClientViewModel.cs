@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PetShopApp.ViewModels
 {
-    public class ClientViewModel 
+    public class ClientViewModel : ViewModelBase
     {
         //Atributos
        // UserClientModel userClientModel;

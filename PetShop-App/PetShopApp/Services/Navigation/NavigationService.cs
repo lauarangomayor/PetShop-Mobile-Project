@@ -8,7 +8,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace PetShopApp.Services.Navigation
 {
-    class NavigationService
+    public class NavigationService
     {
         public async Task PushPage(Page page, object parameter = null)
         {
