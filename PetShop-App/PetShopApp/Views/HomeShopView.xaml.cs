@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace PetShopApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomeView : ContentPage
+    public partial class HomeShopView: ContentPage
     {
-        public HomeView()
+        public HomeShopView()
         {
             InitializeComponent();
         }
