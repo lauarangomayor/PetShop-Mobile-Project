@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text;
-using PetShopApp.Services.ApiRest;
 using System.Threading.Tasks;
 using PetShopApp.AuxModels;
 using Newtonsoft.Json;
+using PetShopApp.Services.APIRest;
 
 namespace PetShopApp.ViewModels
 {
@@ -16,6 +16,7 @@ namespace PetShopApp.ViewModels
         #region Attributes
         private List<AppointmentRecordModel> appointmentsRecords;
         AppointmentRecordModel appointmentRecordModel;
+        private string idPet = "2";
         #endregion Attributes
 
         #region Requests
@@ -45,13 +46,12 @@ namespace PetShopApp.ViewModels
         #region Initialize
         public async Task InitializeRequestAsync()
         {
-            string urlAppointmentRecords = EndPoints.ULR_SERVIDOR + EndPoints.GET_APPOINTMENTRECORDS;
+            string urlAppointmentRecords = EndPoints.SERVER_URL + EndPoints.GET_APPOINTMENTRECORDS + idPet;
 
             GetAppointments = new RequestPicker<BaseModel>();
             GetAppointments.StrategyPicker("GET", urlAppointmentRecords);
 
             AppointmentsRecords = await SelectAppointments();
-            Console.WriteLine("Pene");
         }
         #endregion Initialize
 
@@ -61,7 +61,7 @@ namespace PetShopApp.ViewModels
             try
             {
                 ParametersRequest parameters = new ParametersRequest();
-                parameters.Parameters.Add("3");
+                parameters.Parameters.Add(idPet);
                 APIResponse response = await GetAppointments.ExecuteStrategy(null);
                 if (response.IsSuccess)
                 {
