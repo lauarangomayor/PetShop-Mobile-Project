@@ -7,6 +7,7 @@ namespace PetShopApp.Models
 {
     public class AppointmentRecordModel : BaseModel
     {
+        #region Properties
         [JsonProperty("idAppointmentRecord")]
         private int idRecord;
 
@@ -24,7 +25,9 @@ namespace PetShopApp.Models
 
         [JsonProperty("abstractAppointment")]
         private string abstractAppointment;
+        #endregion
 
+        #region Getters/Setters
         public string AbstractAppointment
         {
             get { return abstractAppointment; }
@@ -63,6 +66,7 @@ namespace PetShopApp.Models
             get { return idRecord; }
             set { idRecord = value; OnPropertyChanged(); }
         }
+        #endregion
 
     }
 }
