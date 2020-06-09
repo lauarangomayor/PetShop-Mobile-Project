@@ -68,17 +68,37 @@ namespace PetShop_Api.Controllers{
                 return StatusCode(410);
             }
         }
-        [HttpPost("create")]
-        public async Task<ActionResult<VeterinarianModel>> CreateVeterinarian(VeterinarianModel veterinarian){
-            try {
-                dBContext.Veterinarians.Add(veterinarian);
-                await dBContext.SaveChangesAsync();
-                return Ok(veterinarian);
+
+        [HttpPost("registerVeterinarian")] //http://localhost:5000/Veterinarian/registerVeterinarian
+        public async Task<ActionResult<VeterinarianModel>> RegisterVeterinarian(UserModel user)
+        {
+            try
+            {   
+                bool existUser = dBContext.Users.Any(e => e.Email == user.Email);
+                if (!existUser && user.UserType==0)
+                {
+                        dBContext.Users.Add(user);
+                        await dBContext.SaveChangesAsync();
+                        VeterinarianModel vet = new VeterinarianModel();   
+                        vet.IdUser=user.IdUser;                         
+                        dBContext.Veterinarians.Add(vet);
+                        await dBContext.SaveChangesAsync();
+
+                        return Ok(vet);
+
+                }
+                else
+                {
+                    return StatusCode(410);     
+                }
+   
             }
-            catch(Exception e){
-                return StatusCode(410);
-            }
+            catch(Exception e)
+            {
+                return StatusCode(410);     
+            }            
         }
+        
         [HttpPut("update/{id}")]
         public async Task<IActionResult> UpdateVeterinarian(VeterinarianModel veterinarian,long id){
             try {
