@@ -12,9 +12,8 @@ namespace PetShopApp.Models
     public class CategoryModel : BaseModel
     {
         #region Properties
-        [JsonProperty("categoryid")]
-        public long CategoryId { get; set; }
-        [JsonProperty("categoryname")]
+        // crear idcategory
+        public long IdCategory { get; set; }
         public string Name { get; set; }
         #endregion
 

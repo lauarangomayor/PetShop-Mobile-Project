@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 
-namespace PetShopApp.Services.ApiRest
+namespace PetShopApp.Services.APIRest
 {
     public class HeaderService
     {
@@ -15,7 +15,8 @@ namespace PetShopApp.Services.ApiRest
         #region Initialize
         public HeaderService()
         {
-            Headers.Add("content-type", "application/json");
+            Headers = new Dictionary<string, string>();
+            Headers.Add("ContentType", "application/json");
         }
         #endregion
         #region Methods
