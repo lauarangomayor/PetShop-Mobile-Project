@@ -38,7 +38,7 @@ namespace PetShopApp.Moldels
             get { return wishlist; }
             set { wishlist = value; OnPropertyChanged(); }
         }
-        public ShoppingCartModel Car
+        public ShoppingCartModel Cart
         {
             get { return cart; }
             set { cart = value; OnPropertyChanged(); }
