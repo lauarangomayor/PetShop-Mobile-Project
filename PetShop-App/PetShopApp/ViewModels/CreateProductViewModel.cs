@@ -17,11 +17,12 @@ namespace PetShopApp.ViewModels
     {
         #region Properties
         public RequestPicker<BaseModel> GetCategories { get; set; }
-        public List<CategoryModel> CategoriesList { get; set; }
-        private List<string> categories;
+        public RequestPicker<BaseModel> GetStateProduct { get; set; }
+        private List<CategoryModel> categories;
+        private List<StateProductModel> stateProduct;
         #endregion
         #region Getters/Setters
-        public List<string> Categories
+        public List<CategoryModel> Categories
         {
             get { return categories; }
             set
@@ -30,16 +31,21 @@ namespace PetShopApp.ViewModels
                 OnPropertyChanged();
             }
         }
-        #endregion
-        #region Commands
-        //public ICommand ListCategoriesCommand { get; set; }
+        public List<StateProductModel> StateProduct
+        {
+            get { return stateProduct; }
+            set
+            {
+                stateProduct = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
         public CreateProductViewModel()
         {
-            Categories = new List<string>();
+            Categories = new List<CategoryModel>();
+            StateProduct = new List<StateProductModel>();
             InitizalizeRequest();
-            
-            //ListCategoriesCommand = new Command(async () => await ListCategories(), () => true);
         }
         #region Methods
         public async void InitizalizeRequest()
@@ -48,21 +54,34 @@ namespace PetShopApp.ViewModels
             GetCategories = new RequestPicker<BaseModel>();
             GetCategories.StrategyPicker("GET", urlGetCategories);
             await ListCategories();
+
+            string urlGetProductStates = EndPoints.SERVER_URL + EndPoints.GET_ALL_STATESPRODUCT;
+            GetStateProduct = new RequestPicker<BaseModel>();
+            GetStateProduct.StrategyPicker("GET", urlGetProductStates);
+            await ListStatesProduct();
         }
         public async Task ListCategories()
         {
             APIResponse response = await GetCategories.ExecuteStrategy(null);
             if (response.IsSuccess){
-                List<CategoryModel> categoriesList = JsonConvert.DeserializeObject<List<CategoryModel>>(response.Response);
-                foreach (var c in categoriesList){
-                    categories.Add(c.Name);
-                }
+                Categories = JsonConvert.DeserializeObject<List<CategoryModel>>(response.Response);
             }
             else
             {
-                var error = "Error al cargar categorías";
+                Exception e;
             }
-
+        }
+        public async Task ListStatesProduct()
+        {
+            APIResponse response = await GetStateProduct.ExecuteStrategy(null);
+            if (response.IsSuccess)
+            {
+                StateProduct = JsonConvert.DeserializeObject<List<StateProductModel>>(response.Response);
+            }
+            else
+            {
+                Exception e;
+            }
         }
         #endregion
 
