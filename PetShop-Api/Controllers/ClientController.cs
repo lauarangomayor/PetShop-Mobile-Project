@@ -48,7 +48,7 @@ namespace PetShop_Api.Controllers
           
         }
 
-        [HttpGet("all")] //http:localhost:5000/user/all
+        [HttpGet("all")] //http://localhost:5000/client/all
         //Return all the user from de DB
         public async Task<ActionResult<List<ClientModel>>> GetAllClient()
         {
@@ -64,22 +64,38 @@ namespace PetShop_Api.Controllers
             }
           
         }
-
-        [HttpPost("create")] //http:localhost:5000/user/create
-        public async Task<ActionResult<ClientModel>> CreateClient(ClientModel client)
+        
+        [HttpPost("registerClient")] //http://localhost:5000/client/registerClient
+        public async Task<ActionResult<ClientModel>> RegisterClient(UserModel user)
         {
             try
-            {
-                dBContext.Clients.Add(client);
-                await dBContext.SaveChangesAsync();
+            {   
+                bool existUser = dBContext.Users.Any(e => e.Email == user.Email);
+                if (!existUser && user.UserType==1)
+                {
+                        dBContext.Users.Add(user);
+                        await dBContext.SaveChangesAsync();
+                        ClientModel client = new ClientModel();   
+                        client.IdUser=user.IdUser;                         
+                        dBContext.Clients.Add(client);
+                        await dBContext.SaveChangesAsync();
 
-                return Ok(client);
+                        return Ok(client);
+
+                }
+                else
+                {
+                    return StatusCode(410);     
+                }
+   
             }
             catch(Exception e)
             {
                 return StatusCode(410);     
             }            
         }
+        
+
 
         [HttpPut("update/{id}")] //http:localhost:5000/user/update
         public async Task<IActionResult> UpdateClient(long id, ClientModel client)

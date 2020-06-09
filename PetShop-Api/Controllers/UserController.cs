@@ -61,21 +61,6 @@ namespace PetShop_Api.Controllers
           
         }
 
-        [HttpPost("create")] //http:localhost:5000/user/create
-        public async Task<ActionResult<UserModel>> CreateUser(UserModel user)
-        {
-            try
-            {
-                dBContext.Users.Add(user);
-                await dBContext.SaveChangesAsync();
-
-                return Ok(user);
-            }
-            catch(Exception e)
-            {
-                return StatusCode(410);     
-            }            
-        }
 
         [HttpPut("update/{id}")] //http:localhost:5000/user/update
         public async Task<IActionResult> UpdateUser(long id, UserModel user)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PetShopApp.Moldels
+namespace PetShopApp.Models
 {
     public class UserVetModel : UserModel
     {

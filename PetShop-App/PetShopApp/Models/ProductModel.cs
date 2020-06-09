@@ -5,7 +5,7 @@ using System.Text;
 using PetShopApp.Services.Propagation;
 using PetShopApp.Models;
 
-namespace PetShopApp.Moldels
+namespace PetShopApp.Models
 {
     public class ProductModel : BaseModel
     {
@@ -47,11 +47,11 @@ namespace PetShopApp.Moldels
             get { return unitPrice; }
             set { unitPrice = value; OnPropertyChanged(); }
         }
-        
+
         public CategoryModel Category
         {
             get { return category; }
-            set {category = value; OnPropertyChanged();}
+            set { category = value; OnPropertyChanged(); }
         }
         public int Stock
         {

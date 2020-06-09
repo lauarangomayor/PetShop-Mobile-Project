@@ -5,7 +5,7 @@ using System.Text;
 using PetShopApp.Services.Propagation;
 using PetShopApp.Models;
 
-namespace PetShopApp.Moldels
+namespace PetShopApp.Models
 {
     public class UserModel : BaseModel
     {

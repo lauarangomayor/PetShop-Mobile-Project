@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="PetShopApp.Views.AppointmentRecordView">
+    <ScrollView>
+        <StackLayout>
+            <ListView ItemsSource="{Binding Asignaturas}"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout BackgroundColor="white">
+                                <Frame OutlineColor="Black" Padding="7" BackgroundColor="#014880" Margin="2,1,0,0">
+                                    <Label x:Name="ASigantura" HorizontalOptions="Fill" Text="{Binding NombreAsignatura}" TextColor="White" FontAttributes="Bold"></Label>
+                                </Frame>
+                                <StackLayout x:Name="Detalles">
+                                    <Label Text="Nota Acumulada: " FontAttributes="Bold"></Label>
+                                    <Label Text="{Binding Nota}" ></Label>
+                                    <Label Text="Inasistencia:" FontAttributes="Bold"></Label>
+                                    <Label Text="{Binding PorcentajeInasistencia}"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -6,6 +6,10 @@
              mc:Ignorable="d"
              x:Class="PetShopApp.App">
     <Application.Resources>
-
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="White"></Setter>
+            <Setter Property="BarTextColor" Value="Black"></Setter>
+            <Setter Property="Title" Value="Nombre app"></Setter>
+        </Style>
     </Application.Resources>
 </Application>

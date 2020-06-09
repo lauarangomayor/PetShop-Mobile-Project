@@ -3,14 +3,63 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xfg="clr-namespace:XFGloss;assembly=XFGloss"
              mc:Ignorable="d"
              x:Class="PetShopApp.Views.CategoriesView"
              NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="BoxView" x:Key="LineUp">
+                <Setter Property="HeightRequest" Value="3"></Setter>
+                <Setter Property="BackgroundColor" Value="Black"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <BoxView Style="{StaticResource LineUp}"></BoxView>
+            <!--
+            <ListView ItemsSource="{Binding CategoriesList}" HasUnevenRows="True" SeparatorVisibility="None"
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}" IsPullToRefreshEnabled="False"
+                      Scrolled="OnListViewScrolled" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10" RowSpacing="50" ColumnSpacing="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="1"
+                                       Text="{Binding Name}"
+                                       VerticalOptions="End"></Label>
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+            <StackLayout Padding="6">
+                <CollectionView ItemsSource="{Binding CategoriesList}" SelectedItem="{Binding selectedCategory, Mode=TwoWay}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectedItemTappedCommand, Mode=TwoWay}">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="7"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame HeightRequest="150" BackgroundColor="#EDEAEA" Padding="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
+                                <Label Text="{Binding Name}" FontSize="Title" TextColor="Black" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"></Label>
+                                
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

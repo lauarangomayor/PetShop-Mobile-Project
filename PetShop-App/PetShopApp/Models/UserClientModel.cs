@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace PetShopApp.Moldels
+namespace PetShopApp.Models
 {
     public class UserClientModel : UserModel
     {
