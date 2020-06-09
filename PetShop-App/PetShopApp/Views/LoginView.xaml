@@ -6,7 +6,13 @@
              mc:Ignorable="d"
              x:Class="PetShopApp.Views.LoginView"
              NavigationPage.HasNavigationBar="False">
-
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem
+            IconImageSource="Shoppingcart.png"
+            Order="Primary"
+            Text="Agregar al carrito"
+            Priority="0"></ToolbarItem>
+    </ContentPage.ToolbarItems> -->
     <ContentPage.Resources>
         <ResourceDictionary>
             <!--Estilos de la pagina-->
