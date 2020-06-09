@@ -2,10 +2,11 @@
 using PetShopApp.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PetShopApp.Services.ApiRest
+namespace PetShopApp.Services.APIRest
 {
     public class RequestPicker<T>
     {
@@ -30,7 +31,6 @@ namespace PetShopApp.Services.ApiRest
                 Type classType = Type.GetType(className);
                 Type[] typeArgs = { typeof(T) };
                 var genericClass = classType.MakeGenericType(typeArgs);
-                /* Recivies class name and params for converting them to a concrete class casted to the abstract class. */
                 SendStrategy = (Request<T>)Activator.CreateInstance(genericClass, url, verb.ToUpper());
             }
         }

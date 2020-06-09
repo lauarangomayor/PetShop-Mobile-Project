@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PetShopApp.Services.ApiRest
+namespace PetShopApp.Services.APIRest
 {
     public abstract class Request<T>
     {

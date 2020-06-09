@@ -13,7 +13,7 @@ namespace PetShopApp.Configuration
         #region Initialize
         public RestConfiguration()
         {
-            NameSpaceRest = "PetShopApp.Serivices.APIRest";
+            NameSpaceRest = "PetShopApp.Services.APIRest.";
             InitializeVerbsConfiguration();
         }
         #endregion
