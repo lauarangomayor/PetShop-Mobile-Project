@@ -3,15 +3,94 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:numeric="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"
              mc:Ignorable="d"
              x:Class="PetShopApp.Views.ProductDetailView"
              NavigationPage.HasNavigationBar="False">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            IconImageSource="Shoppingcart.png"
+            Order="Primary"
+            Text="Agregar al carrito"
+            Priority="0"></ToolbarItem>
+        <!--<ToolbarItem Name="Create" Command="{Binding CreateNewScopeCommand}"></ToolbarItem>-->
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="BoxView" x:Key="LineUp">
+                <Setter Property="HeightRequest" Value="3"></Setter>
+                <Setter Property="BackgroundColor" Value="Black"></Setter>
+            </Style>
+            
+            <Style TargetType="Label" x:Key="Titles">
+                <Setter Property="FontSize" Value="Medium"></Setter>
+                <Setter Property= "LineBreakMode" Value="WordWrap"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property= "Margin" Value ="10,5,5,0"></Setter>
+            </Style>
+
+            <Style TargetType="Button" x:Key="ButtonStyle">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
+                
+                <Setter Property="BackgroundColor" Value="#5EC8EA"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="Center">
-            <Label Text="Welcome to this app!"></Label>
-            <Image Source="{Binding ItemDetail.Image}" WidthRequest="100"></Image>
-            <Label Text="{Binding ItemDetail.Name}" HorizontalTextAlignment="Center"></Label>
-            <Label Text="{Binding ItemDetail.Description}" Margin="20,20" FontSize="Small"></Label>
+        <StackLayout  BackgroundColor="White">
+            <BoxView Style="{StaticResource LineUp}"></BoxView>
+            <Label Text="{Binding ItemDetail.Name}"  Style="{StaticResource Titles}" ></Label>
+            <Image Source="{Binding ItemDetail.Image}" HeightRequest="250" Aspect="AspectFit" Margin="0,35,0,15"></Image>
+            <StackLayout Padding="15">
+
+                <BoxView BackgroundColor="Black" HeightRequest="1"></BoxView>
+                <Label LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand" FontSize="Body" Padding="0,10,0,20">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Descripción: " TextColor="Black" FontAttributes="Bold"/>
+                            <Span Text="{Binding ItemDetail.Description}" TextColor="Black"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand" FontSize="Body" Padding="0,0,0,20">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Cantidad disponible: " TextColor="Black" FontAttributes="Bold"/>
+                            <Span Text="{Binding ItemDetail.Stock}" TextColor="Black"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand" FontSize="Body" Padding="0,0,0,10">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Precio: " TextColor="Black" FontAttributes="Bold"/>
+                            <Span Text="$" TextColor="Black"></Span>
+                            <Span Text="{Binding ItemDetail.UnitPrice}" TextColor="Black"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <BoxView BackgroundColor="Black" HeightRequest="1"></BoxView>
+                <StackLayout Padding="30">
+                <Label Text="Cantidad:" TextColor="Black" FontAttributes="Bold"  Padding="0,10,0,15" HorizontalTextAlignment="Center"></Label>
+                <numeric:SfNumericUpDown x:Name="numericUpDown" Value="0" TextAlignment="Center" ParsingMode="Decimal" FontSize="20" Maximum="{Binding ItemDetail.Stock}" Minimum="0" MaximumDecimalDigits="0" SpinButtonAlignment="Both">
+                    <numeric:SfNumericUpDown.IncrementButtonSettings>
+                        <numeric:UpDownButtonSettings ButtonFontColor="#5EC8EA" ButtonHeight="80" ButtonWidth="80"/>
+                    </numeric:SfNumericUpDown.IncrementButtonSettings>
+                    <numeric:SfNumericUpDown.DecrementButtonSettings>
+                        <numeric:UpDownButtonSettings ButtonFontColor="#5EC8EA" ButtonHeight="80" ButtonWidth="80"/>
+                    </numeric:SfNumericUpDown.DecrementButtonSettings>
+                </numeric:SfNumericUpDown>
+                <Button Text="Agregar al carrito" Style="{StaticResource ButtonStyle}" Margin="0,20,0,0"/>
+                </StackLayout>
+            </StackLayout>
         </StackLayout>
+       <!-- <StackLayout HorizontalOptions="Center">
+            <Label Text="{Binding ItemDetail.Name}" HorizontalTextAlignment="Center"></Label>
+            <Image Source="{Binding ItemDetail.Image}" WidthRequest="200" Aspect="AspectFit"></Image>
+            <Label Text="{Binding ItemDetail.Description}" Margin="20,20" FontSize="Small"></Label>
+        </StackLayout> -->
     </ContentPage.Content>
 </ContentPage>

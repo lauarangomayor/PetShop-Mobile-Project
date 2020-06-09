@@ -13,8 +13,11 @@ namespace PetShopApp
         #endregion
         public App()
         {
+            //Register Syncfusion license
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjY5Mzk4QDMxMzgyZTMxMmUzMG1MN3U3NURvdEVZU00yaCt3U2N4dHFRQVBjc0I1S1lqdjVMNnkyVUtRTkU9");
+            
             InitializeComponent();
-
+            //MainPage = new NavigationPage(new ShopTabbedPage());
             MainPage = new NavigationPage(new StartPageView());
         }
 

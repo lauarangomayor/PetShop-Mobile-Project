@@ -22,12 +22,20 @@
                 <Setter Property="HeightRequest" Value="3"></Setter>
                 <Setter Property="BackgroundColor" Value="Black"></Setter>
             </Style>
+            <Style TargetType="Label" x:Key="Titles">
+                <Setter Property="FontSize" Value="Medium"></Setter>
+                <Setter Property= "LineBreakMode" Value="WordWrap"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property= "Margin" Value ="10,5,5,5"></Setter>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+    
     <ContentPage.Content>
         <StackLayout  BackgroundColor="White">
             <BoxView Style="{StaticResource LineUp}"></BoxView>
-                <Label Text="Nuevo" FontSize="Medium" LineBreakMode="WordWrap" TextColor="Black" FontAttributes="Bold" Margin="5,5,5,5" ></Label>
+                <Label Text="Nuevo"  Style="{StaticResource Titles}" ></Label>
             <StackLayout Padding="6">
                 <CollectionView ItemsSource="{Binding ProductsList}" SelectedItem="{Binding productItem, Mode=TwoWay}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectedItemTappedCommand, Mode=TwoWay}">
 
@@ -50,7 +58,8 @@
                                                           VerticalOptions="CenterAndExpand"
                                                           Aspect="AspectFill"
                                                           WidthRequest="160"
-                                                          Source="{Binding Image}">
+                                                          Source="{Binding Image}"
+                                                      >
 
                                 </controls:CircleImage>
 

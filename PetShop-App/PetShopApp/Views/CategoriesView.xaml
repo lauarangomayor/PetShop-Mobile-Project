@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xfg="clr-namespace:XFGloss;assembly=XFGloss"
              mc:Ignorable="d"
              x:Class="PetShopApp.Views.CategoriesView"
              NavigationPage.HasNavigationBar="False">
@@ -17,6 +18,7 @@
     <ContentPage.Content>
         <StackLayout>
             <BoxView Style="{StaticResource LineUp}"></BoxView>
+            <!--
             <ListView ItemsSource="{Binding CategoriesList}" HasUnevenRows="True" SeparatorVisibility="None"
                       SelectedItem="{Binding SelectedItem, Mode=TwoWay}" IsPullToRefreshEnabled="False"
                       Scrolled="OnListViewScrolled" SelectionMode="None">
@@ -40,7 +42,24 @@
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </ListView>-->
+            <StackLayout Padding="6">
+                <CollectionView ItemsSource="{Binding CategoriesList}" SelectedItem="{Binding selectedCategory, Mode=TwoWay}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectedItemTappedCommand, Mode=TwoWay}">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="7"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame HeightRequest="150" BackgroundColor="#EDEAEA" Padding="0" VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
+                                <Label Text="{Binding Name}" FontSize="Title" TextColor="Black" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"></Label>
+                                
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
