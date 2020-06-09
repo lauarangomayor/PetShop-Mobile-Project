@@ -41,6 +41,20 @@ namespace PetShop_Api.Controllers
             }
         }
 
+        public async Task<ProductModel> GetProductModel(long id){ //Trae la categoria asociada a el producto con ese id
+            try{
+                var product = await dBContext.Products
+                                                    .Include(c => c.Category)
+                                                    .Include(sp => sp.StateProduct)
+                                                    .FirstAsync(p => p.IdProduct == id);
+                return product;
+            }
+            catch(Exception e){
+                Console.WriteLine(e);
+                return null;
+            }
+        }
+
         [HttpGet("getWishListProductsByClientId/{id}")]
         public async Task<ActionResult<ProductModel>> GetWishListProductsByClientId(long id)
         {
