@@ -11,7 +11,6 @@
         <ResourceDictionary>
             <!--Estilos de la pagina-->
             <Style TargetType="Label" x:Key="Title">
-
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
                 <Setter Property="TextColor" Value="Black"></Setter>
                 <Setter Property="FontSize" Value="30"></Setter>
@@ -54,7 +53,8 @@
                     <Entry HorizontalOptions="FillAndExpand"/>
                     <Label Text="Contraseña:" Style="{StaticResource LoginText}"/>
                     <Entry HorizontalOptions="FillAndExpand" IsPassword="True"/>
-                    <Button Text="Ingresar" Style="{StaticResource ButtonStyle}" Margin="0,55,0,15"/>
+                    <Button Text="Ingresar" Style="{StaticResource ButtonStyle}" Margin="0,55,0,15"
+                            Command="{Binding ShowCreatePetViewCommand}"/>
                     <Label LineBreakMode="WordWrap" HorizontalOptions="CenterAndExpand" FontSize="Body">
                         <Label.FormattedText>
                             <FormattedString>
