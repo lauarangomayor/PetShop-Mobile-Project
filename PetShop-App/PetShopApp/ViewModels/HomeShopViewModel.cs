@@ -1,17 +1,26 @@
-﻿using PetShopApp.Models;
-using PetShopApp.Moldels;
+﻿using Acr.UserDialogs;
+using PetShopApp.Models;
+using PetShopApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace PetShopApp.ViewModels
 {
-    class HomeShopViewModel
+    class HomeShopViewModel : ViewModelBase
     {
+        #region Commands
+        public ICommand SelectedItemTappedCommand { get; set; }
+        #endregion
         public ObservableCollection<ProductModel> ProductsList { get; set; }
+        public ProductModel productItem { get; set; }
         public HomeShopViewModel()
         {
+            SelectedItemTappedCommand = new Command(async () => await GoToProductDetails(), () => true);
             ProductsList = new ObservableCollection<ProductModel>();
 
             ProductsList.Add(new ProductModel { ID = 1, Name = "Test1", Description="Super producto Wow 1", UnitPrice = 5000,Category= new CategoryModel { CategoryId = 1,Name= "Aseo"}, Stock = 5, Image = "https://image.shutterstock.com/image-photo/fresh-tasty-burger-isolated-on-260nw-705104968.jpg"});
@@ -29,7 +38,21 @@ namespace PetShopApp.ViewModels
             ProductsList.Add(new ProductModel { ID = 13, Name = "Test13", Description="Super producto Wow 13", UnitPrice = 10000,Category= new CategoryModel { CategoryId = 1,Name= "Aseo"}, Stock = 5, Image = "https://image.shutterstock.com/image-photo/fresh-tasty-burger-isolated-on-260nw-705104968.jpg"});
             ProductsList.Add(new ProductModel { ID = 14, Name = "Test14", Description="Super producto Wow 14", UnitPrice = 46600,Category= new CategoryModel { CategoryId = 3,Name= "Medicamentos"}, Stock = 5, Image = "https://image.shutterstock.com/image-photo/fresh-tasty-burger-isolated-on-260nw-705104968.jpg"});
             
+            
 
         }
+        #region Methods
+        private async Task GoToProductDetails()
+        {
+            /*
+            var promptConfig = new PromptConfig();
+            promptConfig.InputType = InputType.Name;
+            promptConfig.IsCancellable = true;
+            promptConfig.Message = productItem.Name;
+            var result = await UserDialogs.Instance.PromptAsync(promptConfig);*/
+            await NavigationService.PushPage(new ProductDetailView(), productItem );
+        }
+        #endregion
+
     }
 }
