@@ -5,14 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              mc:Ignorable="d"
-             x:Class="PetShopApp.Views.HomeShop"
+             x:Class="PetShopApp.Views.HomeShopView"
              Title="Nuevos"
              BackgroundColor="#EDEAEA">
     <ContentPage.Content>
         <ListView ItemsSource="{Binding ProductsList}" HasUnevenRows="True" SeparatorVisibility="None"
                   ItemTapped="OnItemSelected" IsPullToRefreshEnabled="true"   RefreshControlColor="#5EC8EA" 
                   Scrolled="OnListViewScrolled" SelectionMode="None">
-            <ListView.ItemTemplate>
+            <ListView.ItemTemplate> 
                 <DataTemplate>
                     <ViewCell>
                         <Frame Padding="3" Margin="0,5,0,5" HeightRequest="200" BackgroundColor="White">
@@ -48,7 +48,7 @@
                                             <Span Text="$"></Span>
                                             <Span Text="{Binding UnitPrice}"></Span>
                                         </FormattedString>
-                                    </Label.FormattedText>
+                                    </Label.FormattedText> 
                                 </Label>
 
 

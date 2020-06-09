@@ -12,17 +12,24 @@ namespace PetShopApp.ViewModels
     {
         #region Commands
         public ICommand VetImageTappedCommand { get; set; }
+        public ICommand ShopImageTappedCommad { get; set; }
         #endregion
         #region Initialization
         public StartPageViewModel()
         {
             VetImageTappedCommand = new Command(async () => await VetLogin(), () => true);
+            ShopImageTappedCommad = new Command(async () => await ShopHome(), () => true);
         }
         #endregion
         #region Methods
         private async Task VetLogin()
         {
             await NavigationService.PushPage(new LoginView());
+        }
+
+        private async Task ShopHome()
+        {
+            await NavigationService.PushPage(new ShopTabbedPage());
         }
         #endregion
     }

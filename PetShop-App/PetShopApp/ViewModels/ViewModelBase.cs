@@ -1,4 +1,5 @@
 ﻿using PetShopApp.Services.Navigation;
+using PetShopApp.Services.Propagation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PetShopApp.ViewModels
 {
-    public class ViewModelBase
+    public class ViewModelBase : NotificationObject
     {
         #region Properties
         public NavigationService NavigationService { get; set; }

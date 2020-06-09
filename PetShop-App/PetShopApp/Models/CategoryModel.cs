@@ -15,10 +15,11 @@ namespace PetShopApp.Moldels
         [JsonProperty("categoryid")]
         public long CategoryId { get; set; }
         [JsonProperty("categoryname")]
-        public string Name; 
+        public string Name { get; set; }
         #endregion
+
         #region Getters/Setters
-      
+        
         #endregion
     }
 }

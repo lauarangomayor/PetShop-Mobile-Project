@@ -16,6 +16,7 @@ namespace PetShopApp.Views
         LoginViewModel context = new LoginViewModel();
         public LoginView()
         {
+            //BarBackgroundColor = Color.FromHex("#096085");
             InitializeComponent();
             BindingContext = context;
         }

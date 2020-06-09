@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PetShopApp.Models
 {
-    class MyListModel
+    class MyListModel: BaseModel
     {
         public string Name { get; set; }
         public string Detail { get; set; }
