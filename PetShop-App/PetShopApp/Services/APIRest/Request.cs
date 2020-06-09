@@ -1,6 +1,7 @@
 ﻿using PetShopApp.AuxModels;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,6 +33,21 @@ namespace PetShopApp.Services.ApiRest
         #endregion
         #region Methods
         public abstract Task<APIResponse> SendRequest(T obj);
+
+        public async Task ConstructURL(ParametersRequest parameters)
+        {
+            ParametersRequest Parameters = parameters as ParametersRequest;
+            if (Parameters.Parameters.Count > 0)
+            {
+                Url = (Url.Substring(Url.Length - 1) == "/") ? Url.Remove(Url.Length - 1) : Url;
+                Parameters.Parameters.ForEach(p => Url += "/" + p);
+            }
+            if (Parameters.QueryParameters.Count > 0)
+            {
+                var queryParameters = await new FormUrlEncodedContent(Parameters.QueryParameters).ReadAsStringAsync();
+                Url = Url + queryParameters;
+            }
+        }
         #endregion
     }
 }

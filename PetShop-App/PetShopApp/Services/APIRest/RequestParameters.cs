@@ -35,11 +35,10 @@ namespace PetShopApp.Services.ApiRest
                 using (var client = new HttpClient())
                 {
                     var HttpVerb = (Verb == "GET") ? HttpMethod.Get : HttpMethod.Delete;
-                    await this.ConstructURL(obj);
-
+                    client.Timeout = TimeSpan.FromSeconds(50);
                     HttpRequestMessage RequestMessage = new HttpRequestMessage(HttpVerb, Url);
                     RequestMessage = HeaderService.AddHeader(RequestMessage);
-                    HttpResponseMessage HttpResponse= await client.SendAsync(RequestMessage);
+                    HttpResponseMessage HttpResponse = client.SendAsync(RequestMessage).Result;
                     response.Code = Convert.ToInt32(HttpResponse.StatusCode);
                     response.IsSuccess = HttpResponse.IsSuccessStatusCode;
                     response.Response = await HttpResponse.Content.ReadAsStringAsync();
@@ -51,20 +50,6 @@ namespace PetShopApp.Services.ApiRest
                 response.Response = "Server error";
             }
             return response;
-        }
-        private async Task ConstructURL(T parameters)
-        {
-            ParametersRequest Parameters = parameters as ParametersRequest;
-            if (Parameters.Parameters.Count > 0)
-            {
-                Url = (Url.Substring(Url.Length - 1) == "/") ? Url.Remove(Url.Length - 1) : Url;
-                Parameters.Parameters.ForEach(p => Url += "/" + p);
-            }
-            if (Parameters.QueryParameters.Count > 0)
-            {
-                var queryParameters = await new FormUrlEncodedContent(Parameters.QueryParameters).ReadAsStringAsync();
-                Url = Url + queryParameters;
-            }
         }
         #endregion
     }

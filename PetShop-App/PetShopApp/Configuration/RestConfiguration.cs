@@ -21,10 +21,10 @@ namespace PetShopApp.Configuration
         private void InitializeVerbsConfiguration()
         {
             VerbsConfiguration = new Dictionary<string, string>();
-            VerbsConfiguration.Add("GET", string.Concat(NameSpaceRest, "RequestParameters"));
-            VerbsConfiguration.Add("DELETE", string.Concat(NameSpaceRest, "RequestParameters"));
-            VerbsConfiguration.Add("POST", string.Concat(NameSpaceRest, "RequestBody"));
-            VerbsConfiguration.Add("PUT", string.Concat(NameSpaceRest, "RequestBody"));
+            VerbsConfiguration.Add("GET", string.Concat(NameSpaceRest, "RequestParameters`1"));
+            VerbsConfiguration.Add("DELETE", string.Concat(NameSpaceRest, "RequestParameters`1"));
+            VerbsConfiguration.Add("POST", string.Concat(NameSpaceRest, "RequestBody`1"));
+            VerbsConfiguration.Add("PUT", string.Concat(NameSpaceRest, "RequestBody`1"));
 
         }
         #endregion

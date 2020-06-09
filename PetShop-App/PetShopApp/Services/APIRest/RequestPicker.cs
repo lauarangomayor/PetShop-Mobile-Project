@@ -28,13 +28,17 @@ namespace PetShopApp.Services.ApiRest
             if (dictionary.TryGetValue(verb.ToUpper(), out className)) 
             {
                 Type classType = Type.GetType(className);
+                Type[] typeArgs = { typeof(T) };
+                var genericClass = classType.MakeGenericType(typeArgs);
                 /* Recivies class name and params for converting them to a concrete class casted to the abstract class. */
-                SendStrategy = (Request<T>)Activator.CreateInstance(classType, url);
+                SendStrategy = (Request<T>)Activator.CreateInstance(genericClass, url, verb.ToUpper());
             }
         }
 
-        public async Task<APIResponse> ExecuteStrategy(T obj)
+        public async Task<APIResponse> ExecuteStrategy(T obj, ParametersRequest parametersRequest = null)
         {
+            parametersRequest = parametersRequest ?? new ParametersRequest();
+            await SendStrategy.ConstructURL(parametersRequest);
             var response = await SendStrategy.SendRequest(obj);
             return response;
         }
