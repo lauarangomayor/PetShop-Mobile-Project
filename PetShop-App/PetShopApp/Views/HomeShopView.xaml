@@ -6,58 +6,79 @@
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              mc:Ignorable="d"
              x:Class="PetShopApp.Views.HomeShopView"
-             Title="Nuevos"
+             NavigationPage.HasNavigationBar="False"
              BackgroundColor="#EDEAEA">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            IconImageSource="Shoppingcart.png"
+            Order="Primary"
+            Text="Agregar al carrito"
+            Priority="0"></ToolbarItem>
+        <!--<ToolbarItem Name="Create" Command="{Binding CreateNewScopeCommand}"></ToolbarItem>-->
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="BoxView" x:Key="LineUp">
+                <Setter Property="HeightRequest" Value="3"></Setter>
+                <Setter Property="BackgroundColor" Value="Black"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding ProductsList}" HasUnevenRows="True" SeparatorVisibility="None"
-                  ItemTapped="OnItemSelected" IsPullToRefreshEnabled="true"   RefreshControlColor="#5EC8EA" 
-                  Scrolled="OnListViewScrolled" SelectionMode="None">
-            <ListView.ItemTemplate> 
-                <DataTemplate>
-                    <ViewCell>
-                        <Frame Padding="3" Margin="0,5,0,5" HeightRequest="200" BackgroundColor="White">
+        <StackLayout  BackgroundColor="White">
+            <BoxView Style="{StaticResource LineUp}"></BoxView>
+                <Label Text="Nuevo" FontSize="Medium" LineBreakMode="WordWrap" TextColor="Black" FontAttributes="Bold" Margin="5,5,5,5" ></Label>
+            <StackLayout Padding="6">
+                <CollectionView ItemsSource="{Binding ProductsList}" SelectedItem="{Binding productItem, Mode=TwoWay}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectedItemTappedCommand, Mode=TwoWay}">
 
-                            <Grid Padding="10" RowSpacing="50" ColumnSpacing="10" Margin="0,0,0,15">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="6" VerticalItemSpacing="6"/>
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <Grid  BackgroundColor="#EDEAEA">
+
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="3*" />
+                                    <RowDefinition Height="2*" />
                                 </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
+
                                 <controls:CircleImage HeightRequest="180"
-                                                      HorizontalOptions="CenterAndExpand"
-                                                      VerticalOptions="CenterAndExpand"
-                                                      Aspect="AspectFill"
-                                                      WidthRequest="160"
-                                                      Grid.RowSpan="3"
-                                                      Source="{Binding Image}"></controls:CircleImage>
-                                <Label  LineBreakMode="WordWrap" Grid.Column="1"  VerticalOptions="End" TextColor="Black">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="Nombre: " FontAttributes="Bold"></Span>
-                                            <Span Text="{Binding Name}"></Span>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                                <Label LineBreakMode="WordWrap" Grid.Column="1" Grid.Row="1" VerticalOptions="End" TextColor="Black">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="Precio: " FontAttributes="Bold"></Span>
-                                            <Span Text="$"></Span>
-                                            <Span Text="{Binding UnitPrice}"></Span>
-                                        </FormattedString>
-                                    </Label.FormattedText> 
-                                </Label>
+                                                          HorizontalOptions="CenterAndExpand"
+                                                          VerticalOptions="CenterAndExpand"
+                                                          Aspect="AspectFill"
+                                                          WidthRequest="160"
+                                                          Source="{Binding Image}">
+
+                                </controls:CircleImage>
+
+                                <StackLayout Grid.Row="1" HorizontalOptions="CenterAndExpand">
+
+                                    <Label Grid.Column="1"
+                                           VerticalOptions="Center"
+                                           Text="{Binding Name}"
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
 
 
+                                    <Label LineBreakMode="WordWrap" Grid.Column="1"  VerticalOptions="End" TextColor="Black">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="$" TextColor="Black"></Span>
+                                                <Span Text="{Binding UnitPrice} " TextColor="Black"></Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
 
                             </Grid>
-                        </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

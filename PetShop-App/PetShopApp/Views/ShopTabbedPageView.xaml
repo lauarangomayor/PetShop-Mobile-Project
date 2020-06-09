@@ -12,7 +12,7 @@
             android:TabbedPage.ToolbarPlacement="Bottom"
             android:TabbedPage.BarItemColor ="Black"
             android:TabbedPage.BarSelectedItemColor="#096085">
-            
+
 
     <TabbedPage.Children>
         <NavigationPage Title="Inicio" Icon="Home.png">
@@ -43,4 +43,4 @@
 
 
 
-    </TabbedPage>
+</TabbedPage>
