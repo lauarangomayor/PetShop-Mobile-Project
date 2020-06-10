@@ -27,7 +27,7 @@
         </NavigationPage>
         <NavigationPage Title="Perfil" Icon="Profile.png">
             <x:Arguments>
-                <views:ProfileView></views:ProfileView>
+                <views:MyListPageView></views:MyListPageView>
             </x:Arguments>
         </NavigationPage>
 

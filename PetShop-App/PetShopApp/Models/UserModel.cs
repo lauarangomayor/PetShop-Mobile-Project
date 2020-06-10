@@ -19,6 +19,8 @@ namespace PetShopApp.Models
 
         public string Address { get; set; }
 
+        public int UserType { get; set; }
+
         private string password;
 
         private string email;

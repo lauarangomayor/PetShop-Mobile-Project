@@ -11,10 +11,10 @@ using Xamarin.Forms.Xaml;
 namespace PetShopApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PopUpTheme 
+    public partial class MyListPageView : ContentPage
     {
-        PopUpThemeViewModel context = new PopUpThemeViewModel();
-        public PopUpTheme()
+        MyListPageViewModel context = new MyListPageViewModel();
+        public MyListPageView()
         {
             InitializeComponent();
             BindingContext = context;

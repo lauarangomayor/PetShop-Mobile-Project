@@ -17,6 +17,8 @@ namespace PetShopApp.Configuration
         public static readonly string REGISTER_VET = "Veterinarian/registerVeterinarian";
         public static readonly string VALIDATE_CLIENT = "Client/getClientByEmailAndPassword/";
         public static readonly string REGISTER_CLIENT = "client/registerClient";
+        public static readonly string DELETE_PET = "pet/delete/";
+
 
     }
 }

@@ -1,5 +1,9 @@
-﻿using Plugin.Settings;
+﻿using Newtonsoft.Json;
+using PetShopApp.Models;
+using Plugin.Settings;
 using Plugin.Settings.Abstractions;
+using System;
+using System.Collections.Generic;
 
 namespace PetShopApp.Helpers
 {
@@ -51,6 +55,28 @@ namespace PetShopApp.Helpers
 
             set => AppSettings.AddOrUpdateValue(nameof(UId), value);
         }
+
+        private const string listProductsCartKey = "myintlist_key";
+        public static List<Tuple<long,int>> listProductsCart
+        {
+            get
+            {
+                string value = AppSettings.GetValueOrDefault(listProductsCartKey, string.Empty);
+                List<Tuple<long, int>> myList;
+                if (string.IsNullOrEmpty(value))
+                    myList = new List<Tuple<long, int>>();
+                else
+                    myList = JsonConvert.DeserializeObject<List<Tuple<long, int>>>(value);
+                return myList;
+            }
+            set
+            {
+                string listValue = JsonConvert.SerializeObject(value);
+                AppSettings.AddOrUpdateValue(listProductsCartKey, listValue);
+            }
+        }
+
+
 
     }
 }
