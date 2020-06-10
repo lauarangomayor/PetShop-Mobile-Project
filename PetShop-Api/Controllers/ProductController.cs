@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PetShop_Api.Models;
+using Newtonsoft.Json;
 
 namespace PetShop_Api.Controllers
 {
@@ -162,6 +163,44 @@ namespace PetShop_Api.Controllers
             catch (Exception e){
                 return StatusCode(410);
             }
+        }
+
+        [HttpPost("getProductsByListId")]
+        public async Task<ActionResult<List<ProductModel>>> GetProductsByListId(IdProductListModel listIdsEntry){
+            try {
+                //Console.WriteLine(listIdsEntry.ToString());
+                
+                //var jsonString = listIdsEntry.ToString();
+                //var dic = JsonConvert.DeserializeObject<Dictionary<string, Object>>(jsonString);
+                var listIds = new List<long>(listIdsEntry.IdProducts);
+                //List<long> listIds = dic.Values.ToList();
+                
+                //onsole.WriteLine(listIds);
+                //var listIds = JsonConvert.DeserializeObject<List<string>>(dic["IdProducts"].ToString);
+                
+                //Console.WriteLine(listIds);
+                /*var products = await dBContext.Products
+                                               .Join(listIds,
+                                                     p => p.IdProduct,
+                                                     id => id,
+                                                     (p,id)=> new {p.IdProduct, p.Name, p.ImagePath}).ToListAsync();*/
+                
+                var products = await dBContext.Products
+                                              .Where(p => listIds.Contains(p.IdProduct))
+                                              .Select(p => new{p.IdProduct, p.Name, p.ImagePath, p.UnitPrice})
+                                              .ToListAsync();
+                // if (products == null){
+                //         return NotFound();
+                //     }
+                //     return Ok(products);
+                return NoContent();
+            }
+            catch (Exception e){
+                Console.WriteLine(e);
+                return StatusCode(410);
+            }
+            
+            
         }
 
         [HttpGet("all")]//http://localhost:5000/Product/all
