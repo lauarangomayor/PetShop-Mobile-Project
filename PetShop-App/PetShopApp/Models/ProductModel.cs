@@ -4,34 +4,45 @@ using System.Collections.Generic;
 using System.Text;
 using PetShopApp.Services.Propagation;
 using PetShopApp.Models;
+using Newtonsoft.Json;
 
 namespace PetShopApp.Models
 {
     public class ProductModel : BaseModel
     {
         #region Properties
+        private long idProduct;
         private string name;
         private string description;
+        private long idCategory;
+        /*[JsonIgnore]
+        private CategoryModel category;*/
+        private int quantityAvailable;
         private float unitPrice;
-        private CategoryModel category;
-        private int stock;
-        private string image;
-        private StateProductModel stateProduct;
+        private long idStateProduct;
+        /*[JsonIgnore]
+        private StateProductModel stateProduct;*/
+        private string imagePath;
+        
         #endregion
         #region Initialize
-        /*
-        public ProductModel(CategoryModel category, int stock, StateProductModel stateProduct)
+        public ProductModel()
         {
-            if (category == null | stock < 0 | stateProduct == null)
+            /*if (quantityAvailable < 0)
             {
-                throw new System.ArgumentException("ProductModel received a null category or an invalid stock argument");
+                throw new System.ArgumentException("Se recibió algún argumento nulo en productmodel");
             }
             this.category = category;
-            this.stock = stock;
-        }*/
+            this.stock = stock;*/
+        }
 
         #endregion
         #region Getters/Setters
+        public long IdProduct
+        {
+            get{ return idProduct; }
+            set { idProduct = value; OnPropertyChanged(); }
+        }
         public string Name
         {
             get { return name; }
@@ -42,33 +53,43 @@ namespace PetShopApp.Models
             get { return description; }
             set { description = value; OnPropertyChanged(); }
         }
+        public long IdCategory
+        {
+            get { return idCategory; }
+            set { idCategory = value; OnPropertyChanged(); }
+        }
+        /*public CategoryModel Category
+        {
+            get { return category; }
+            set { category = value; OnPropertyChanged(); }
+        }*/
+        public int QuantityAvailable
+        {
+            get { return quantityAvailable; }
+            set { quantityAvailable = value; OnPropertyChanged(); }
+        }
         public float UnitPrice
         {
             get { return unitPrice; }
             set { unitPrice = value; OnPropertyChanged(); }
         }
 
-        public CategoryModel Category
+        public long IdStateProduct
         {
-            get { return category; }
-            set { category = value; OnPropertyChanged(); }
-        }
-        public int Stock
-        {
-            get { return stock; }
-            set { stock = value; OnPropertyChanged(); }
+            get { return idStateProduct; }
+            set { idStateProduct = value; OnPropertyChanged(); }
         }
 
-        public string Image
-        {
-            get { return image; }
-            set { image = value; OnPropertyChanged(); }
-        }
-
-        public StateProductModel StateProduct
+        /*public StateProductModel StateProduct
         {
             get { return stateProduct; }
             set { stateProduct = value; OnPropertyChanged(); }
+        }*/
+
+        public string ImagePath
+        {
+            get { return imagePath; }
+            set { imagePath = value; OnPropertyChanged(); }
         }
         #endregion
     }

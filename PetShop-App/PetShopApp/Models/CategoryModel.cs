@@ -13,12 +13,22 @@ namespace PetShopApp.Models
     {
         #region Properties
         // crear idcategory
-        public long IdCategory { get; set; }
-        public string Name { get; set; }
+        private long idCategory;
+        private string name;
         #endregion
 
         #region Getters/Setters
-        
+        public long IdCategory
+        {
+            get { return idCategory; }
+            set { idCategory = value; OnPropertyChanged(); }
+        }
+        public string Name
+        {
+            get { return name; }
+            set { name = value; OnPropertyChanged(); }
+        }
+
         #endregion
     }
 }
