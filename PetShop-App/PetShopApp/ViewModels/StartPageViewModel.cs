@@ -18,7 +18,7 @@ namespace PetShopApp.ViewModels
         public StartPageViewModel()
         {
             VetImageTappedCommand = new Command(async () => await VetLogin(), () => true);
-            ShopImageTappedCommand = new Command(async () => await ShopHome(), () => true);
+            ShopImageTappedCommand = new Command(async () => await ShopLogin(), () => true);
         }
         #endregion
         #region Methods
@@ -27,7 +27,7 @@ namespace PetShopApp.ViewModels
             await NavigationService.PushPage(new LoginView());
         }
 
-        private async Task ShopHome()
+        private async Task ShopLogin()
         {
             await NavigationService.PushPage(new ShopTabbedPageView());
         }
