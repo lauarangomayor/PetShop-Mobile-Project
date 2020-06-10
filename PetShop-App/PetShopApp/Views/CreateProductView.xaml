@@ -47,27 +47,29 @@
                     </Frame>
                     <StackLayout HorizontalOptions="FillAndExpand" Padding="40,50" VerticalOptions="Center">
                         <Label Text="Nombre:" Style="{StaticResource FormLabel}"/>
-                        <Entry HorizontalOptions="FillAndExpand"/>
+                        <Entry Text="{Binding ProductName}" HorizontalOptions="FillAndExpand"/>
                         <Label Text="Descripción:" Style="{StaticResource FormLabel}"/>
-                        <Entry HorizontalOptions="FillAndExpand"/>
+                        <Entry Text="{Binding ProductDescription}" HorizontalOptions="FillAndExpand"/>
                         <Label Text="Categoría:" Style="{StaticResource FormLabel}"/>
                         <Picker x:Name="categoryPicker" HorizontalOptions="FillAndExpand" Margin="10,40,10,10"
                                 Title="Seleccionar"
                                 TitleColor="Gray"
+                                SelectedIndex="{Binding ProductIndexCategory}"
                                 ItemsSource="{Binding Categories}"
                                 ItemDisplayBinding="{Binding Name}"/>
                         <Label Text="Cantidad:" Style="{StaticResource FormLabel}"/>
-                        <Entry Keyboard="Numeric" HorizontalOptions="FillAndExpand"/>
+                        <Entry Keyboard="Numeric" Text="{Binding ProductQuantityAvailable}" HorizontalOptions="FillAndExpand"/>
                         <Label Text="Precio:" Style="{StaticResource FormLabel}"/>
-                        <Entry HorizontalOptions="FillAndExpand"/>
+                        <Entry Text ="{Binding ProductUnitPrice }" HorizontalOptions="FillAndExpand"/>
                         <Label Text="Estado de venta:" Style="{StaticResource FormLabel}"/>
                         <Picker x:Name="productStatePicker" HorizontalOptions="FillAndExpand" Margin="10,40,10,10"
                                 Title="Seleccionar"
+                                SelectedIndex="{Binding ProductIndexStateProduct}"
                                 TitleColor="Gray"
-                                ItemsSource="{Binding StateProduct}"
+                                ItemsSource="{Binding StateProducts}"
                                 ItemDisplayBinding="{Binding Description}"/>
                         <Button Text="Crear" Style="{StaticResource ButtonStyle}" Margin="0,55,0,15"
-                                Command="{Binding ShowCreatePetViewCommand}"/>
+                                Command="{Binding CreateProductCommand}"/>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>

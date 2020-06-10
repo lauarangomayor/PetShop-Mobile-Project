@@ -28,9 +28,6 @@ namespace PetShopApp.Services.APIRest
                 Response = ""
             };
 
-            string jsonObject = JsonConvert.SerializeObject(obj);
-            HttpContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
-
             try
             {
                 /* Context function. */
@@ -41,8 +38,10 @@ namespace PetShopApp.Services.APIRest
                     {
                         return true;
                     };
-                    using (var client = new HttpClient())
-                    { 
+                    using (var client = new HttpClient(handler))
+                    {
+                        string jsonObject = JsonConvert.SerializeObject(obj);
+                        HttpContent content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
                         var HttpVerb = (Verb == "POST") ? HttpMethod.Post : HttpMethod.Put;
                         HttpRequestMessage RequestMessage = new HttpRequestMessage(HttpVerb, Url);
                         RequestMessage = HeaderService.AddHeader(RequestMessage);
@@ -55,7 +54,7 @@ namespace PetShopApp.Services.APIRest
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 response.Response = "Server error";
             }
