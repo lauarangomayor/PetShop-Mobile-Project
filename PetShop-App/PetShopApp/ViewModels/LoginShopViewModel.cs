@@ -98,7 +98,7 @@ namespace PetShopApp.ViewModels
                 //Exception e;
                 //UserDialogs.Instance.ShowError("El usuario no existe en el sistema", 4000);
                 //await Application.Current.MainPage.DisplayAlert("Error", "El usuario no existe en el sistema", "OK");
-                await Application.Current.MainPage.DisplayAlert("Error", EmailEntry +" " + PasswordEntry, "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", "El correo no se encuentra en eñ sistema", "OK");
             };
             
         } 
