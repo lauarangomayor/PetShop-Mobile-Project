@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PetShopApp.Services.ApiRest
+namespace PetShopApp.Services.APIRest
 {
     public class RequestParameters<T> : Request<T>
     {
@@ -32,39 +32,34 @@ namespace PetShopApp.Services.ApiRest
             try
             {
                 /* Context function. */
-                using (var client = new HttpClient())
+                using (var handler = new HttpClientHandler())
                 {
-                    var HttpVerb = (Verb == "GET") ? HttpMethod.Get : HttpMethod.Delete;
-                    await this.ConstructURL(obj);
+                    handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+                    handler.ServerCertificateCustomValidationCallback = (h, c, ch, pe) =>
+                    {
+                        return true;
+                    };
 
-                    HttpRequestMessage RequestMessage = new HttpRequestMessage(HttpVerb, Url);
-                    RequestMessage = HeaderService.AddHeader(RequestMessage);
-                    HttpResponseMessage HttpResponse= await client.SendAsync(RequestMessage);
-                    response.Code = Convert.ToInt32(HttpResponse.StatusCode);
-                    response.IsSuccess = HttpResponse.IsSuccessStatusCode;
-                    response.Response = await HttpResponse.Content.ReadAsStringAsync();
+                    using (var client = new HttpClient(handler))
+                    {
+                        var HttpVerb = (Verb == "GET") ? HttpMethod.Get : HttpMethod.Delete;
+                        client.Timeout = TimeSpan.FromSeconds(50);
+                        HttpRequestMessage RequestMessage = new HttpRequestMessage(HttpVerb, Url);
+                        RequestMessage = HeaderService.AddHeader(RequestMessage);
+                        HttpResponseMessage HttpResponse = await client.SendAsync(RequestMessage);
+                        response.Code = Convert.ToInt32(HttpResponse.StatusCode);
+                        response.IsSuccess = HttpResponse.IsSuccessStatusCode;
+                        response.Response = await HttpResponse.Content.ReadAsStringAsync();
 
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                
                 response.Response = "Server error";
             }
             return response;
-        }
-        private async Task ConstructURL(T parameters)
-        {
-            ParametersRequest Parameters = parameters as ParametersRequest;
-            if (Parameters.Parameters.Count > 0)
-            {
-                Url = (Url.Substring(Url.Length - 1) == "/") ? Url.Remove(Url.Length - 1) : Url;
-                Parameters.Parameters.ForEach(p => Url += "/" + p);
-            }
-            if (Parameters.QueryParameters.Count > 0)
-            {
-                var queryParameters = await new FormUrlEncodedContent(Parameters.QueryParameters).ReadAsStringAsync();
-                Url = Url + queryParameters;
-            }
         }
         #endregion
     }

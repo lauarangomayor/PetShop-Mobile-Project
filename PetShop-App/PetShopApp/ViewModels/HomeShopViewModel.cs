@@ -1,4 +1,4 @@
-﻿using Acr.UserDialogs;
+﻿//using Acr.UserDialogs;
 using PetShopApp.Models;
 using PetShopApp.Views;
 using System;

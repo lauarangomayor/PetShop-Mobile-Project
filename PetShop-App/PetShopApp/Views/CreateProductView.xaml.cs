@@ -11,13 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace PetShopApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AppointmentRecordView : ContentPage
+    public partial class CreateProductView : ContentPage
     {
-        AppointmentRecordViewModel context;
-        public AppointmentRecordView()
+        CreateProductViewModel context = new CreateProductViewModel();
+        public CreateProductView()
         {
             InitializeComponent();
-            context = new AppointmentRecordViewModel();
             BindingContext = context;
         }
     }
