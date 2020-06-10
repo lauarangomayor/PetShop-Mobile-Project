@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetShopApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,12 @@ namespace PetShopApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterClientView : ContentPage
     {
+        ClientViewModel context;
         public RegisterClientView()
         {
             InitializeComponent();
+            context = new ClientViewModel();
+            BindingContext = context;
         }
     }
 }
