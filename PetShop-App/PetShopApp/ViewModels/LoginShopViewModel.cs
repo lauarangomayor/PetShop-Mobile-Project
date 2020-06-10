@@ -1,4 +1,10 @@
-﻿using PetShopApp.Helpers;
+﻿using Acr.UserDialogs;
+using Newtonsoft.Json;
+using PetShopApp.AuxModels;
+using PetShopApp.Configuration;
+using PetShopApp.Helpers;
+using PetShopApp.Models;
+using PetShopApp.Services.APIRest;
 using PetShopApp.Views;
 using Rg.Plugins.Popup.Services;
 using System;
@@ -12,9 +18,16 @@ namespace PetShopApp.ViewModels
 {
     class LoginShopViewModel : ViewModelBase
     {
-        #region Properties
+        #region Attributes
+        private LoginShopModel login;
         private string emailEntry;
+        private string passwordEntry;
         #endregion
+
+        #region Requests
+        public RequestPicker<BaseModel> ValidateLoginClient { get; set; }
+        #endregion Requests
+
         public string EmailEntry
         {
             get { return emailEntry; }
@@ -23,31 +36,73 @@ namespace PetShopApp.ViewModels
                 emailEntry = value; OnPropertyChanged();
             }
         }
+
+        public string PasswordEntry
+        {
+            get { return passwordEntry; }
+            set
+            {
+                passwordEntry = value; OnPropertyChanged();
+            }
+        }
+
+        #region Getters & Setters
+        public LoginShopModel Login
+        {
+            get { return login; }
+            set
+            {
+                login = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion Getters & Setters
+
         #region Commands
         public ICommand ValidateLoginCommand { get; set; }
         public ICommand CancelLoginCommand { get; set; }
         
         #endregion
+
         #region Initialization
         public LoginShopViewModel()
         {
-            ValidateLoginCommand = new Command(async () => await ValidateLogin(), () => true);
+            ValidateLoginCommand = new Command(async () =>  InitizalizeRequest(), () => true);
             CancelLoginCommand = new Command(async () => await CancelLogin(), () => true);
         }
         #endregion
+
+        public async void InitizalizeRequest()
+        {
+            string urlGetClientByLogin = EndPoints.SERVER_URL + EndPoints.VALIDATE_CLIENT + EmailEntry +"/" +PasswordEntry;
+            ValidateLoginClient = new RequestPicker<BaseModel>();
+            ValidateLoginClient.StrategyPicker("GET", urlGetClientByLogin);
+            await ValidateLogin();
+        }
+
+
         #region Methods
         private async Task ValidateLogin()
         {
             //Settings.UEmail = emailEntry;
-            if (EmailEntry != null)
+            APIResponse response = await ValidateLoginClient.ExecuteStrategy(null);
+            if (response.IsSuccess)
             {
-                Settings.UId = "1";
-                Settings.UEmail = EmailEntry;
+                Login = JsonConvert.DeserializeObject<LoginShopModel>(response.Response);
+                Settings.UId = Login.IdClient.ToString();
+                Settings.UEmail = Login.Email;
                 await PopupNavigation.PopAsync();
-            } 
+            }
+            else
+            {
+                //Exception e;
+                //UserDialogs.Instance.ShowError("El usuario no existe en el sistema", 4000);
+                //await Application.Current.MainPage.DisplayAlert("Error", "El usuario no existe en el sistema", "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", EmailEntry +" " + PasswordEntry, "OK");
+            };
             
-        }
-
+        } 
+            
         private async Task CancelLogin()
         {
              await PopupNavigation.PopAsync();

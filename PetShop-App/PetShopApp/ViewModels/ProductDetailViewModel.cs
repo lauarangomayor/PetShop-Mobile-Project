@@ -66,8 +66,9 @@ namespace PetShopApp.ViewModels
                 var promptConfig = new PromptConfig();
                 promptConfig.InputType = InputType.Name;
                 promptConfig.IsCancellable = true;
-                promptConfig.Message = Settings.UEmail;
+                promptConfig.Message = Settings.UEmail +" "+itemDetail.Name;
                 await UserDialogs.Instance.PromptAsync(promptConfig);
+                NavigationService.PopPage();
             }
             //NavigationService.PushPage(new CategoriesView());
 
