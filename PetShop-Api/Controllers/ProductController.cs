@@ -189,11 +189,10 @@ namespace PetShop_Api.Controllers
                                               .Where(p => listIds.Contains(p.IdProduct))
                                               .Select(p => new{p.IdProduct, p.Name, p.ImagePath, p.UnitPrice})
                                               .ToListAsync();
-                // if (products == null){
-                //         return NotFound();
-                //     }
-                //     return Ok(products);
-                return NoContent();
+                 if (products == null){
+                         return NotFound();
+                     }
+                    return Ok(products);
             }
             catch (Exception e){
                 Console.WriteLine(e);
