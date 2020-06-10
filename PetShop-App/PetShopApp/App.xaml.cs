@@ -4,6 +4,7 @@ using Xamarin.Forms.Xaml;
 using PetShopApp.Views;
 using PetShopApp.Services.Navigation;
 using PetShopApp.Helpers;
+using PetShopApp.Models;
 
 namespace PetShopApp
 {
@@ -38,8 +39,9 @@ namespace PetShopApp
 
         protected override void OnStart()
         {
-            Settings.UEmail = "";
-            Settings.UId = "";
+            /*Settings.UEmail = "";
+            Settings.UId = "";*/
+            
         }
 
         protected override void OnSleep()

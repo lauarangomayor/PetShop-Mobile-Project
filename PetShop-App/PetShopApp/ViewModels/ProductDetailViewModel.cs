@@ -21,21 +21,31 @@ namespace PetShopApp.ViewModels
 
         #region Properties
             private ProductModel itemDetail;
+            private int quantitySelected;
         #endregion Properties
 
         #region Getters & Setters
             public ProductModel ItemDetail
+                {
+                    get { return itemDetail; }
+                    set
+                    {
+                        itemDetail =  value; OnPropertyChanged();
+                    }
+                }
+
+            public int QuantitySelected
             {
-                get { return itemDetail; }
+                get { return quantitySelected; }
                 set
                 {
-                    itemDetail =  value; OnPropertyChanged();
+                quantitySelected = value; OnPropertyChanged();
                 }
             }
 
         #endregion
         #region Initialization
-            public ProductDetailViewModel()
+        public ProductDetailViewModel()
             {
                    AddProductCommand = new Command(async () => await AddProductToChart(), () => true);
             }
@@ -54,20 +64,23 @@ namespace PetShopApp.ViewModels
             
             if (string.IsNullOrEmpty(Settings.UEmail))
             {
-                var promptConfig = new PromptConfig();
-                promptConfig.InputType = InputType.Name;
-                promptConfig.IsCancellable = true;
-                promptConfig.Message = "Vacio";
+                
                 //await UserDialogs.Instance.PromptAsync(promptConfig);
                 await PopupNavigation.PushAsync(new LoginShopView());
             }
             else
             {
-                var promptConfig = new PromptConfig();
+                /*var promptConfig = new PromptConfig();
                 promptConfig.InputType = InputType.Name;
                 promptConfig.IsCancellable = true;
                 promptConfig.Message = Settings.UEmail +" "+itemDetail.Name;
-                await UserDialogs.Instance.PromptAsync(promptConfig);
+                await UserDialogs.Instance.PromptAsync(promptConfig);*/
+                //await Settings.ShoppingCartUser.AddItemToCart(ItemDetail);
+                //Settings.ShoppingCartUser.ShowItemsFromCart();
+                var savedList = new List<Tuple<long, int>>(Settings.listProductsCart);
+                savedList.Add(new Tuple<long, int>(ItemDetail.ID, QuantitySelected));
+                Settings.listProductsCart = savedList;
+
                 NavigationService.PopPage();
             }
             //NavigationService.PushPage(new CategoriesView());
