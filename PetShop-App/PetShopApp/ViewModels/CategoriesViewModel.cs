@@ -15,10 +15,10 @@ namespace PetShopApp.ViewModels
         {
             CategoriesList = new ObservableCollection<CategoryModel>();
 
-            CategoriesList.Add(new CategoryModel {CategoryId = 1, Name = "Aseo" });
-            CategoriesList.Add(new CategoryModel {CategoryId = 2, Name = "Accesorios" });
-            CategoriesList.Add(new CategoryModel {CategoryId = 3, Name = "Medicamentos" });
-            CategoriesList.Add(new CategoryModel {CategoryId = 4, Name = "Varios" });
+            CategoriesList.Add(new CategoryModel { IdCategory = 1, Name = "Aseo" });
+            CategoriesList.Add(new CategoryModel { IdCategory = 2, Name = "Accesorios" });
+            CategoriesList.Add(new CategoryModel { IdCategory = 3, Name = "Medicamentos" });
+            CategoriesList.Add(new CategoryModel { IdCategory = 4, Name = "Varios" });
 
 
 

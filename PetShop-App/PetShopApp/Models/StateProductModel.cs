@@ -8,10 +8,8 @@ namespace PetShopApp.Models
     public class StateProductModel: BaseModel
     {
         #region Properties
-        [JsonProperty("idStateProduct")]
-        public long StateProductId { get; set; }
-        [JsonProperty("description")]
-        public string StateProduct { get; set; }
+        public long IdStateProduct { get; set; }
+        public string Description { get; set; }
         #endregion
 
         #region Getters/Setters

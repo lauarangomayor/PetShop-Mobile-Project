@@ -46,7 +46,7 @@ namespace PetShopApp.Services.APIRest
             {
                 var queryParameters = await new FormUrlEncodedContent(Parameters.QueryParameters).ReadAsStringAsync();
                 Url = Url + queryParameters;
-            }
+            }   
         }
         #endregion
     }
