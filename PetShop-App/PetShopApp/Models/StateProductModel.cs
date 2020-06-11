@@ -8,11 +8,21 @@ namespace PetShopApp.Models
     public class StateProductModel: BaseModel
     {
         #region Properties
-        public long IdStateProduct { get; set; }
-        public string Description { get; set; }
+        private long idStateProduct;
+        private string description;
         #endregion
 
         #region Getters/Setters
+        public long IdStateProduct
+        {
+            get { return idStateProduct; }
+            set { idStateProduct = value; OnPropertyChanged(); }
+        }
+        public string Description
+        {
+            get { return description; }
+            set { description = value; OnPropertyChanged(); }
+        }
 
         #endregion
     }

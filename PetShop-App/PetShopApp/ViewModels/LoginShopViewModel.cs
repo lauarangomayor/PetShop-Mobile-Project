@@ -19,7 +19,7 @@ namespace PetShopApp.ViewModels
     class LoginShopViewModel : ViewModelBase
     {
         #region Attributes
-        private LoginShopModel login;
+        private LoginClientModel login;
         private string emailEntry;
         private string passwordEntry;
         #endregion
@@ -47,7 +47,7 @@ namespace PetShopApp.ViewModels
         }
 
         #region Getters & Setters
-        public LoginShopModel Login
+        public LoginClientModel Login
         {
             get { return login; }
             set
@@ -74,7 +74,7 @@ namespace PetShopApp.ViewModels
 
         public async void InitizalizeRequest()
         {
-            string urlGetClientByLogin = EndPoints.SERVER_URL + EndPoints.VALIDATE_CLIENT + EmailEntry +"/" +PasswordEntry;
+            string urlGetClientByLogin = EndPoints.SERVER_URL + EndPoints.VALIDATE_CLIENT + EmailEntry +"/" + PasswordEntry + "/1";
             ValidateLoginClient = new RequestPicker<BaseModel>();
             ValidateLoginClient.StrategyPicker("GET", urlGetClientByLogin);
             await ValidateLogin();
@@ -88,7 +88,7 @@ namespace PetShopApp.ViewModels
             APIResponse response = await ValidateLoginClient.ExecuteStrategy(null);
             if (response.IsSuccess)
             {
-                Login = JsonConvert.DeserializeObject<LoginShopModel>(response.Response);
+                Login = JsonConvert.DeserializeObject<LoginClientModel>(response.Response);
                 Settings.UId = Login.IdClient.ToString();
                 Settings.UEmail = Login.Email;
                 await PopupNavigation.PopAsync();

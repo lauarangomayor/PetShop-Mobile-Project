@@ -5,6 +5,7 @@ using PetShopApp.Views;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -78,10 +79,20 @@ namespace PetShopApp.ViewModels
                 //await Settings.ShoppingCartUser.AddItemToCart(ItemDetail);
                 //Settings.ShoppingCartUser.ShowItemsFromCart();
                 var savedList = new List<Tuple<long, int>>(Settings.listProductsCart);
-                savedList.Add(new Tuple<long, int>(ItemDetail.ID, QuantitySelected));
-                Settings.listProductsCart = savedList;
+                if (savedList.Any(p => p.Item1 == ItemDetail.IdProduct))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "El producto ya está agregado en el carrito", "OK");
 
-                NavigationService.PopPage();
+
+                }
+                else
+                {
+                    savedList.Add(new Tuple<long, int>(ItemDetail.IdProduct, QuantitySelected));
+                    Settings.listProductsCart = savedList;
+                    NavigationService.PopPage();
+                    
+                }
+                
             }
             //NavigationService.PushPage(new CategoriesView());
 
