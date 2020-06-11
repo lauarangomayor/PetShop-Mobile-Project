@@ -15,7 +15,7 @@ namespace PetShopApp.Configuration
         public static readonly string GET_ALL_PRODUCTS = "Product/all";
         public static readonly string GET_APPOINTMENTRECORDS = "appointmentrecord/getAppointmentRecordByPetId/";
         public static readonly string REGISTER_VET = "Veterinarian/registerVeterinarian";
-        public static readonly string VALIDATE_CLIENT = "User/validateUserByEmailAndPasswordAndType/";
+        public static readonly string VALIDATE_USER = "User/validateUserByEmailAndPasswordAndType/";
         public static readonly string REGISTER_CLIENT = "client/registerClient";
         public static readonly string DELETE_PET = "pet/delete/";
         public static readonly string GET_PRODUCTS_OF_CHART = "Product/getProductsByListId";

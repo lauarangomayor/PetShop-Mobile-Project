@@ -16,14 +16,15 @@ namespace PetShopApp.ViewModels
     public class LoginViewModel : ViewModelBase
     {
         #region Attributes
-        private LoginShopModel login;
+        private LoginClientModel loginClient;
+        private LoginVetModel loginVet;
         private string emailEntry;
         private string passwordEntry;
         private bool isClient;
         private bool isVet;
         #endregion
         #region Requests
-        public RequestPicker<BaseModel> ValidateLoginClient { get; set; }
+        public RequestPicker<BaseModel> ValidateLoginUser { get; set; }
         #endregion 
         #region Commands
         public ICommand ShowVetHomeViewCommand { get; set; }
@@ -31,12 +32,21 @@ namespace PetShopApp.ViewModels
         public ICommand CancelLoginCommand { get; set; }
         #endregion
         #region Getters/Setters
-        public LoginShopModel Login
+        public LoginClientModel LoginClient
         {
-            get { return login; }
+            get { return loginClient; }
             set
             {
-                login = value;
+                loginClient = value;
+                OnPropertyChanged();
+            }
+        }
+        public LoginVetModel LoginVet
+        {
+            get { return loginVet; }
+            set
+            {
+                loginVet = value;
                 OnPropertyChanged();
             }
         }
@@ -93,20 +103,41 @@ namespace PetShopApp.ViewModels
         }
         public async Task ValidateLogin()
         {
-            string urlGetClientByLogin = EndPoints.SERVER_URL + EndPoints.VALIDATE_CLIENT + EmailEntry + "/" + PasswordEntry;
-            ValidateLoginClient = new RequestPicker<BaseModel>();
-            ValidateLoginClient.StrategyPicker("GET", urlGetClientByLogin);
-            APIResponse response = await ValidateLoginClient.ExecuteStrategy(null);
+            string userType = "";
+            if (IsVet)
+            {
+                 userType = "0";
+            }
+            else if (IsClient)
+            {
+                userType = "1";
+            }
+            string urlGetUserByLogin = EndPoints.SERVER_URL + EndPoints.VALIDATE_USER + EmailEntry + "/" + PasswordEntry + "/" + userType ;
+            ValidateLoginUser = new RequestPicker<BaseModel>();
+            ValidateLoginUser.StrategyPicker("GET", urlGetUserByLogin);
+            APIResponse response = await ValidateLoginUser.ExecuteStrategy(null);
             if (response.IsSuccess)
             {
-                Login = JsonConvert.DeserializeObject<LoginShopModel>(response.Response);
-                Settings.UId = Login.IdClient.ToString();
-                Settings.UEmail = Login.Email;
+                
+                if (userType == "1")
+                {
+                    LoginClient = JsonConvert.DeserializeObject<LoginClientModel>(response.Response);
+                    Settings.UId = LoginClient.IdClient.ToString();
+                    Settings.UEmail = LoginClient.Email;
+                }
+                else
+                {
+                    LoginVet = JsonConvert.DeserializeObject<LoginVetModel>(response.Response);
+                    Settings.UId = LoginVet.IdVeterinarian.ToString();
+                    Settings.UEmail = LoginVet.Email;
+                }
+                
+               
                 await ShowVetHomeView();
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "El correo no se encuentra en eñ sistema", "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", "Correo o contraseña invalidos", "OK");
             }
         }
         private async Task CancelLogin()

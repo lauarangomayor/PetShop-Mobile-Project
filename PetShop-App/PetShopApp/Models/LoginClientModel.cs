@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PetShopApp.Models
 {
-    public class LoginShopModel: BaseModel
+    public class LoginClientModel: BaseModel
     {
         #region Properties
         private int idClient;

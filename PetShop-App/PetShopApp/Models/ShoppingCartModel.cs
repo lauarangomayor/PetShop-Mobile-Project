@@ -4,26 +4,36 @@ using System.Collections.Generic;
 using System.Text;
 using PetShopApp.Services.Propagation;
 using PetShopApp.Models;
+using System.Threading.Tasks;
 
 namespace PetShopApp.Models
 {
     public class ShoppingCartModel : BaseModel
     {
         #region Properties
-        private List<ProductModel> products;
-        public UserClientModel User { get; set; }
+        private List<long> idProducts;
         #endregion
 
         #region Getters/Setters
-        public List<ProductModel> Products
+        public List<long> IdProducts
         {
-            get { return products; }
+            get { return idProducts; }
             set
             {
-                products = value;
+                idProducts = value;
                 OnPropertyChanged();
             }
         }
         #endregion
+        /*
+        public async Task ClearCart()
+        {
+            Products = null;
+        }
+
+        public async Task ShowItemsFromCart()
+        {
+            Products.ForEach(Console.Write);
+        }*/
     }
 }

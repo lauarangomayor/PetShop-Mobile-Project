@@ -74,7 +74,7 @@ namespace PetShopApp.ViewModels
 
         public async void InitizalizeRequest()
         {
-            string urlGetClientByLogin = EndPoints.SERVER_URL + EndPoints.VALIDATE_CLIENT + EmailEntry +"/" + PasswordEntry + "/1";
+            string urlGetClientByLogin = EndPoints.SERVER_URL + EndPoints.VALIDATE_USER + EmailEntry +"/" + PasswordEntry + "/1";
             ValidateLoginClient = new RequestPicker<BaseModel>();
             ValidateLoginClient.StrategyPicker("GET", urlGetClientByLogin);
             await ValidateLogin();

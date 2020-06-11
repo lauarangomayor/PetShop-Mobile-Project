@@ -23,7 +23,7 @@ namespace PetShopApp.Models
                 throw new System.ArgumentException("UserClientModel received a null ShoppingCartModel argument");
             }
             this.cart = cart;
-            cart.User = this;
+            //cart.User = this;
         }
         #endregion
 
