@@ -24,7 +24,7 @@
                 <Setter Property="Margin" Value="0,08"></Setter>
                 <Setter Property="Padding" Value="90,0"></Setter>
             </Style>
-            <Style TargetType="Label" x:Key="LoginText">
+            <Style TargetType="Label" x:Key="FormLabel">
                 <Setter Property="Margin" Value="10,40,10,10"></Setter>
                 <Setter Property="FontSize" Value="Large"></Setter>
             </Style>
@@ -55,12 +55,21 @@
                     </StackLayout>
                 </Frame>
                 <StackLayout HorizontalOptions="FillAndExpand" Padding="40,50" VerticalOptions="Center">
-                    <Label Text="Email:" Style="{StaticResource LoginText}"/>
+                    <Label Text="Email:" Style="{StaticResource FormLabel}"/>
                     <Entry HorizontalOptions="FillAndExpand"/>
-                    <Label Text="Contraseña:" Style="{StaticResource LoginText}"/>
+                    <Label Text="Contraseña:" Style="{StaticResource FormLabel}"/>
                     <Entry HorizontalOptions="FillAndExpand" IsPassword="True"/>
-                    <Button Text="Ingresar" Style="{StaticResource ButtonStyle}" Margin="0,55,0,15" CornerRadius="100" HorizontalOptions="FillAndExpand"
-                            Command="{Binding ShowCreatePetViewCommand}"/>
+                    <!--<Label Text="Tipo de usuario:" Style="{StaticResource FormLabel}"/>-->
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+                        <!--<RadioButton x:Name="clientCheck" Text="Cliente" IsChecked="{Binding IsClient}"/>
+                        <RadioButton x:Name="vetCheck" Text="Veterinario" IsChecked="{Binding IsVet}"/>-->
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
+                        <Button Text="Ingresar" FontSize="Medium" Margin="0,35,5,15"  BackgroundColor="#5EC8EA"  TextColor="White" CornerRadius="100" 
+                                 Style="{StaticResource ButtonStyle}" Command="{Binding ValidateLoginCommand}"/>
+                        <Button Text="Cancelar" FontSize="Medium" Margin="5,35,0,15"  BackgroundColor="#5EC8EA"  TextColor="White" CornerRadius="100"
+                                Style="{StaticResource ButtonStyle}" Command="{Binding CancelLoginCommand}"/>
+                    </StackLayout>
                     <Label LineBreakMode="WordWrap" HorizontalOptions="CenterAndExpand" FontSize="Body">
                         <Label.FormattedText>
                             <FormattedString>

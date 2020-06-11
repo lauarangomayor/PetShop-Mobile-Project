@@ -31,17 +31,7 @@ namespace PetShopApp.ViewModels
         public RequestPicker<BaseModel> GetStateProduct { get; set; }
         public RequestPicker<ProductModel> PostProduct { get; set; }
         #endregion
-        #region Attributes
-        public string ProductName { get; set; }
-        public string ProductDescription { get; set; }
-        public int ProductIndexCategory { get; set; }
-        public int ProductQuantityAvailable { get; set; }
-        public float ProductUnitPrice { get; set; }
-        public int ProductIndexStateProduct { get; set; }
-        public string ProductImagePath { get; set; }
-        #endregion
-
-
+      
         #region Commands
         public ICommand SelectedItemTappedCommand { get; set; }
         public ICommand GoToCartCommand { get; set; }
