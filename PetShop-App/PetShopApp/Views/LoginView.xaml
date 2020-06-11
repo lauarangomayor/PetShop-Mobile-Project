@@ -73,7 +73,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="¿No tienes cuenta? Crea una " TextColor="Black"/>
-                                <Span Text="aquí" TextColor="#096085"/>
+                                <Span Text="aquí" x:Name ="labelgotoRegister" TextColor="#096085"></Span>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

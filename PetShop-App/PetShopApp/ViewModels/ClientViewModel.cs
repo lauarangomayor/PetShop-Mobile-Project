@@ -1,7 +1,10 @@
-﻿using PetShopApp.AuxModels;
+﻿using Newtonsoft.Json;
+using PetShopApp.AuxModels;
 using PetShopApp.Configuration;
+using PetShopApp.Helpers;
 using PetShopApp.Models;
 using PetShopApp.Services.APIRest;
+using SQLitePCL;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,7 +18,9 @@ namespace PetShopApp.ViewModels
     {
         #region Attributes
         private UserModel usermodel;
-        #endregion Attributes
+        private LoginClientModel login;
+
+        #endregion Attribute
 
         #region Requests
         public RequestPicker<UserModel> clientCreate { get; set; }
@@ -43,6 +48,16 @@ namespace PetShopApp.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public LoginClientModel Login
+        {
+            get { return login; }
+            set
+            {
+                login = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion Getters & Setters
 
         #region Initialize
@@ -63,10 +78,11 @@ namespace PetShopApp.ViewModels
         #region Methods
         public async Task SaveClient()
         {
-            ((Command)RegistrarUsuarioClientCommand).ChangeCanExecute();  
+            ((Command)RegistrarUsuarioClientCommand).ChangeCanExecute();
             await CreateClient();
         }
 
+ 
         public async Task CreateClient()
         {
             try
@@ -78,20 +94,36 @@ namespace PetShopApp.ViewModels
                     APIResponse response = await clientCreate.ExecuteStrategy(usermodel);
                     if (response.IsSuccess)
                     {
-                        Console.WriteLine("Guardo");
+                        Login = JsonConvert.DeserializeObject<LoginClientModel>(response.Response);
+                        Settings.UId = Login.IdClient.ToString();
+                        Settings.UEmail = Login.Email;
+                        await Application.Current.MainPage.DisplayAlert("Guardado", "Se registro satisfactoriamente", "OK");
+
+                        Usermodel.DocumentId = null; //Limpiar campos
+                        Usermodel.Name = null;
+                        Usermodel.Telephone = null;
+                        Usermodel.Address = null;
+                        Usermodel.Email = null;
+                        Usermodel.Password = null;
                     }
                     else
                     {
+                        await Application.Current.MainPage.DisplayAlert("Error", "El registro no fue exitoso", "OK");
 
                     }
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Complete todos los campos", "OK");
                 }
             }
             catch (Exception e)
             {
+                await Application.Current.MainPage.DisplayAlert("Error", "Se presento una exepción", "OK");
 
             }
-        
-    }
+
+        }
      
         #endregion Methods
 

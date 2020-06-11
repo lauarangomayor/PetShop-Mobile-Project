@@ -14,7 +14,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Image Grid.Row="0" Source="ImagenUserRegistro.jpg"/>
+            <Image Grid.Row="0" Source="ImagenUserRegistro.jpg" Margin="120,0,120,0"/>
 
             <ScrollView Grid.Row="1" >
                 <StackLayout Padding="30,20">
