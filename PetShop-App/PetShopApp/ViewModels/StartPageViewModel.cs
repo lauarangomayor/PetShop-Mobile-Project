@@ -29,7 +29,7 @@ namespace PetShopApp.ViewModels
 
         private async Task ShopLogin()
         {
-            await NavigationService.PushPage(new HomeShopView());
+            await NavigationService.PushPage(new ShopTabbedPageView());
         }
         #endregion
     }

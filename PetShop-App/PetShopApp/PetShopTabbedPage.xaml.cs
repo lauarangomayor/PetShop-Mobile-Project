@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace PetShopApp.Views
+namespace PetShopApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ShopTabbedPage : TabbedPage
+    public partial class PetShopTabbedPage : TabbedPage
     {
-        public ShopTabbedPage()
+        public PetShopTabbedPage()
         {
             InitializeComponent();
         }
