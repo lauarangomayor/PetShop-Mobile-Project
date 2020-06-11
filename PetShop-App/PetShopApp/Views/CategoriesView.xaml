@@ -43,7 +43,8 @@
                 </ListView.ItemTemplate>
             </ListView>-->
             <StackLayout Padding="6">
-                <CollectionView ItemsSource="{Binding CategoriesList}" SelectedItem="{Binding selectedCategory, Mode=TwoWay}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectedItemTappedCommand, Mode=TwoWay}">
+                <CollectionView ItemsSource="{Binding CategoriesList}" SelectedItem="{Binding SelectedCategory, Mode=TwoWay}" 
+                                SelectionMode="Single" SelectionChangedCommand="{Binding TappedCategoryCommand, Mode=TwoWay}">
 
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="7"/>
