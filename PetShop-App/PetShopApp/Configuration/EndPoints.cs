@@ -21,5 +21,6 @@ namespace PetShopApp.Configuration
         public static readonly string GET_PRODUCTS_OF_CHART = "Product/getProductsByListId";
 
 
+
     }
 }

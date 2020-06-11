@@ -24,6 +24,21 @@ namespace PetShopApp.ViewModels
         #endregion
         #region Requests
         public RequestPicker<BaseModel> GetProducts { get; set; }
+
+        #endregion
+
+        #region RequestPikers
+        public RequestPicker<BaseModel> GetStateProduct { get; set; }
+        public RequestPicker<ProductModel> PostProduct { get; set; }
+        #endregion
+        #region Attributes
+        public string ProductName { get; set; }
+        public string ProductDescription { get; set; }
+        public int ProductIndexCategory { get; set; }
+        public int ProductQuantityAvailable { get; set; }
+        public float ProductUnitPrice { get; set; }
+        public int ProductIndexStateProduct { get; set; }
+        public string ProductImagePath { get; set; }
         #endregion
 
 
@@ -61,7 +76,9 @@ namespace PetShopApp.ViewModels
         public void InitializeCommands()
         {
             SelectedItemTappedCommand = new Command(async () => await GoToProductDetails(), () => true);
+
             GoToCartCommand = new Command(async () => await GoToShoppingCart(), () => true);
+
         }
         public async void InitizalizeRequest()
         {
@@ -79,7 +96,10 @@ namespace PetShopApp.ViewModels
             promptConfig.Message = productItem.Name;
             var result = await UserDialogs.Instance.PromptAsync(promptConfig);*/
 
+
             await NavigationService.PushPage(new ProductDetailView(), ProductItem);
+
+
 
         }
         public async Task ListProducts()
@@ -100,6 +120,7 @@ namespace PetShopApp.ViewModels
             {
                 Exception e;
             }
+
         }
         private async Task GoToShoppingCart()
         {
@@ -110,6 +131,7 @@ namespace PetShopApp.ViewModels
             promptConfig.Message = productItem.Name;
             var result = await UserDialogs.Instance.PromptAsync(promptConfig);*/
             await NavigationService.PushPage(new ShoppingCartView());
+
         }
         #endregion
 
