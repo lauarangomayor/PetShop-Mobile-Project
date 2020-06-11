@@ -12,15 +12,10 @@ namespace PetShopApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MyListPageDetail : ContentPage
     {
-        public MyListPageDetail(string Name, string Ingredients, string source)
+        public MyListPageDetail(string Name)
         {
             InitializeComponent();
             MyItemNameShow.Text = Name;
-            MyIngrediantItemShow.Text = Ingredients;
-            MyImageCall.Source = new UriImageSource()
-            {
-                Uri = new Uri(source)
-            };
         }
     }
 }

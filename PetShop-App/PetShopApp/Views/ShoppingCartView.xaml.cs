@@ -14,6 +14,7 @@ namespace PetShopApp.Views
     public partial class ShoppingCartView : ContentPage
     {
         ShoppingCartViewModel context = new ShoppingCartViewModel();
+        //ShoppingCartViewModel context = new ShoppingCartViewModel();
         public ShoppingCartView()
         {
             InitializeComponent();

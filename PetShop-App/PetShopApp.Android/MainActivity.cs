@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using ImageCircle.Forms.Plugin.Droid;
 using Acr.UserDialogs;
+using Xamarin.Forms;
 
 namespace PetShopApp.Droid
 {
@@ -19,6 +20,7 @@ namespace PetShopApp.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
             UserDialogs.Init(this);
+            Forms.SetFlags("SwipeView_Experimental");
             base.OnCreate(savedInstanceState);
 
             Xamarin.Forms.Forms.SetFlags("RadioButton_Experimental");

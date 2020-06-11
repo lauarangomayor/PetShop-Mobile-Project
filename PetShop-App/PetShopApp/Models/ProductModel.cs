@@ -19,6 +19,7 @@ namespace PetShopApp.Models
         private CategoryModel category;*/
         private int quantityAvailable;
         private float unitPrice;
+        private string unitPriceString;
         private long idStateProduct;
         /*[JsonIgnore]
         private StateProductModel stateProduct;*/
@@ -72,6 +73,12 @@ namespace PetShopApp.Models
         {
             get { return unitPrice; }
             set { unitPrice = value; OnPropertyChanged(); }
+        }
+
+        public string UnitPriceString
+        {
+            get { return unitPriceString; }
+            set { unitPriceString = value; OnPropertyChanged(); }
         }
 
         public long IdStateProduct

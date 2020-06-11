@@ -23,7 +23,7 @@ namespace PetShopApp.Views
         private async void OnItemSelected(Object sender, ItemTappedEventArgs e)
         {
             var mydetails = e.Item as MyListModel;
-            await Navigation.PushAsync(new MyListPageDetail(mydetails.Name, mydetails.Ingredients, mydetails.Image));
+            await Navigation.PushAsync(new MyListPageDetail(mydetails.Name));
         }
 
         void OnListViewScrolled(Object sender, ScrolledEventArgs e)

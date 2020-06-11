@@ -102,6 +102,7 @@ namespace PetShopApp.ViewModels
                 Products = JsonConvert.DeserializeObject<List<ProductModel>>(response.Response, jsonSerializerSettings);
                 foreach (var p in Products)
                 {
+                    p.UnitPriceString = p.UnitPrice.ToString("N0");
                     ProductsList.Add(p);
                 }
 
