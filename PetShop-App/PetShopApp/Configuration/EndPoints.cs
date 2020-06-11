@@ -20,6 +20,8 @@ namespace PetShopApp.Configuration
         public static readonly string REGISTER_CLIENT = "client/registerClient";
         public static readonly string DELETE_PET = "pet/delete/";
         public static readonly string GET_PRODUCTS_OF_CHART = "Product/getProductsByListId";
+        public static readonly string CREATE_PET = "Pet/create";
+        public static readonly string GET_ALL_SPECIES = "Specie/all";
 
 
 
