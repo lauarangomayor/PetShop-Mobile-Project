@@ -12,7 +12,7 @@
             <Style TargetType="Label" x:Key="Title">
                 <Setter Property="HorizontalOptions" Value="Center"></Setter>
                 <Setter Property="TextColor" Value="Black"></Setter>
-                <Setter Property="FontSize" Value="Large"></Setter>
+                <Setter Property="FontSize" Value="20"></Setter>
                 <Setter Property="FontFamily" Value="Times New Roman"></Setter>
                 <Setter Property="Margin" Value="0,08"></Setter>
                 <Setter Property="Padding" Value="90,0"></Setter>
@@ -20,57 +20,56 @@
             <Style TargetType="Label" x:Key="FormLabel">
                 <Setter Property="Margin" Value="10,40,10,10"></Setter>
                 <Setter Property="FontSize" Value="Medium"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
             </Style>
-            <Style TargetType="BoxView" x:Key="Separator">
+            <Style TargetType="BoxView" x:Key="LineUp">
                 <Setter Property="HeightRequest" Value="3"></Setter>
-                <Setter Property="BackgroundColor" Value="#0A6086"></Setter>
+                <Setter Property="BackgroundColor" Value="Black"></Setter>
             </Style>
             <Style TargetType="Button" x:Key="ButtonStyle">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
-                <Setter Property="FontSize" Value="Large"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
                 <Setter Property="Padding" Value="25"></Setter>
                 <Setter Property="BackgroundColor" Value="#096085"></Setter>
                 <Setter Property="TextColor" Value="WhiteSmoke"></Setter>
+                <Setter Property="CornerRadius" Value="15"></Setter>
             </Style>
-            <!--Fin de estilos-->
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout VerticalOptions="FillAndExpand">
-                <StackLayout VerticalOptions="FillAndExpand">
-                    <Frame Padding="0" Margin="0">
+            <StackLayout HorizontalOptions="FillAndExpand" Padding="20,20" VerticalOptions="Center">
+                <Frame Padding="0" Margin="0">
                         <StackLayout BackgroundColor="White" Padding="0" Margin="0">
                             <Label Text="Creación Producto" Style="{StaticResource Title}"></Label>
-                            <BoxView Style="{StaticResource Separator}"></BoxView>
+                            <BoxView Style="{StaticResource LineUp}"></BoxView>
                         </StackLayout>
                     </Frame>
-                    <StackLayout HorizontalOptions="FillAndExpand" Padding="40,50" VerticalOptions="Center">
-                        <Label Text="Nombre:" Style="{StaticResource FormLabel}"/>
-                        <Entry Text="{Binding ProductName}" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Descripción:" Style="{StaticResource FormLabel}"/>
-                        <Entry Text="{Binding ProductDescription}" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Categoría:" Style="{StaticResource FormLabel}"/>
-                        <Picker x:Name="categoryPicker" HorizontalOptions="FillAndExpand" Margin="10,40,10,10"
+                <StackLayout HorizontalOptions="FillAndExpand" Padding="20,20" VerticalOptions="Center">
+                    <Label Text="Nombre:" Style="{StaticResource FormLabel}"/>
+                    <Entry Text="{Binding ProductName}"/>
+                    <Label Text="Descripción:" Style="{StaticResource FormLabel}"/>
+                    <Entry Text="{Binding ProductDescription}"/>
+                    <Label Text="Categoría:" Style="{StaticResource FormLabel}"/>
+                    <Picker x:Name="categoryPicker"
                                 Title="Seleccionar"
                                 TitleColor="Gray"
                                 SelectedIndex="{Binding ProductIndexCategory}"
                                 ItemsSource="{Binding Categories}"
                                 ItemDisplayBinding="{Binding Name}"/>
-                        <Label Text="Cantidad:" Style="{StaticResource FormLabel}"/>
-                        <Entry Keyboard="Numeric" Text="{Binding ProductQuantityAvailable}" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Precio:" Style="{StaticResource FormLabel}"/>
-                        <Entry Text ="{Binding ProductUnitPrice }" HorizontalOptions="FillAndExpand"/>
-                        <Label Text="Estado de venta:" Style="{StaticResource FormLabel}"/>
-                        <Picker x:Name="productStatePicker" HorizontalOptions="FillAndExpand" Margin="10,40,10,10"
+                    <Label Text="Cantidad:" Style="{StaticResource FormLabel}"/>
+                    <Entry Keyboard="Numeric" Text="{Binding ProductQuantityAvailable}"/>
+                    <Label Text="Precio:" Style="{StaticResource FormLabel}"/>
+                    <Entry Text ="{Binding ProductUnitPrice }"/>
+                    <Label Text="Estado de venta:" Style="{StaticResource FormLabel}"/>
+                    <Picker x:Name="productStatePicker" HorizontalOptions="FillAndExpand"
                                 Title="Seleccionar"
                                 SelectedIndex="{Binding ProductIndexStateProduct}"
                                 TitleColor="Gray"
                                 ItemsSource="{Binding StateProducts}"
                                 ItemDisplayBinding="{Binding Description}"/>
-                        <Button Text="Crear" Style="{StaticResource ButtonStyle}" Margin="0,55,0,15"
+                    <Button Text="Crear" Style="{StaticResource ButtonStyle}" Margin="60"
                                 Command="{Binding CreateProductCommand}"/>
-                    </StackLayout>
                 </StackLayout>
             </StackLayout>
         </ScrollView>
