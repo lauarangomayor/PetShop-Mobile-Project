@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetShopApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,13 @@ using Xamarin.Forms.Xaml;
 namespace PetShopApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomeView : ContentPage
+    public partial class CreatePetView : ContentPage
     {
-        public HomeView()
+        CreatePetViewModel context = new CreatePetViewModel();
+        public CreatePetView()
         {
             InitializeComponent();
+            BindingContext = context;
         }
     }
 }

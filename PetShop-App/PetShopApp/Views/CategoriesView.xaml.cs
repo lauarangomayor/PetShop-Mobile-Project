@@ -23,12 +23,13 @@ namespace PetShopApp.Views
 
         }
 
-        private async void OnItemSelected(Object sender, ItemTappedEventArgs e)
+        /*private async void OnItemSelected(Object sender, ItemTappedEventArgs c)
         {
-            var myProducts = e.Item as ProductModel;
-            await Navigation.PushAsync(new ProductDetailView());
+
+            var category = c.Item as CategoryModel;
+           // await Navigation.PushAsync(new ProductsByCategoryView(), c);
             //await NavigationService.PushPage(new ProductDetail(myProducts.ID, myProducts.Name, myProducts.Description, myProducts.UnitPrice, myProducts.Image));
-        }
+        }*/
 
         void OnListViewScrolled(object sender, ScrolledEventArgs e)
         {

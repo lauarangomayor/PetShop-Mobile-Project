@@ -16,7 +16,7 @@
     <TabbedPage.Children>
         <NavigationPage Title="Inicio" Icon="home.png">
             <x:Arguments>
-                <views:HomeView ></views:HomeView>
+                <views:HomeShopView ></views:HomeShopView>
             </x:Arguments>
         </NavigationPage>
         <NavigationPage Title="Categorías" Icon="Categories.png">

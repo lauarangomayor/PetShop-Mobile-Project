@@ -10,25 +10,30 @@ namespace PetShopApp.Models
     public class PetModel : BaseModel
     {
         #region Properties 
-        [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
+        private long idPet;
         private string name;
-        private string specie;
-        private string birthdate;
+        private long idSpecie;
         private string generalInfo;
-        public UserClientModel Owner { get; set; }
-                
+        private string birthdate;
+        private long idClient;
+        private string imagePath;
+
         #endregion
         #region Getters/Setters
+        public long IdPet
+        {
+            get { return idPet; }
+            set { idPet = value; OnPropertyChanged(); }
+        }
         public string Name
         {
             get { return name; }
             set { name = value; OnPropertyChanged(); }
         }
-        public string Specie
+        public long IdSpecie
         {
-            get { return specie; }
-            set { specie = value; OnPropertyChanged(); }
+            get { return idSpecie; }
+            set { idSpecie = value; OnPropertyChanged(); }
         }
         public string Birthdate
         {
@@ -40,6 +45,16 @@ namespace PetShopApp.Models
         {
             get { return generalInfo; }
             set { generalInfo = value; OnPropertyChanged(); }
+        }
+        public long IdClient
+        {
+            get { return idClient; }
+            set { idClient = value; OnPropertyChanged(); }
+        }
+        public string ImagePath
+        {
+            get { return imagePath; }
+            set { imagePath = value; OnPropertyChanged(); }
         }
         #endregion
     }

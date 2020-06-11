@@ -2,6 +2,7 @@
 using PetShopApp.Configuration;
 using PetShopApp.Models;
 using PetShopApp.Services.APIRest;
+using PetShopApp.Services.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -74,21 +75,25 @@ namespace PetShopApp.ViewModels
                 APIResponse response = await petDelete.ExecuteStrategy(null, parameters);
                 if (response.IsSuccess)
                 {
-                   Console.WriteLine("Eliminado");
+                    await Application.Current.MainPage.DisplayAlert("Opreción exitosa", "La mascota ha sido eliminada", "OK");
+
                 }
                 else
                 {
+                    await Application.Current.MainPage.DisplayAlert("Error", "La mascota no ha sido eliminada", "OK");
 
                 }
-                
+
             }
             catch (Exception e)
             {
+                await Application.Current.MainPage.DisplayAlert("Error", "Ocurrio una excepción", "OK");
 
             }
 
         }
 
+      
         #endregion Methods
     }
 }

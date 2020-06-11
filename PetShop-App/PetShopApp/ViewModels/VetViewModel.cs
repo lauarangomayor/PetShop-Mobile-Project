@@ -80,21 +80,30 @@ namespace PetShopApp.ViewModels
                     APIResponse response = await CreateVet.ExecuteStrategy(Usermodel);
                     if (response.IsSuccess)
                     {
-                        Console.WriteLine("Guardo");
+                        await Application.Current.MainPage.DisplayAlert("Guardado", "Se registro satisfactoriamente", "OK");
+                        Usermodel.DocumentId = "";
+                        Usermodel.Name = "";
+                        Usermodel.Telephone = "";
+                        Usermodel.Address = "";
+                        Usermodel.Email = "";
+                        Usermodel.Password = "";
                     }
                     else
                     {
+                        await Application.Current.MainPage.DisplayAlert("Error", "El registro no fue exitoso", "OK");
 
                     }
                 }
                 else 
-                { 
-                    //PopUp de datos incompletos
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Complete todos los campos", "OK");
+
                 }
             }
             catch(Exception e)
             {
-                //Error de servidor
+                await Application.Current.MainPage.DisplayAlert("Error", "Se presento una exepción", "OK");
+
             }
         }
         #endregion Methods

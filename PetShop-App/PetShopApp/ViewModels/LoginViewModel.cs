@@ -4,6 +4,7 @@ using PetShopApp.Configuration;
 using PetShopApp.Helpers;
 using PetShopApp.Models;
 using PetShopApp.Services.APIRest;
+using PetShopApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -124,6 +125,7 @@ namespace PetShopApp.ViewModels
                     LoginClient = JsonConvert.DeserializeObject<LoginClientModel>(response.Response);
                     Settings.UId = LoginClient.IdClient.ToString();
                     Settings.UEmail = LoginClient.Email;
+                    
                 }
                 else
                 {
