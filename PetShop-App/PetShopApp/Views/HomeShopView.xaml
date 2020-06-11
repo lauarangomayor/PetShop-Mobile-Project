@@ -13,8 +13,11 @@
             IconImageSource="Shoppingcart.png"
             Order="Primary"
             Text="Agregar al carrito"
-            Priority="0"></ToolbarItem>
-        <!--<ToolbarItem Name="Create" Command="{Binding CreateNewScopeCommand}"></ToolbarItem>-->
+            Priority="0"
+            Name="ShoppingCart" 
+            Command="{Binding GoToCartCommand}">
+
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -31,11 +34,11 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <StackLayout  BackgroundColor="White">
             <BoxView Style="{StaticResource LineUp}"></BoxView>
-                <Label Text="Nuevo"  Style="{StaticResource Titles}" ></Label>
+            <Label Text="Nuevo"  Style="{StaticResource Titles}" ></Label>
             <StackLayout Padding="6">
                 <CollectionView ItemsSource="{Binding ProductsList}" SelectedItem="{Binding ProductItem, Mode=TwoWay}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectedItemTappedCommand, Mode=TwoWay}">
 

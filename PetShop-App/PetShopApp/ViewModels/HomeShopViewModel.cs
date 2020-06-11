@@ -24,6 +24,10 @@ namespace PetShopApp.ViewModels
         #endregion
         #region Requests
         public RequestPicker<BaseModel> GetProducts { get; set; }
+
+        #endregion
+
+        #region RequestPikers
         public RequestPicker<BaseModel> GetStateProduct { get; set; }
         public RequestPicker<ProductModel> PostProduct { get; set; }
         #endregion
@@ -37,9 +41,12 @@ namespace PetShopApp.ViewModels
         public string ProductImagePath { get; set; }
         #endregion
 
+
         #region Commands
         public ICommand SelectedItemTappedCommand { get; set; }
+        public ICommand GoToCartCommand { get; set; }
         #endregion
+
         #region Getters/Setters
         public ObservableCollection<ProductModel> ProductsList
         {
@@ -57,6 +64,7 @@ namespace PetShopApp.ViewModels
             set { products = value; OnPropertyChanged(); }
         }
         #endregion
+
         public HomeShopViewModel()
         {
             Products = new List<ProductModel>();
@@ -68,6 +76,9 @@ namespace PetShopApp.ViewModels
         public void InitializeCommands()
         {
             SelectedItemTappedCommand = new Command(async () => await GoToProductDetails(), () => true);
+
+            GoToCartCommand = new Command(async () => await GoToShoppingCart(), () => true);
+
         }
         public async void InitizalizeRequest()
         {
@@ -84,7 +95,12 @@ namespace PetShopApp.ViewModels
             promptConfig.IsCancellable = true;
             promptConfig.Message = productItem.Name;
             var result = await UserDialogs.Instance.PromptAsync(promptConfig);*/
-            await NavigationService.PushPage(new ProductDetailView(), ProductItem );
+
+
+            await NavigationService.PushPage(new ProductDetailView(), ProductItem);
+
+
+
         }
         public async Task ListProducts()
         {
@@ -104,6 +120,18 @@ namespace PetShopApp.ViewModels
             {
                 Exception e;
             }
+
+        }
+        private async Task GoToShoppingCart()
+        {
+            /*
+            var promptConfig = new PromptConfig();
+            promptConfig.InputType = InputType.Name;
+            promptConfig.IsCancellable = true;
+            promptConfig.Message = productItem.Name;
+            var result = await UserDialogs.Instance.PromptAsync(promptConfig);*/
+            await NavigationService.PushPage(new ShoppingCartView());
+
         }
         #endregion
 

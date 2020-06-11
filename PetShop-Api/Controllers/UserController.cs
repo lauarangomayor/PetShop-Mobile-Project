@@ -46,6 +46,61 @@ namespace PetShop_Api.Controllers
           
         }
 
+        [HttpGet("validateUserByEmailAndPasswordAndType/{email}/{password}/{userType}")]
+        public async Task<ActionResult<UserModel>> ValidateUserByEmailAndPasswordAndType(string email, string password, string userType)
+        {
+            if (userType == "1")
+            {
+                try
+                {
+
+                    var clientInfo = await dBContext.Users
+                                                    .Where(u => u.Email == email && u.Password == password &&  u.UserType == 1 && u.UserType.ToString() == userType)
+                                                    .Join(dBContext.Clients,
+                                                        pU => pU.IdUser,
+                                                        c => c.IdUser,
+                                                        (pU, c) => new {pU.Email, pU.Password, c.IdClient}
+                                                        ).FirstAsync();
+                    if (clientInfo == null)
+                    {
+                        return NotFound();
+                    }
+                    return Ok(clientInfo);
+                }
+                catch(Exception e)
+                {
+                    return StatusCode(410);
+                }
+            }
+            else if (userType == "0")
+            {
+                try
+                {
+                   var vetInfo = await dBContext.Users
+                                                    .Where(u => u.Email == email && u.Password == password)
+                                                    .Join(dBContext.Veterinarians,
+                                                        pU => pU.IdUser,
+                                                        v => v.IdUser,
+                                                        (pU, v) => new {pU.Email, pU.Password, v.IdVeterinarian}
+                                                        ).FirstAsync();
+                    if (vetInfo == null)
+                    {
+                        return NotFound();
+                    }
+                    return Ok(vetInfo);
+                }
+                catch(Exception e)
+                {
+                    return StatusCode(410);
+                }
+
+            }
+
+            return NotFound();
+  
+
+        }
+
         [HttpGet("all")] //http:localhost:5000/user/all
         //Return all the user from de DB
         public async Task<ActionResult<List<UserModel>>> GetAllUser()

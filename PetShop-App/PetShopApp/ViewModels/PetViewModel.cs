@@ -50,8 +50,9 @@ namespace PetShopApp.ViewModels
         #region Initialize
         private async Task InitializeRequestAsync()
         {
-            string urlDeletePet = EndPoints.SERVER_URL+ EndPoints.DELETE_PET;
+            //string urlDeletePet = EndPoints.SERVER_URL+ EndPoints.DELETE_PET;
 
+            string urlDeletePet = "https://3.20.51.47:5001/Category/all";
             petDelete = new RequestPicker<PetModel>();
             petDelete.StrategyPicker("DELETE", urlDeletePet);
         }
