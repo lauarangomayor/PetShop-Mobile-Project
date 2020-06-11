@@ -1,5 +1,6 @@
 ﻿using PetShopApp.Services.Navigation;
 using PetShopApp.ViewModels;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace PetShopApp.Views
             {
                 Command = new Command(async () =>
                 {
+                    await PopupNavigation.PopAsync();
                     await navigationService.PushPage(new RegisterClientView(), null);
 
                 })
