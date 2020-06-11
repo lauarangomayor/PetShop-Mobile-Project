@@ -31,8 +31,7 @@ namespace PetShopApp.Views
             {
                 Command = new Command(async () =>
                   {
-                      await PopupNavigation.PopAsync();
-                      await navigationService.PushPage(new RegisterClientView(), null);
+                    await navigationService.PushPage(new RegisterClientView(), null);
 
                   })
 
