@@ -31,13 +31,13 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <StackLayout  BackgroundColor="White">
             <BoxView Style="{StaticResource LineUp}"></BoxView>
-                <Label Text="Nuevo"  Style="{StaticResource Titles}" ></Label>
+            <Label Text="Nuevo"  Style="{StaticResource Titles}" ></Label>
             <StackLayout Padding="6">
-                <CollectionView ItemsSource="{Binding ProductsList}" SelectedItem="{Binding productItem, Mode=TwoWay}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectedItemTappedCommand, Mode=TwoWay}">
+                <CollectionView ItemsSource="{Binding ProductsList}" SelectedItem="{Binding ProductItem, Mode=TwoWay}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectedItemTappedCommand, Mode=TwoWay}">
 
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="6" VerticalItemSpacing="6"/>
@@ -58,7 +58,7 @@
                                                           VerticalOptions="CenterAndExpand"
                                                           Aspect="AspectFill"
                                                           WidthRequest="160"
-                                                          Source="{Binding Image}"
+                                                          Source="{Binding ImagePath}"
                                                       >
 
                                 </controls:CircleImage>

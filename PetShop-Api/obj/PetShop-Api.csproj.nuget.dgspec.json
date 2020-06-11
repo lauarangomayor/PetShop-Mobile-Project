@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tania\\source\\repos\\PetShop-Mobile-App\\PetShop-Api\\PetShop-Api.csproj": {}
+    "C:\\Users\\VeronicaT\\Desktop\\Universidad 2020-1\\Moviles\\Proyecto\\PetShop\\PetShop-Api\\PetShop-Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tania\\source\\repos\\PetShop-Mobile-App\\PetShop-Api\\PetShop-Api.csproj": {
+    "C:\\Users\\VeronicaT\\Desktop\\Universidad 2020-1\\Moviles\\Proyecto\\PetShop\\PetShop-Api\\PetShop-Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tania\\source\\repos\\PetShop-Mobile-App\\PetShop-Api\\PetShop-Api.csproj",
+        "projectUniqueName": "C:\\Users\\VeronicaT\\Desktop\\Universidad 2020-1\\Moviles\\Proyecto\\PetShop\\PetShop-Api\\PetShop-Api.csproj",
         "projectName": "PetShop-Api",
-        "projectPath": "C:\\Users\\tania\\source\\repos\\PetShop-Mobile-App\\PetShop-Api\\PetShop-Api.csproj",
-        "packagesPath": "C:\\Users\\tania\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tania\\source\\repos\\PetShop-Mobile-App\\PetShop-Api\\obj\\",
+        "projectPath": "C:\\Users\\VeronicaT\\Desktop\\Universidad 2020-1\\Moviles\\Proyecto\\PetShop\\PetShop-Api\\PetShop-Api.csproj",
+        "packagesPath": "C:\\Users\\VeronicaT\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\VeronicaT\\Desktop\\Universidad 2020-1\\Moviles\\Proyecto\\PetShop\\PetShop-Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\tania\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\VeronicaT\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -75,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

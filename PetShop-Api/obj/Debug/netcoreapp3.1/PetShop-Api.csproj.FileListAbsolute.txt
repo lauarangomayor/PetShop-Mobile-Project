@@ -130,3 +130,8 @@ C:\Users\tania\source\repos\PetShop-Mobile-App\PetShop-Api\obj\Debug\netcoreapp3
 C:\Users\tania\source\repos\PetShop-Mobile-App\PetShop-Api\obj\Debug\netcoreapp3.1\PetShop-Api.genruntimeconfig.cache
 C:\Users\tania\source\repos\PetShop-Mobile-App\PetShop-Api\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
 C:\Users\tania\source\repos\PetShop-Mobile-App\PetShop-Api\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\VeronicaT\Desktop\Universidad 2020-1\Moviles\Proyecto\PetShop\PetShop-Api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\VeronicaT\Desktop\Universidad 2020-1\Moviles\Proyecto\PetShop\PetShop-Api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\VeronicaT\Desktop\Universidad 2020-1\Moviles\Proyecto\PetShop\PetShop-Api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\VeronicaT\Desktop\Universidad 2020-1\Moviles\Proyecto\PetShop\PetShop-Api\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\VeronicaT\Desktop\Universidad 2020-1\Moviles\Proyecto\PetShop\PetShop-Api\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
