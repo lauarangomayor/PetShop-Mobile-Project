@@ -47,32 +47,7 @@ namespace PetShop_Api.Controllers
  
         }
 
-        [HttpGet("getClientByEmailAndPassword/{email}/{password}")]
-        public async Task<ActionResult<ClientModel>> GetClientByEmailAndPassword(string email, string password)
-        {
-            try
-            {
-                var clientInfo = await dBContext.Users
-                                                .Where(u => u.Email == email)
-                                                .Where(u => u.Password == password)
-                                                .Where(u => u.UserType == 1)
-                                                .Join(dBContext.Clients,
-                                                      pU => pU.IdUser,
-                                                      c => c.IdUser,
-                                                      (pU, c) => new {pU.Email, pU.Password, c.IdClient}
-                                                     ).FirstAsync();
-                if (clientInfo == null)
-                {
-                    return NotFound();
-                }
-                return Ok(clientInfo);
-            }
-            catch(Exception e)
-            {
-                return StatusCode(410);
-            }
 
-        }
 
         [HttpGet("all")] //http://localhost:5000/client/all
         //Return all the user from de DB
