@@ -26,7 +26,7 @@
         </NavigationPage>
         <NavigationPage Title="Perfil" Icon="Profile.png">
             <x:Arguments>
-                <views:ProfilePetView></views:ProfilePetView>
+                <views:CreateAppointmentView></views:CreateAppointmentView>
             </x:Arguments>
         </NavigationPage>
         

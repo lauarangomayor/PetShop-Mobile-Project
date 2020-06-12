@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace PetShopApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CreateAppointment : ContentPage
+    public partial class CreateAppointmentView : ContentPage
     {
-        public CreateAppointment()
+        public CreateAppointmentView()
         {
             InitializeComponent();
         }
