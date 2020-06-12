@@ -3,9 +3,13 @@ using PetShopApp.AuxModels;
 using PetShopApp.Configuration;
 using PetShopApp.Models;
 using PetShopApp.Services.APIRest;
+using PetShopApp.Views;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -19,6 +23,8 @@ namespace PetShopApp.ViewModels
         private List<CategoryModel> categories;
         private List<StateProductModel> stateProduct;
         private ProductModel product;
+        private ImageSource image;
+        private MemoryStream memoryStream;
         #endregion
         #region Requests
         public RequestPicker<BaseModel> GetCategories { get; set; }
@@ -37,6 +43,7 @@ namespace PetShopApp.ViewModels
         
         #region Commands
         public ICommand CreateProductCommand { get; set; }
+        public ICommand UploadImageCommand { get; set; }
         #endregion
         #region Getters/Setters
         public List<CategoryModel> Categories
@@ -66,11 +73,22 @@ namespace PetShopApp.ViewModels
                 OnPropertyChanged();
             }
         }
+        public ImageSource Image
+        {
+            get { return image; }
+            set { image = value; OnPropertyChanged(); }
+        }
+        public MemoryStream MemoryStream
+        {
+            get { return memoryStream; }
+            set { memoryStream = value; OnPropertyChanged(); }
+        }
         #endregion
         public CreateProductViewModel()
         {
             Categories = new List<CategoryModel>();
             StateProducts = new List<StateProductModel>();
+            MemoryStream = new MemoryStream();
             InitizalizeRequest();
             InitializeCommands();
         }
@@ -78,6 +96,7 @@ namespace PetShopApp.ViewModels
         public void InitializeCommands()
         {
             CreateProductCommand = new Command(async () => await CreateProduct(), () => true);
+            UploadImageCommand = new Command(async () => await UploadImage(), () => true);
         }
         public async void InitizalizeRequest()
         {
@@ -119,8 +138,32 @@ namespace PetShopApp.ViewModels
                 Exception e;
             }
         }
+        public async Task UploadImage()
+        {
+            if (!CrossMedia.Current.IsPickPhotoSupported)
+            {
+                return;
+            }
+            MediaFile file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+            {
+                PhotoSize = PhotoSize.Medium,
+            });
+            if (file == null)
+            {
+                return;
+            }
+            Image = ImageSource.FromStream(() =>
+            {
+                Stream stream = file.GetStream();
+                file.GetStream().CopyTo(memoryStream);
+                file.Dispose();
+                return stream;
+            });
+        }
         public async Task CreateProduct()
         {
+            string base64ToString = Convert.ToBase64String(memoryStream.ToArray());
+            memoryStream = new MemoryStream();
             try
             {
                 ProductModel product = new ProductModel()
@@ -131,7 +174,7 @@ namespace PetShopApp.ViewModels
                     QuantityAvailable = ProductQuantityAvailable,
                     UnitPrice= ProductUnitPrice,
                     IdStateProduct = StateProducts[ProductIndexStateProduct].IdStateProduct,
-                    ImagePath = "C:/Windows/System32/"
+                    ImagePath = base64ToString
 
                 };
                 APIResponse response = await PostProduct.ExecuteStrategy(product);
