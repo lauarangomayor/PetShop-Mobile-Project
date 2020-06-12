@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:views="clr-namespace:PetShopApp.Views"
              mc:Ignorable="d"
-             x:Class="PetShopApp.PetShopTabbedPage"
+             x:Class="PetShopApp.Views.PetsTabbedPageView"
             NavigationPage.HasNavigationBar="False"
             BarBackgroundColor="Transparent"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core" 
@@ -14,11 +14,11 @@
             android:TabbedPage.BarSelectedItemColor="#096085">
 
     <TabbedPage.Children>
-        <NavigationPage Title="Inicio" Icon="Home.png">
+        <!--<NavigationPage Title="Inicio" Icon="Home.png">
             <x:Arguments>
                 <views:HomeVetView ></views:HomeVetView>
             </x:Arguments>
-        </NavigationPage>
+        </NavigationPage> --> 
         <NavigationPage Title="Mis mascotas" Icon="Pet.png">
             <x:Arguments>
                 <views:PetsView ></views:PetsView>
@@ -26,7 +26,7 @@
         </NavigationPage>
         <NavigationPage Title="Perfil" Icon="Profile.png">
             <x:Arguments>
-                <views:ProfilePetView></views:ProfilePetView>
+                <views:MyListPageView></views:MyListPageView>
             </x:Arguments>
         </NavigationPage>
         

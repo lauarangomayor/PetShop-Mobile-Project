@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PetShopApp.AuxModels;
 using PetShopApp.Configuration;
+using PetShopApp.Helpers;
 using PetShopApp.Models;
 using PetShopApp.Services.APIRest;
 using PetShopApp.Services.Navigation;
@@ -26,7 +27,7 @@ namespace PetShopApp.ViewModels
 
         #region Requests
         public RequestPicker<PetModel> petDelete { get; set; }
-        public RequestPicker<PetModel> GetPetsByUser { get; set; }
+        public RequestPicker<BaseModel> GetPetsByUser { get; set; }
         #endregion Requests
 
         #region Commands
@@ -38,7 +39,9 @@ namespace PetShopApp.ViewModels
         public PetViewModel()
         {
             Petmodel = new PetModel();
-            InitializeRequestAsync();
+            Pets = new List<PetModel>();
+            PetsList = new ObservableCollection<PetModel>();
+            InitializeRequest();
             InitializeCommands();
         }
 
@@ -75,7 +78,12 @@ namespace PetShopApp.ViewModels
         #endregion Getters & Setters
 
         #region Initialize
-        private async Task InitializeRequestAsync()
+        private async Task InitializeCommands()
+        {
+            DeletePetCommand = new Command(async () => await DeletePet());
+            PetSelectedCommand = new Command(async () => await GoPetDetail());
+        }
+        private async Task InitializeRequest()
         {
             //string urlDeletePet = EndPoints.SERVER_URL+ EndPoints.DELETE_PET;
 
@@ -83,17 +91,13 @@ namespace PetShopApp.ViewModels
             petDelete = new RequestPicker<PetModel>();
             petDelete.StrategyPicker("DELETE", urlDeletePet);
 
-            string urlGetPetsByClientId = EndPoints.SERVER_URL + EndPoints.GET_PETS_BY_CLIENT;
-            GetPetsByUser = new RequestPicker<PetModel>();
+            string urlGetPetsByClientId = EndPoints.SERVER_URL + EndPoints.GET_PETS_BY_CLIENT + Settings.UId;
+            GetPetsByUser = new RequestPicker<BaseModel>();
             GetPetsByUser.StrategyPicker("GET", urlGetPetsByClientId);
             await ListPets();
         }
 
-        private async Task InitializeCommands()
-        {
-            DeletePetCommand = new Command(async () => await DeletePet());
-            PetSelectedCommand = new Command(async () => await GoPetDetail());
-        }
+
         #endregion Initialize
 
         #region Methods

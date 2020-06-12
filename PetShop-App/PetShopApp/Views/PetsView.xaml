@@ -31,97 +31,55 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout BackgroundColor="white">
-            <StackLayout Padding="0" BackgroundColor="#white">
-                <BoxView Style="{StaticResource LineUp}" Margin="0"></BoxView>
+        <StackLayout  BackgroundColor="White">
+            <BoxView Style="{StaticResource LineUp}" Margin="0"></BoxView>
 
-                <Label Text="Carrito de compras" TextColor="Black" FontSize="Medium" Padding="10" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" ></Label>
-            </StackLayout>
-            <CollectionView x:Name="collectionView"
-                ItemsSource="{Binding PetsList}">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" Span="2" VerticalItemSpacing="3" />
-                </CollectionView.ItemsLayout>
+            <Button Text=" + Agregar mascota" WidthRequest="55" HeightRequest="55" BackgroundColor="#096085" TextColor="White" FontSize="Medium"></Button>
+            <StackLayout Padding="6,0,6,6">
+                <CollectionView ItemsSource="{Binding PetsList}" SelectedItem="{Binding Pet, Mode=TwoWay}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectedItemTappedCommand, Mode=TwoWay}">
+                    
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="6" VerticalItemSpacing="6"/>
+                    </CollectionView.ItemsLayout>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <SwipeView>
-                            <SwipeView.RightItems>
-                                <SwipeItems>
-                                    <SwipeItem Text="Modificar"
-                                               IconImageSource="Modify.png"
-                                               BackgroundColor="#fff373"
-                                               CommandParameter="{Binding}"
-                                               Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.ModifyPet}"/>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="0" CornerRadius="6" BackgroundColor="#EDEAEA">
+                                <Grid   Padding="5,15" VerticalOptions="Center" HorizontalOptions="Center" >
 
-                                    <SwipeItem Text="Eliminar"
-                                           IconImageSource="Delete.png"
-                                           BackgroundColor="#ff4f4f" 
-                                           CommandParameter="{Binding}"
-                                               
-                                           Command="{Binding Source={x:Reference collectionView}, Path=BindingContext.DeletePet}"/>
-                                </SwipeItems>
-                            </SwipeView.RightItems>
-                            <Frame BorderColor="LightGray" Padding="0,4">
-                                <Grid BackgroundColor="White"
-                              Padding="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
 
-                                    <controls:CircleImage 
-                                        Grid.RowSpan="3"
-                                        HeightRequest="130"
-                                        HorizontalOptions="CenterAndExpand"
-                                        VerticalOptions="CenterAndExpand"
-                                        Aspect="AspectFit"
-                                        WidthRequest="130"
-                                        
-                                        Source="{Binding ImagePath}">
-
+                                    <controls:CircleImage HeightRequest="160"
+                                                              HorizontalOptions="CenterAndExpand"
+                                                              VerticalOptions="CenterAndExpand"
+                                                              Aspect="AspectFill"
+                                                              WidthRequest="160"
+                                                              Source="{Binding ImagePath}" >
                                     </controls:CircleImage>
-                                    <Label Grid.Column="1" 
-                                       Text="{Binding Name}" 
-                                       Padding="0,10,0,5"
-                                       FontAttributes="Bold"
-                                       TextColor="Black"/>
+
+
+                                    <Label Grid.Row="1" HorizontalOptions="Center"  VerticalOptions="Center" LineBreakMode="TailTruncation"
+                                               Text="{Binding Name}"
+                                               FontAttributes="Bold"
+                                               TextColor="Black"/>
+                                    <StackLayout Orientation="Horizontal"  Grid.Row="2" Padding="5">
+                                        <ImageButton Source="EditYellow.png"   VerticalOptions="Start" HeightRequest="60" HorizontalOptions="Center" BackgroundColor="#EDEAEA" Padding="0,0,7,0"></ImageButton>
+                                        <ImageButton Source="DeleteRed.png"   VerticalOptions="End" HeightRequest="60" HorizontalOptions="Center" BackgroundColor="#EDEAEA" Padding="7,0,0,0"></ImageButton>
+                                    </StackLayout>
                                 </Grid>
                             </Frame>
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            <StackLayout Padding="0" Margin="0" BackgroundColor="White">
-                <BoxView Style="{StaticResource LineBottom}" Margin="0"></BoxView>
-                <Grid Padding="0" BackgroundColor="White">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label TextColor="Black" FontSize="Medium" Grid.Column="0" Text="Total a  pagar:" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Padding="10,0,0,0" BackgroundColor="White"/>
-                    <Label LineBreakMode="WordWrap"  Grid.Column="1" TextColor="Black" FontSize="Medium" HorizontalOptions="End" VerticalOptions="Center" Padding="0,0,10,0" BackgroundColor="White" >
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span  Text="$ "/>
-                                <Span Text="{Binding TotalString}" />
-
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                </Grid>
-                <StackLayout Margin="0,10,0,0">
-                    <Button Text="Ir al checkout" VerticalOptions="FillAndExpand" BackgroundColor="#5EC8EA" TextColor="Black" ></Button>
-                </StackLayout>
+                            
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </StackLayout>
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

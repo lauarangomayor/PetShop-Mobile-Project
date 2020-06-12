@@ -7,30 +7,39 @@
              x:Class="PetShopApp.Views.StartPageView"
              Title="Nombre App"
              NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="BoxView" x:Key="LineUp">
+                <Setter Property="HeightRequest" Value="3"></Setter>
+                <Setter Property="BackgroundColor" Value="Black"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50*"/>
-                    <RowDefinition Height="50*"/>
-                </Grid.RowDefinitions>
-            </Grid>
+        <StackLayout Padding="0">
+
             <Label Text="Bienvenido"
-                   VerticalOptions="CenterAndExpand" 
-                   HorizontalOptions="CenterAndExpand"
-                   FontSize="Large"/>
+                   TextColor="Black"
+                   Margin="0"
+                   VerticalOptions="Center" 
+                   HorizontalOptions="Center"
+                   Padding="15,23"
+                   FontSize="Title"/>
+            <BoxView Style="{StaticResource LineUp}" Margin="0"></BoxView>
             <Label Text="Por favor seleccione alguna opción"
-                   VerticalOptions="StartAndExpand" 
+                   VerticalOptions="StartAndExpand"
+                   TextColor="Black"
+                   Padding="0,15,0,0"
                    HorizontalOptions="CenterAndExpand"
                    FontSize="Body"/>
-            <Image Grid.Row="0" Source="ShopSelector.png">
+            <Image  Source="ShopSelector.png">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer
                         Command="{Binding ShopImageTappedCommand}"
                         NumberOfTapsRequired="1" />
                 </Image.GestureRecognizers>
             </Image>
-            <Image Grid.Row="1" Source="ClinicSelector.png">
+            <Image Source="ClinicSelector.png">
                 <Image.GestureRecognizers>
                     <TapGestureRecognizer
                         Command="{Binding VetImageTappedCommand}"

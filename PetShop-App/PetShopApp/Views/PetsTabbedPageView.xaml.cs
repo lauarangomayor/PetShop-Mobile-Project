@@ -8,15 +8,16 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace PetShopApp
+namespace PetShopApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PetShopTabbedPage : TabbedPage
+    public partial class PetsTabbedPageView : TabbedPage
     {
         TabbedPageViewModel context = new TabbedPageViewModel();
-        public PetShopTabbedPage()
+        public PetsTabbedPageView()
         {
             InitializeComponent();
+            BindingContext = context;
         }
     }
 }
