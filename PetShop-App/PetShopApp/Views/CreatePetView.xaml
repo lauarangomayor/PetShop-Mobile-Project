@@ -34,6 +34,13 @@
                 <Setter Property="TextColor" Value="WhiteSmoke"></Setter>
                 <Setter Property="CornerRadius" Value="15"></Setter>
             </Style>
+            <Style TargetType="Button" x:Key="AuxButtonStyle">
+                <Setter Property="FontSize" Value="Medium"></Setter>
+                <Setter Property="Padding" Value="10"></Setter>
+                <Setter Property="BackgroundColor" Value="LightGray"></Setter>
+                <Setter Property="TextColor" Value="WhiteSmoke"></Setter>
+                <Setter Property="CornerRadius" Value="15"></Setter>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -41,7 +48,7 @@
             <StackLayout HorizontalOptions="FillAndExpand" Padding="20,20" VerticalOptions="Center">
                 <Frame Padding="0" Margin="0">
                     <StackLayout BackgroundColor="White" Padding="0" Margin="0">
-                        <Label Text="Creación Producto" Style="{StaticResource Title}"></Label>
+                        <Label Text="Creación Mascota" Style="{StaticResource Title}"></Label>
                         <BoxView Style="{StaticResource LineUp}"></BoxView>
                     </StackLayout>
                 </Frame>
@@ -61,9 +68,11 @@
                                 Date="{Binding PetBirthdate}"/>
                     <Label Text="Información general:" Style="{StaticResource FormLabel}"/>
                     <Editor Text="{Binding PetGeneralInfo}" AutoSize="TextChanges"/>
-                    <!--<Entry Text="{Binding PetGeneralInfo}"/>
                     <Label Text="Imagen:" Style="{StaticResource FormLabel}"/>
-                    <Entry Text ="{Binding ProductUnitPrice }"/>-->
+                    <Button Text="Agregar" Command="{Binding UploadImageCommand}" 
+                            Style="{StaticResource AuxButtonStyle}"></Button>
+                    <Image Source="{Binding Image}" HorizontalOptions="CenterAndExpand"
+                           Margin="40"></Image>
                     <Button Text="Crear" Style="{StaticResource ButtonStyle}" Margin="60"
                                 Command="{Binding CreatePetCommand}"/>
                 </StackLayout>

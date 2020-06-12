@@ -4,8 +4,11 @@ using PetShopApp.Configuration;
 using PetShopApp.Helpers;
 using PetShopApp.Models;
 using PetShopApp.Services.APIRest;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -18,6 +21,8 @@ namespace PetShopApp.ViewModels
         #region Properties
         private List<SpecieModel> species;
         private PetModel pet;
+        private ImageSource image;
+        private MemoryStream memoryStream;
         #endregion
         #region Getters/Setters
         public List<SpecieModel> Species
@@ -29,6 +34,16 @@ namespace PetShopApp.ViewModels
         {
             get { return pet; }
             set { pet = value; OnPropertyChanged(); }
+        }
+        public ImageSource Image
+        {
+            get { return image; }
+            set { image = value; OnPropertyChanged(); }
+        }
+        public MemoryStream MemoryStream
+        {
+            get { return memoryStream; }
+            set { memoryStream = value; OnPropertyChanged(); }
         }
         #endregion
         #region Requests
@@ -46,10 +61,12 @@ namespace PetShopApp.ViewModels
         #endregion
         #region Commands
         public ICommand CreatePetCommand { get; set; }
+        public ICommand UploadImageCommand { get; set; }
         #endregion
         #region Initialization
         public CreatePetViewModel()
         {
+            MemoryStream = new MemoryStream();
             Species = new List<SpecieModel>();
             InitizalizeRequest();
             InitializeCommands();
@@ -70,6 +87,7 @@ namespace PetShopApp.ViewModels
         public void InitializeCommands()
         {
             CreatePetCommand = new Command(async () => await CreatePet(), () => true);
+            UploadImageCommand = new Command(async () => await UploadImage(), () => true);
         }
 
         public async Task ListSpecies()
@@ -84,18 +102,42 @@ namespace PetShopApp.ViewModels
                 Exception e;
             }
         }
+        public async Task UploadImage()
+        {
+            if (!CrossMedia.Current.IsPickPhotoSupported)
+            {
+                return;
+            }
+            MediaFile file = await CrossMedia.Current.PickPhotoAsync(new PickMediaOptions
+            {
+                PhotoSize = PhotoSize.Medium,
+            });
+            if (file == null)
+            {
+                return;
+            }
+            Image = ImageSource.FromStream(() =>
+            {
+                Stream stream = file.GetStream();
+                file.GetStream().CopyTo(memoryStream);
+                file.Dispose();
+                return stream;
+            });
+        }
         public async Task CreatePet()
         {
             try
             {
+                string base64ToString = Convert.ToBase64String(memoryStream.ToArray());
+                memoryStream = new MemoryStream();
                 PetModel pet = new PetModel()
                 {
                     Name = PetName,
                     IdSpecie = Species[PetIndexSpecie].IdSpecie,
                     GeneralInfo = PetGeneralInfo,
                     Birthdate = PetBirthdate,
-                    IdClient = Convert.ToInt64(Settings.UId),
-                    ImagePath = "C:/Windows/System32/"
+                    IdClient = 2,
+                    ImagePath = base64ToString
 
                 };
                 APIResponse response = await PostPet.ExecuteStrategy(pet);
