@@ -48,44 +48,43 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
+                            <Frame Padding="0" CornerRadius="6" BackgroundColor="#EDEAEA">
+                                <Grid   Padding="5,15" VerticalOptions="Center" HorizontalOptions="Center" >
 
-                            <Grid  BackgroundColor="#EDEAEA">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="3*" />
-                                    <RowDefinition Height="2*" />
-                                </Grid.RowDefinitions>
+                                    <controls:CircleImage HeightRequest="160"
+                                                              HorizontalOptions="CenterAndExpand"
+                                                              VerticalOptions="CenterAndExpand"
+                                                              Aspect="AspectFill"
+                                                              WidthRequest="160"
+                                                              Source="{Binding ImagePath}"
+                                                          >
 
-                                <controls:CircleImage HeightRequest="180"
-                                                          HorizontalOptions="CenterAndExpand"
-                                                          VerticalOptions="CenterAndExpand"
-                                                          Aspect="AspectFill"
-                                                          WidthRequest="160"
-                                                          Source="{Binding ImagePath}"
-                                                      >
-
-                                </controls:CircleImage>
-
-                                <StackLayout Grid.Row="1" HorizontalOptions="CenterAndExpand">
-
-                                    <Label Grid.Column="1"
-                                           VerticalOptions="Center"
-                                           Text="{Binding Name}"
-                                           FontAttributes="Bold"
-                                           TextColor="Black"/>
+                                    </controls:CircleImage>
 
 
-                                    <Label LineBreakMode="WordWrap" Grid.Column="1"  VerticalOptions="End" TextColor="Black">
+                                    <Label Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" LineBreakMode="TailTruncation"
+                                               Text="{Binding Name}"
+                                               FontAttributes="Bold"
+                                               TextColor="Black"/>
+
+
+                                    <Label LineBreakMode="WordWrap"   TextColor="Black" Grid.Row="3" VerticalOptions="Center" HorizontalOptions="Center" >
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="$" TextColor="Black"></Span>
-                                                <Span Text="{Binding UnitPrice} " TextColor="Black"></Span>
+                                                <Span Text="{Binding UnitPriceString} " TextColor="Black"></Span>
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
-                                </StackLayout>
 
-                            </Grid>
+                                </Grid>
+                            </Frame>
 
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

@@ -78,21 +78,28 @@ namespace PetShopApp.ViewModels
                 await UserDialogs.Instance.PromptAsync(promptConfig);*/
                 //await Settings.ShoppingCartUser.AddItemToCart(ItemDetail);
                 //Settings.ShoppingCartUser.ShowItemsFromCart();
-                var savedList = new List<Tuple<long, int>>(Settings.listProductsCart);
-                if (savedList.Any(p => p.Item1 == ItemDetail.IdProduct))
+                if (QuantitySelected >=1)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "El producto ya está agregado en el carrito", "OK");
+                    var savedList = new List<Tuple<long, int>>(Settings.listProductsCart);
+                    if (savedList.Any(p => p.Item1 == ItemDetail.IdProduct))
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", "El producto ya está agregado en el carrito", "OK");
 
 
+                    }
+                    else
+                    {
+                        savedList.Add(new Tuple<long, int>(ItemDetail.IdProduct, QuantitySelected));
+                        Settings.listProductsCart = savedList;
+                        NavigationService.PopPage();
+                    
+                    }
                 }
                 else
                 {
-                    savedList.Add(new Tuple<long, int>(ItemDetail.IdProduct, QuantitySelected));
-                    Settings.listProductsCart = savedList;
-                    NavigationService.PopPage();
-                    
+                    await Application.Current.MainPage.DisplayAlert("Error", "No puede agregar 0 cantidades", "OK");
                 }
-                
+
             }
             //NavigationService.PushPage(new CategoriesView());
 

@@ -43,7 +43,7 @@
         <StackLayout  BackgroundColor="White">
             <BoxView Style="{StaticResource LineUp}"></BoxView>
             <Label Text="{Binding ItemDetail.Name}"  Style="{StaticResource Titles}" ></Label>
-            <Image Source="{Binding ItemDetail.ImagePath}" HeightRequest="250" Aspect="AspectFit" Margin="0,35,0,15"></Image>
+            <Image Source="{Binding ItemDetail.ImagePath}" HeightRequest="200" WidthRequest="200" Aspect="AspectFit" Margin="0,35,0,15"></Image>
             <StackLayout Padding="15">
 
                 <BoxView BackgroundColor="Black" HeightRequest="1"></BoxView>
@@ -68,14 +68,14 @@
                         <FormattedString>
                             <Span Text="Precio: " TextColor="Black" FontAttributes="Bold"/>
                             <Span Text="$" TextColor="Black"></Span>
-                            <Span Text="{Binding ItemDetail.UnitPrice}" TextColor="Black"/>
+                            <Span Text="{Binding ItemDetail.UnitPriceString}" TextColor="Black"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
                 <BoxView BackgroundColor="Black" HeightRequest="1"></BoxView>
                 <StackLayout Padding="30">
                 <Label Text="Cantidad:" TextColor="Black" FontAttributes="Bold"  Padding="0,10,0,15" HorizontalTextAlignment="Center"></Label>
-                    <numeric:SfNumericUpDown x:Name="numericUpDown" Value="{Binding QuantitySelected}" TextAlignment="Center" ParsingMode="Decimal" FontSize="20" Maximum="{Binding ItemDetail.QuantityAvailable}" Minimum="1" MaximumDecimalDigits="0" SpinButtonAlignment="Both">
+                    <numeric:SfNumericUpDown x:Name="numericUpDown" Value="{Binding QuantitySelected}" TextAlignment="Center" ParsingMode="Decimal" FontSize="20" Maximum="{Binding ItemDetail.QuantityAvailable}" Minimum="0" MaximumDecimalDigits="0" SpinButtonAlignment="Both">
                     <numeric:SfNumericUpDown.IncrementButtonSettings>
                         <numeric:UpDownButtonSettings ButtonFontColor="#5EC8EA" ButtonHeight="80" ButtonWidth="80"/>
                     </numeric:SfNumericUpDown.IncrementButtonSettings>

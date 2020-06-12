@@ -11,7 +11,7 @@
             BarBackgroundColor="Transparent"
             android:TabbedPage.ToolbarPlacement="Bottom"
             android:TabbedPage.BarItemColor ="Black"
-            android:TabbedPage.BarSelectedItemColor="#096085">
+            android:TabbedPage.BarSelectedItemColor="#5EC8EA">
 
 
     <TabbedPage.Children>
