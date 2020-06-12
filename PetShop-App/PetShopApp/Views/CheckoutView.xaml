@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:PetShopApp.Converters"
+             mc:Ignorable="d"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="PetShopApp.Views.CheckoutView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ConverterBase64ImageSource x:Key="Base64ToImageConverter" />
+            <Style TargetType="BoxView" x:Key="LineUp">
+                <Setter Property="HeightRequest" Value="3"></Setter>
+                <Setter Property="BackgroundColor" Value="Black"></Setter>
+            </Style>
+            <Style TargetType="Label" x:Key="Titles">
+                <Setter Property="FontSize" Value="Medium"></Setter>
+                <Setter Property= "LineBreakMode" Value="WordWrap"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property= "Margin" Value ="10,5,5,5"></Setter>
+            </Style>
+            <Style TargetType="BoxView" x:Key="LineUp2">
+                <Setter Property="HeightRequest" Value="2"></Setter>
+                <Setter Property="BackgroundColor" Value="Black"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <BoxView Style="{StaticResource LineUp}"></BoxView>
+            <Label Text="Resumen de compra" TextColor="Black" FontSize="Medium" Padding="10" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" ></Label>
+            <Frame CornerRadius="0" >
+                <StackLayout Padding="0">
+                        <Label Text="Productos:" TextColor="Black" FontAttributes="Bold"></Label>
+                        <ListView x:Name="ProductsView" HeightRequest="150"
+                             ItemsSource="{Binding CheckoutItems.Products}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextCell Grid.Column="1"
+                                                   Text="{Binding Name}">
+                                    </TextCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    <Label LineBreakMode="WordWrap" FontSize="Body" HorizontalOptions="End">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Total:  $" TextColor="Black"/>
+                            <Span Text="{Binding CheckoutItems.TotalValueString}" x:Name ="labelgotoRegister" TextColor="Black"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+            </Frame>
+            <BoxView Style="{StaticResource LineUp2}"></BoxView>
+            <Frame CornerRadius="0">
+                <StackLayout Padding="20,5">
+                    <Label Text="Dirección de entrega:" TextColor="Black"  FontAttributes="Bold" ></Label>
+                    <Label Text="{Binding CheckoutItems.Address}" Padding="10,5" TextColor="Black"></Label>
+                </StackLayout>
+            </Frame>
+            <BoxView Style="{StaticResource LineUp2}"></BoxView>
+            <Frame CornerRadius="0">
+                <StackLayout Padding="20,5">
+                    <Label Text="Método de pago:" TextColor="Black"  FontAttributes="Bold"></Label>
+                    <RadioButton x:Name="clientCheck" Text="Efectivo" IsChecked="True" />
+                </StackLayout>
+            </Frame>
+            <BoxView Style="{StaticResource LineUp2}"></BoxView>
+            <StackLayout Margin="0">
+                <Button Text="Confirmar" CornerRadius="15" VerticalOptions="Center" BackgroundColor="#5EC8EA" TextColor="Black" Command="{Binding CreateOrderCommand}"></Button>
+            </StackLayout>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>

@@ -13,7 +13,6 @@ namespace PetShopApp.Models
         private int quantitySelected;
         private float unitPrice;
         private string unitPriceString;
-        private float total;
         #endregion
 
         public ShoppingCartShowModel()
@@ -57,11 +56,7 @@ namespace PetShopApp.Models
             set { quantitySelected = value; OnPropertyChanged(); }
         }
 
-        public float Total
-        {
-            get { return total; }
-            set { total = value; OnPropertyChanged(); }
-        }
+
         #endregion
     }
 }

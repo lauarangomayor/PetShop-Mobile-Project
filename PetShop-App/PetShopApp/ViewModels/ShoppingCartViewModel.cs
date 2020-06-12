@@ -4,6 +4,7 @@ using PetShopApp.Configuration;
 using PetShopApp.Helpers;
 using PetShopApp.Models;
 using PetShopApp.Services.APIRest;
+using PetShopApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,6 +26,7 @@ namespace PetShopApp.ViewModels
         private string totalString;
         #region Requests
         public RequestPicker<ShoppingCartModel> PostList { get; set; }
+        public RequestPicker<UserModel> GetUserByClient { get; set; }
         #endregion
 
         #region Getters/Setters
@@ -78,6 +80,8 @@ namespace PetShopApp.ViewModels
 
         #region Commands
         public ICommand DeleteItemFromChart { get; set; }
+
+        public ICommand GoToCheckoutCommand { get; set; }
         #endregion
 
         public ShoppingCartViewModel()
@@ -97,11 +101,16 @@ namespace PetShopApp.ViewModels
             PostList = new RequestPicker<ShoppingCartModel>();
             PostList.StrategyPicker("POST", urlGetProductsByList);
             await ListProducts();
-           
+
+            string urlGetUserByClient = EndPoints.SERVER_URL + EndPoints.GET_USER_BY_CLIENT + Settings.UId;
+            GetUserByClient = new RequestPicker<UserModel>();
+            GetUserByClient.StrategyPicker("GET", urlGetUserByClient);
+
         }
         public void InitializeCommands()
         {
             DeleteItemFromChart = new Command <ShoppingCartShowModel>(async (itemDetail) => await DeleteProductFromChart(itemDetail), (itemDetail) => true);
+            GoToCheckoutCommand = new Command(async () => await GoToCheckout(), () => true);
 
         }
         public async Task ListProducts()
@@ -159,6 +168,32 @@ namespace PetShopApp.ViewModels
             }
             TotalString = Total.ToString("N0");
 
+
+        }
+
+        public async Task GoToCheckout()
+        {
+            APIResponse response = await GetUserByClient.ExecuteStrategy(null);
+            if (response.IsSuccess)
+            {
+                UserModel User = JsonConvert.DeserializeObject<UserModel>(response.Response);
+                CheckoutModel CheckOut = new CheckoutModel();
+                CheckOut.Address = User.Address;
+                CheckOut.IdClient = Convert.ToInt64(Settings.UId);
+                CheckOut.TotalValue = Total;
+                CheckOut.TotalValueString = TotalString;
+                CheckOut.Products = new List<ShoppingCartShowModel>();
+                foreach (var item in ProductsList)
+                {
+                    CheckOut.Products.Add(item);
+                }
+                NavigationService.PushPage(new CheckoutView(), CheckOut);
+            }
+            else
+            {
+                Exception e;
+            }
+            
 
         }
         #endregion
