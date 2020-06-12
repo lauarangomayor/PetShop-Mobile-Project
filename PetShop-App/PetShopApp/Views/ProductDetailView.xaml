@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:numeric="clr-namespace:Syncfusion.SfNumericUpDown.XForms;assembly=Syncfusion.SfNumericUpDown.XForms"
+             xmlns:local="clr-namespace:PetShopApp.Converters;assembly=PetShopApp"
              mc:Ignorable="d"
              x:Class="PetShopApp.Views.ProductDetailView"
              NavigationPage.HasNavigationBar="False">
@@ -19,6 +20,7 @@
     
     <ContentPage.Resources>
         <ResourceDictionary>
+            <local:ConverterBase64ImageSource x:Key="Base64ToImageConverter" />
             <Style TargetType="BoxView" x:Key="LineUp">
                 <Setter Property="HeightRequest" Value="3"></Setter>
                 <Setter Property="BackgroundColor" Value="Black"></Setter>
@@ -44,7 +46,9 @@
         <StackLayout  BackgroundColor="White">
             <BoxView Style="{StaticResource LineUp}"></BoxView>
             <Label Text="{Binding ItemDetail.Name}"  Style="{StaticResource Titles}" ></Label>
-            <Image Source="{Binding ItemDetail.ImagePath}" HeightRequest="200" WidthRequest="200" Aspect="AspectFit" Margin="0,35,0,15"></Image>
+            <Image Source="{Binding ItemDetail.ImagePath, Converter={StaticResource Base64ToImageConverter}}" 
+                   HeightRequest="200" WidthRequest="200" 
+                   Aspect="AspectFit" Margin="0,35,0,15"></Image>
             <StackLayout Padding="15">
 
                 <BoxView BackgroundColor="Black" HeightRequest="1"></BoxView>

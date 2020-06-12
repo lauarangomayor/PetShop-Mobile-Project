@@ -12,6 +12,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using PetShopApp.AuxModels;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace PetShopApp.ViewModels
 {
@@ -24,7 +25,6 @@ namespace PetShopApp.ViewModels
         #endregion
         #region Requests
         public RequestPicker<BaseModel> GetProducts { get; set; }
-
         #endregion
 
         #region RequestPikers
