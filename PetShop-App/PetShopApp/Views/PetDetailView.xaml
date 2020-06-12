@@ -62,8 +62,12 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <ImageButton Source="EditYellow.png"  Grid.Column="0"  HeightRequest="60" HorizontalOptions="Start" BackgroundColor="White" Padding="0,0,7,0"></ImageButton>
-                    <ImageButton Source="DeleteRed.png"   Grid.Column="1"  HeightRequest="60" HorizontalOptions="End" BackgroundColor="White" Padding="7,0,0,0"></ImageButton>
+                    <ImageButton Source="EditYellow.png"  Grid.Column="0"  HeightRequest="60" HorizontalOptions="Start" 
+                                 BackgroundColor="White" Padding="0,0,7,0"
+                                 Command="{Binding GoToUpdatePetViewCommand}"></ImageButton>
+                    <ImageButton Source="DeleteRed.png"   Grid.Column="1"  HeightRequest="60" HorizontalOptions="End"
+                                 BackgroundColor="White" Padding="7,0,0,0"
+                                 Command="{Binding DeletePetCommand}"></ImageButton>
 
                 </Grid>
             </StackLayout>
@@ -79,7 +83,7 @@
                         <Button Text="Agendar cita"  Grid.Column="0"  CornerRadius="8" HorizontalOptions="Start" TextColor="White" BackgroundColor="#096085" Padding="0,0,7,0"></Button>
                         <Button Text="Próximas citas"  Grid.Column="1"   CornerRadius="8" HorizontalOptions="Start" TextColor="White" BackgroundColor="#096085" Padding="0,0,7,0"></Button>
                         <Button Text="Historial de citas"  Grid.Column="2"   CornerRadius="8" HorizontalOptions="Start" TextColor="White" BackgroundColor="#096085" Padding="0,0,7,0"></Button>
-                    </Grid>Ja
+                    </Grid>
                 </StackLayout>
             </StackLayout>
 

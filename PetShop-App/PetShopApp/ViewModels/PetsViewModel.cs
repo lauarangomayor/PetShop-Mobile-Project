@@ -16,15 +16,13 @@ using Xamarin.Forms;
 
 namespace PetShopApp.ViewModels
 {
-    public class PetViewModel:ViewModelBase
+    public class PetsViewModel:ViewModelBase
     {
 
         #region Attributes
-        private PetModel petmodel;
+        private PetModel petSelected;
         private List<PetModel> pets;
         private ObservableCollection<PetModel> petsList;
-        private PetModel petSelected;
-        private string idPet = "2";
         #endregion Attributes
 
         #region Requests
@@ -33,14 +31,15 @@ namespace PetShopApp.ViewModels
         #endregion Requests
 
         #region Commands
-        public ICommand DeletePetCommand { get; set; }
         public ICommand PetSelectedCommand { get; set; }
+        public ICommand CreatePetViewCommand { get; set; }
+
         #endregion Commands
 
         //Constructores
-        public PetViewModel()
+        public PetsViewModel()
         {
-            Petmodel = new PetModel();
+            PetSelected = new PetModel();
             Pets = new List<PetModel>();
             PetsList = new ObservableCollection<PetModel>();
             InitializeRequest();
@@ -48,12 +47,12 @@ namespace PetShopApp.ViewModels
         }
 
         #region Getters & Setters
-        public PetModel Petmodel
+        public PetModel PetSelected
         {
-            get { return petmodel; }
+            get { return petSelected; }
             set
             {
-                petmodel = value;
+                petSelected = value;
                 OnPropertyChanged();
             }
         }
@@ -66,12 +65,6 @@ namespace PetShopApp.ViewModels
                 pets = value;
                 OnPropertyChanged();
             }
-        }
-
-        public PetModel PetSelected
-        {
-            get { return petSelected; }
-            set { petSelected = value; OnPropertyChanged(); }
         }
         public ObservableCollection<PetModel> PetsList
         {
@@ -86,19 +79,13 @@ namespace PetShopApp.ViewModels
         #endregion Getters & Setters
 
         #region Initialize
-        private async Task InitializeCommands()
+        private void InitializeCommands()
         {
-            DeletePetCommand = new Command(async () => await DeletePet(), () => true);
             PetSelectedCommand = new Command(async () => await GoPetDetail(), () => true);
+            CreatePetViewCommand = new Command(async () => await GoToCreatePetView(), () => true);
         }
         private async Task InitializeRequest()
         {
-            //string urlDeletePet = EndPoints.SERVER_URL+ EndPoints.DELETE_PET;
-
-            string urlDeletePet = EndPoints.SERVER_URL + EndPoints.DELETE_PET; 
-            petDelete = new RequestPicker<PetModel>();
-            petDelete.StrategyPicker("DELETE", urlDeletePet);
-
             string urlGetPetsByClientId = EndPoints.SERVER_URL + EndPoints.GET_PETS_BY_CLIENT + Settings.UId;
             GetPetsByUser = new RequestPicker<BaseModel>();
             GetPetsByUser.StrategyPicker("GET", urlGetPetsByClientId);
@@ -129,38 +116,14 @@ namespace PetShopApp.ViewModels
             }
 
         }
-        public async Task DeletePet()
+        public async Task GoToCreatePetView()
         {
-            try
-            {
-                ParametersRequest parameters = new ParametersRequest();
-                parameters.Parameters.Add(idPet);
-                APIResponse response = await petDelete.ExecuteStrategy(null, parameters);
-                if (response.IsSuccess)
-                {
-                    await Application.Current.MainPage.DisplayAlert("Opreción exitosa", "La mascota ha sido eliminada", "OK");
-
-                }
-                else
-                {
-                    await Application.Current.MainPage.DisplayAlert("Error", "La mascota no ha sido eliminada", "OK");
-
-                }
-
-            }
-            catch (Exception e)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "Ocurrio una excepción", "OK");
-
-            }
-
+            await NavigationService.PushPage(new CreatePetView());
         }
-
         public async Task GoPetDetail()
         {
             await NavigationService.PushPage(new PetDetailView(), PetSelected);
         }
-
         #endregion Methods
     }
 }
