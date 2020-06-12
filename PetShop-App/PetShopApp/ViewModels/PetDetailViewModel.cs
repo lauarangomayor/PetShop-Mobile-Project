@@ -107,7 +107,7 @@ namespace PetShopApp.ViewModels
         }
         private async Task GoToAppointmentsRecord()
         {
-            //await NavigationService.PushPage(new AppointmentsView());
+            await NavigationService.PushPage(new AppointmentRecordView(), PetDetail);
 
         }
         public async Task GoToUpdatePetView()
