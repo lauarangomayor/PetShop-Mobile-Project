@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetShopApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,11 @@ namespace PetShopApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfileView : ContentPage
     {
+        ProfileViewModel context = new ProfileViewModel();
         public ProfileView()
         {
             InitializeComponent();
+            BindingContext = context;
         }
     }
 }
