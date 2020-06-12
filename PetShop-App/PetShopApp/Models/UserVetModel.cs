@@ -8,40 +8,29 @@ namespace PetShopApp.Models
     public class UserVetModel : UserModel
     {
         #region Properties
-        private List<AppointmentModel> appointments;
-        private List<SpecialtyModel> specialties;
+        private long idVeterinarian;
+        private long idUser;
         #endregion
 
         #region Initialize
-
-    public UserVetModel(List<SpecialtyModel> specialties)
-        {
-            if (!specialties.Any())
-            {
-                throw new System.ArgumentException("UserVetModel received an empty List<SpecialtyModel> argument");
-            }
-            this.specialties = new List<SpecialtyModel>();
-            this.specialties = specialties;
-            
-        }
         #endregion
 
         #region Getters/Setters
-        public List<AppointmentModel> Appointments
+        public long IdVeterinarian
         {
-            get { return appointments; }
+            get { return idVeterinarian; }
             set
             {
-                appointments = value;
+                idVeterinarian = value;
                 OnPropertyChanged();
             }
         }
-        public List<SpecialtyModel> Specialties
+        public long IdUser
         {
-            get { return specialties; }
+            get { return idUser; }
             set
             {
-                specialties = value;
+                idUser = value;
                 OnPropertyChanged();
             }
         }

@@ -80,7 +80,9 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <Button Text="Agendar cita"  Grid.Column="0"  CornerRadius="8" HorizontalOptions="Start" TextColor="White" BackgroundColor="#096085" Padding="0,0,7,0"></Button>
+                        <Button Text="Agendar cita"  Grid.Column="0"  CornerRadius="8" HorizontalOptions="Start" 
+                                TextColor="White" BackgroundColor="#096085" Padding="0,0,7,0"
+                                Command="{Binding CreateAppointmentCommand}"></Button>
                         <Button Text="Próximas citas"  Grid.Column="1"   CornerRadius="8" HorizontalOptions="Start" TextColor="White" BackgroundColor="#096085" Padding="0,0,7,0"></Button>
                         <Button Text="Historial de citas"  Grid.Column="2"   CornerRadius="8" HorizontalOptions="Start" TextColor="White" BackgroundColor="#096085" Padding="0,0,7,0"></Button>
                     </Grid>
