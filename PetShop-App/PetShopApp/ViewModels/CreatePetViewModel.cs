@@ -136,7 +136,7 @@ namespace PetShopApp.ViewModels
                     IdSpecie = Species[PetIndexSpecie].IdSpecie,
                     GeneralInfo = PetGeneralInfo,
                     Birthdate = PetBirthdate,
-                    IdClient = 2,
+                    IdClient = Convert.ToInt64(Settings.UId),
                     ImagePath = base64ToString
 
                 };

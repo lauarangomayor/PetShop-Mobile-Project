@@ -13,11 +13,11 @@ namespace PetShopApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PetsView : ContentPage
     {
-        PetViewModel contex = new PetViewModel();
+        PetsViewModel context = new PetsViewModel();
         public PetsView()
         {
             InitializeComponent();
-            BindingContext = contex;
+            BindingContext = context;
         ;
         }
     }
