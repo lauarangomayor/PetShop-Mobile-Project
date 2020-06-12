@@ -12,12 +12,21 @@ namespace PetShop_Api.Models
         public string Telephone{get;set;}
         public string Address{get;set;}
         public string Email{get;set;}
-        [IgnoreDataMember]
-        public string Password{get;set;}
+        private string password;
+
         public int UserType{get;set;}
         [IgnoreDataMember]
         public List <ClientModel> Clients {get;set;}
         [IgnoreDataMember]
         public List <VeterinarianModel> Veterinarians {get;set;}
+
+        public string Password  
+        {
+            get { return null; }
+            set { password = value; }
+        }
+
+           
+        
     }
 }

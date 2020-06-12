@@ -87,11 +87,11 @@ namespace PetShopApp.ViewModels
         {
             try
             {
-                if (usermodel.Password != null && usermodel.Email!=null && usermodel.Name!=null ) 
+                if (Usermodel.Password != null && Usermodel.Email!=null && Usermodel.Name!=null ) 
                 { 
 
                     Usermodel.UserType = 1;
-                    APIResponse response = await clientCreate.ExecuteStrategy(usermodel);
+                    APIResponse response = await clientCreate.ExecuteStrategy(Usermodel);
                     if (response.IsSuccess)
                     {
                         Login = JsonConvert.DeserializeObject<LoginClientModel>(response.Response);
