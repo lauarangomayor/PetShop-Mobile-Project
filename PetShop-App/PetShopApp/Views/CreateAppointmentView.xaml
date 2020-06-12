@@ -50,6 +50,17 @@
                     </StackLayout>
                 </StackLayout>
             </Frame>
+            <Frame>
+                <StackLayout>
+                    <Label Text="Los veterinarios disponibles son:"  HorizontalOptions="Start" TextColor="Black"  Padding="0,0,8,0"></Label>
+                    <Picker x:Name="vetPciker"
+                                    Title="Seleccionar"
+                                    TitleColor="Gray"
+                                    SelectedIndex="{Binding VetChoosed}"
+                                    ItemsSource="{Binding Vets}"
+                                    ItemDisplayBinding="{Binding Name}"/>
+                </StackLayout>
+            </Frame>
 
         </StackLayout>
     </ContentPage.Content>
