@@ -46,9 +46,6 @@ namespace PetShop_Api.Controllers
             }
  
         }
-
-
-
         [HttpGet("all")] //http://localhost:5000/client/all
         //Return all the user from de DB
         public async Task<ActionResult<List<ClientModel>>> GetAllClient()

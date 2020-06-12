@@ -135,7 +135,7 @@
                     </Label>
                 </Grid>
                 <StackLayout Margin="0,10,0,0">
-                    <Button Text="Ir al checkout" VerticalOptions="FillAndExpand" BackgroundColor="#5EC8EA" TextColor="Black" ></Button>
+                    <Button Text="Ir al checkout" VerticalOptions="FillAndExpand" BackgroundColor="#5EC8EA" TextColor="Black" Command="{Binding GoToCheckoutCommand}"></Button>
                 </StackLayout>
             </StackLayout>
         </StackLayout>
