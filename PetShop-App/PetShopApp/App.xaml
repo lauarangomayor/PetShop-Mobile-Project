@@ -9,7 +9,7 @@
         <Style TargetType="NavigationPage">
             <Setter Property="BarBackgroundColor" Value="White"></Setter>
             <Setter Property="BarTextColor" Value="Black"></Setter>
-            <Setter Property="Title" Value="Nombre app"></Setter>
+            <Setter Property="Title" Value="Animal.ly"></Setter>
         </Style>
     </Application.Resources>
 </Application>

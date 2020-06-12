@@ -38,24 +38,13 @@
     <ContentPage.Content>
         <StackLayout  BackgroundColor="White">
             <BoxView Style="{StaticResource LineUp}"></BoxView>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Label Text="{Binding PetDetail.Name}" Grid.Column="0" Style="{StaticResource Titles}"  ></Label>
-                <ImageButton Source="EditYellow.png"  Grid.Column="1" VerticalOptions="End" HeightRequest="40" HorizontalOptions="Center" BackgroundColor="White" Padding="0,0,7,0"></ImageButton>
-                <ImageButton Source="DeleteRed.png"   Grid.Column="1" VerticalOptions="End" HeightRequest="40" HorizontalOptions="End" BackgroundColor="White" Padding="7,0,0,0"></ImageButton>
-
-            </Grid>
+            <Label Text="{Binding PetDetail.Name}" Grid.Column="0" Style="{StaticResource Titles}"  ></Label>
             <Image Source="{Binding PetDetail.ImagePath, Converter={StaticResource Base64ToImageConverter}}" 
                    HeightRequest="200" WidthRequest="200" 
                    Aspect="AspectFit" Margin="0,35,0,15"></Image>
             <StackLayout Padding="15">
 
-                <BoxView BackgroundColor="Black" HeightRequest="1"></BoxView>
-                <Label LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand" FontSize="Body" Padding="0,10,0,20">
+                 <Label LineBreakMode="WordWrap" HorizontalOptions="StartAndExpand" FontSize="Body" Padding="0,10,0,20">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="Descripción: " TextColor="Black" FontAttributes="Bold"/>
@@ -63,11 +52,37 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
+            
+            <BoxView BackgroundColor="Black" HeightRequest="1"></BoxView>
+                <Label Text="Zona de edición:" TextColor="Black" FontAttributes="Bold" FontSize="Body" ></Label>
+            <StackLayout Margin="70,0" BackgroundColor="White" Padding="0,15">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <ImageButton Source="EditYellow.png"  Grid.Column="0"  HeightRequest="60" HorizontalOptions="Start" BackgroundColor="White" Padding="0,0,7,0"></ImageButton>
+                    <ImageButton Source="DeleteRed.png"   Grid.Column="1"  HeightRequest="60" HorizontalOptions="End" BackgroundColor="White" Padding="7,0,0,0"></ImageButton>
+
+                </Grid>
+            </StackLayout>
+                <BoxView BackgroundColor="Black" HeightRequest="1"></BoxView>
+                <Label Text="Zona de citas:" TextColor="Black" FontAttributes="Bold" FontSize="Body" ></Label>
+                <StackLayout  BackgroundColor="White" Padding="0,15">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button Text="Agendar cita"  Grid.Column="0"  CornerRadius="8" HorizontalOptions="Start" TextColor="White" BackgroundColor="#096085" Padding="0,0,7,0"></Button>
+                        <Button Text="Próximas citas"  Grid.Column="1"   CornerRadius="8" HorizontalOptions="Start" TextColor="White" BackgroundColor="#096085" Padding="0,0,7,0"></Button>
+                        <Button Text="Historial de citas"  Grid.Column="2"   CornerRadius="8" HorizontalOptions="Start" TextColor="White" BackgroundColor="#096085" Padding="0,0,7,0"></Button>
+                    </Grid>Ja
+                </StackLayout>
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal"  Padding="5" HorizontalOptions="FillAndExpand">
-                
-            </StackLayout>
         </StackLayout>
         <!-- <StackLayout HorizontalOptions="Center">
             <Label Text="{Binding PetDetail.Name}" HorizontalTextAlignment="Center"></Label>
