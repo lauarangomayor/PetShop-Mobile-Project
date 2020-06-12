@@ -36,7 +36,7 @@
 
             <Button Text=" + Agregar mascota" WidthRequest="55" HeightRequest="55" BackgroundColor="#096085" TextColor="White" FontSize="Medium"></Button>
             <StackLayout Padding="6,0,6,6">
-                <CollectionView ItemsSource="{Binding PetsList}" SelectedItem="{Binding Pet, Mode=TwoWay}" SelectionMode="Single" SelectionChangedCommand="{Binding SelectedItemTappedCommand, Mode=TwoWay}">
+                <CollectionView ItemsSource="{Binding PetsList}" SelectedItem="{Binding PetSelected, Mode=TwoWay}" SelectionMode="Single" SelectionChangedCommand="{Binding PetSelectedCommand, Mode=TwoWay}">
                     
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="6" VerticalItemSpacing="6"/>
@@ -67,10 +67,7 @@
                                                Text="{Binding Name}"
                                                FontAttributes="Bold"
                                                TextColor="Black"/>
-                                    <StackLayout Orientation="Horizontal"  Grid.Row="2" Padding="5">
-                                        <ImageButton Source="EditYellow.png"   VerticalOptions="Start" HeightRequest="60" HorizontalOptions="Center" BackgroundColor="#EDEAEA" Padding="0,0,7,0"></ImageButton>
-                                        <ImageButton Source="DeleteRed.png"   VerticalOptions="End" HeightRequest="60" HorizontalOptions="Center" BackgroundColor="#EDEAEA" Padding="7,0,0,0"></ImageButton>
-                                    </StackLayout>
+                                    
                                 </Grid>
                             </Frame>
                             

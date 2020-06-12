@@ -5,6 +5,7 @@ using PetShopApp.Helpers;
 using PetShopApp.Models;
 using PetShopApp.Services.APIRest;
 using PetShopApp.Services.Navigation;
+using PetShopApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,6 +23,7 @@ namespace PetShopApp.ViewModels
         private PetModel petmodel;
         private List<PetModel> pets;
         private ObservableCollection<PetModel> petsList;
+        private PetModel petSelected;
         private string idPet = "2";
         #endregion Attributes
 
@@ -65,6 +67,12 @@ namespace PetShopApp.ViewModels
                 OnPropertyChanged();
             }
         }
+
+        public PetModel PetSelected
+        {
+            get { return petSelected; }
+            set { petSelected = value; OnPropertyChanged(); }
+        }
         public ObservableCollection<PetModel> PetsList
         {
             get { return petsList; }
@@ -80,8 +88,8 @@ namespace PetShopApp.ViewModels
         #region Initialize
         private async Task InitializeCommands()
         {
-            DeletePetCommand = new Command(async () => await DeletePet());
-            PetSelectedCommand = new Command(async () => await GoPetDetail());
+            DeletePetCommand = new Command(async () => await DeletePet(), () => true);
+            PetSelectedCommand = new Command(async () => await GoPetDetail(), () => true);
         }
         private async Task InitializeRequest()
         {
@@ -150,7 +158,7 @@ namespace PetShopApp.ViewModels
 
         public async Task GoPetDetail()
         {
-
+            await NavigationService.PushPage(new PetDetailView(), PetSelected);
         }
 
         #endregion Methods

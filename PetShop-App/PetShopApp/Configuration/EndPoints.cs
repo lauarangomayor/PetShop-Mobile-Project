@@ -10,6 +10,7 @@ namespace PetShopApp.Configuration
         public static readonly string SERVER_URL = "https://3.20.51.47:5001/";
         public static readonly string GET_ALL_CATEGORIES = "Category/all";
         public static readonly string CREATE_CATEGORY = "Category/create";
+        public static readonly string CREATE_ORDER = "Order/create";
         public static readonly string GET_ALL_STATESPRODUCT = "StatesProduct/all";
         public static readonly string CREATE_PRODUCT = "Product/create";
         public static readonly string GET_ALL_PRODUCTS = "Product/all";
@@ -25,6 +26,7 @@ namespace PetShopApp.Configuration
         public static readonly string UPDATE_PRODUCT = "Product/update/";
         public static readonly string UPDATE_PET = "Pet/update/";
         public static readonly string GET_PETS_BY_CLIENT = "Pet/getPetsByClientId/";
+        public static readonly string GET_USER_BY_CLIENT = "User/getUserByIdClient/";
 
 
 
