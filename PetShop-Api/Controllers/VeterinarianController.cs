@@ -36,6 +36,39 @@ namespace PetShop_Api.Controllers{
                 return StatusCode(410);
             }
         }
+        [HttpGet("getVeterinariansAvailables/{day}&{hour}")]
+        public async Task<ActionResult<ProductModel>> GetVeterinariansAvailables(string day,string hour)
+        {
+            try {
+                string date = day + " " + hour;
+                DateTime startAppointment = DateTime.ParseExact(date,"MM-dd-y H:mm",null);
+                var BusyVets = await dBContext.Appointments
+                                                .Where(a => startAppointment<a.Date.AddHours(1) &&
+                                                            startAppointment>a.Date.AddHours(-1))
+                                                .Join(dBContext.Veterinarians,
+                                                      aV => aV.IdVeterinarian,
+                                                      v => v.IdVeterinarian,
+                                                      (aV, v) => new {v.IdVeterinarian}
+                                                     ).ToListAsync();
+                List<long> idBusyVets = new List<long>();
+                foreach(var v in BusyVets) idBusyVets.Add(v.IdVeterinarian);
+                Console.WriteLine(idBusyVets.ToString());
+                var veterinarians = await dBContext.Veterinarians.Include(v => v.User).ToListAsync();
+                List<VeterinarianModel> vetsAvailables = new List<VeterinarianModel>();
+                foreach(VeterinarianModel vet in veterinarians){
+                    if(!idBusyVets.Contains(vet.IdVeterinarian)){
+                        vetsAvailables.Add(vet);    
+                    }
+                }
+                if (vetsAvailables == null){
+                    return NotFound();
+                }
+                return Ok(vetsAvailables);
+            }
+            catch (Exception e){
+                return StatusCode(410);
+            }
+        }
         [HttpGet("getVeterinariansBySpecialtyId/{id}")]
         public async Task<ActionResult<List<VeterinarianModel>>> GetVeterinariansBySpecialtyId(long id){
           try{
