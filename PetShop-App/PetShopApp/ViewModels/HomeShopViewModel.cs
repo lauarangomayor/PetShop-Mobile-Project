@@ -25,8 +25,6 @@ namespace PetShopApp.ViewModels
         #endregion
         #region Requests
         public RequestPicker<BaseModel> GetProducts { get; set; }
-        private string imageBase64;
-        private Xamarin.Forms.ImageSource image;
         #endregion
 
         #region RequestPikers
@@ -40,27 +38,6 @@ namespace PetShopApp.ViewModels
         #endregion
 
         #region Getters/Setters
-        public Xamarin.Forms.ImageSource Image
-        {
-            get { return image; }
-            set
-            {
-                image = value;
-                OnPropertyChanged("Image");
-            }
-        }
-        public string ImageBase64
-        {
-            get { return imageBase64; }
-            set
-            {
-                imageBase64 = value;
-                OnPropertyChanged("ImageBase64");
-
-                Image = Xamarin.Forms.ImageSource.FromStream(
-                    () => new MemoryStream(Convert.FromBase64String(imageBase64)));
-            }
-        }
         public ObservableCollection<ProductModel> ProductsList
         {
             get { return productsList; }
@@ -128,10 +105,6 @@ namespace PetShopApp.ViewModels
                 {
                     p.UnitPriceString = p.UnitPrice.ToString("N0");
                     ProductsList.Add(p);
-                    //ImageBase64 = p.ImagePath;
-                    //p.ImagePath = ImageBase64;
-                    //var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(p.ImagePath);
-                    //p.ImagePath = System.Convert.ToBase64String(plainTextBytes);
                 }
 
             }
