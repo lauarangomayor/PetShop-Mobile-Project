@@ -96,7 +96,7 @@ namespace PetShopApp.ViewModels
                     {
                         Login = JsonConvert.DeserializeObject<LoginClientModel>(response.Response);
                         Settings.UId = Login.IdClient.ToString();
-                        Settings.UEmail = Login.Email;
+                        Settings.UEmail = Login.Email.ToString(); 
                         await Application.Current.MainPage.DisplayAlert("Guardado", "Se registro satisfactoriamente", "OK");
 
                         Usermodel.DocumentId = null; //Limpiar campos
