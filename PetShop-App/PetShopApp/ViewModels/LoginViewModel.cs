@@ -125,6 +125,8 @@ namespace PetShopApp.ViewModels
                     LoginClient = JsonConvert.DeserializeObject<LoginClientModel>(response.Response);
                     Settings.UId = LoginClient.IdClient.ToString();
                     Settings.UEmail = LoginClient.Email;
+                    NavigationService.PopPage();
+                    NavigationService.PushPage(new PetsTabbedPageView());
                     
                 }
                 else
@@ -132,6 +134,7 @@ namespace PetShopApp.ViewModels
                     LoginVet = JsonConvert.DeserializeObject<LoginVetModel>(response.Response);
                     Settings.UId = LoginVet.IdVeterinarian.ToString();
                     Settings.UEmail = LoginVet.Email;
+                    await Application.Current.MainPage.DisplayAlert("Alert", "Sección de Veterinarios en Construcción", "OK");
                 }
                 
                

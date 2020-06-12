@@ -31,7 +31,7 @@ namespace PetShopApp.ViewModels
             }
             else
             {
-                await NavigationService.PushPage(new PetShopTabbedPage());
+                await NavigationService.PushPage(new PetsTabbedPageView());
             }
         }
 

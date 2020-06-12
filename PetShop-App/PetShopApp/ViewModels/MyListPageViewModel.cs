@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -56,7 +57,7 @@ namespace PetShopApp.ViewModels
         public ICommand DeleteCommand => new Command<MyListModel>(RemoveMonkey);
         public ICommand FavoriteCommand => new Command<MyListModel>(FavoriteMonkey);
         public ICommand FilterCommand => new Command<string>(FilterItems);
-        public ICommand MonkeySelectionChangedCommand => new Command(MonkeySelectionChanged);
+        public ICommand OnItemTapped { set; get; }
 
         public MyListPageViewModel()
         {
@@ -70,6 +71,8 @@ namespace PetShopApp.ViewModels
             {
                 Monkeys[1], Monkeys[3], Monkeys[4]
             };
+
+            OnItemTapped = new  Command<MyListModel>(async (itemSelecetd) => await GoItemDetail(itemSelecetd), (itemSelecetd) => true);
         }
 
         void CreateMonkeyCollection()
@@ -231,7 +234,10 @@ namespace PetShopApp.ViewModels
                 }
             }
         }
-
+        public async Task GoItemDetail(MyListModel itemSelecetd)
+        {
+            await Application.Current.MainPage.DisplayAlert("Error", "El item es" + itemSelecetd.Name, "OK");
+        }
         void MonkeySelectionChanged()
         {
             SelectedMonkeyMessage = $"Selection {selectionCount}: {SelectedMonkey.Name}";
@@ -251,6 +257,8 @@ namespace PetShopApp.ViewModels
         {
             monkey.IsFavorite = !monkey.IsFavorite;
         }
+
+
 
     }
 }

@@ -40,8 +40,8 @@ namespace PetShopApp
 
         protected override void OnStart()
         {
-            Settings.UEmail = "";
-            Settings.UId = "";
+            /*Settings.UEmail = "";
+            Settings.UId = "";*/
 
             //Settings.listProductsCart = string.Empty;
             
