@@ -22,6 +22,7 @@ namespace PetShopApp.ViewModels
         private List<UserVetToShowModel> veterinarians;
         private ObservableCollection<UserVetToShowModel> vetsList;
         private PetModel petSelected;
+        public int SelectedVetIndex { get; set; }
 
         #endregion
 
@@ -135,7 +136,7 @@ namespace PetShopApp.ViewModels
                     Date = SelectedDate,
                     Description = "",
                     IdPet = PetSelected.IdPet,
-                    IdVeterinarian = 1,
+                    IdVeterinarian = VetsList[SelectedVetIndex].IdVeterinarian,
 
                 };
                 APIResponse response = await PostAppointment.ExecuteStrategy(appointment);

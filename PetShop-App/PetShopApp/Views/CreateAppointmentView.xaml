@@ -56,10 +56,11 @@
                 <StackLayout>
                     <Label Text="Los veterinarios disponibles son:"  HorizontalOptions="Start" TextColor="Black"  Padding="0,0,8,0"></Label>
                     <Picker x:Name="vetPciker"
-                                    Title="Seleccionar Veterinario"
-                                    TitleColor="Black"
-                                    ItemsSource="{Binding VetsList}"
-                                    ItemDisplayBinding="{Binding User.Name}"/>
+                            Title="Seleccionar Veterinario"
+                            TitleColor="Black"
+                            SelectedIndex="{Binding SelectedVetIndex}"
+                            ItemsSource="{Binding VetsList}"
+                            ItemDisplayBinding="{Binding User.Name}"/>
                     
                     <Button Text="Crear" Style="{StaticResource ButtonStyle}" Margin="40"
                                 Command="{Binding CreateAppointmentCommand}"/>
