@@ -104,8 +104,9 @@ namespace PetShop_Api.Controllers
                 var dic = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonString);
                 Console.WriteLine(dic["TotalValue"]);
                 OrderModel newOrder = Parsing(dic);
-                var idNewOrder = newOrder.IdOrder;
                 dBContext.Orders.Add(newOrder);
+                await dBContext.SaveChangesAsync();
+                var idNewOrder = newOrder.IdOrder;
                 var listDic = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(dic["Products"].ToString());
                 foreach (Dictionary<string,string> d in listDic){
                     Order_ProductsModel newOrder_Product = new Order_ProductsModel();
