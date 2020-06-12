@@ -17,9 +17,16 @@ namespace PetShopApp.ViewModels
     {
         #region Properties
         private string selectedDate;
+        private List<UserVetToShowModel> vetsU;
         private string selectedHour;
-        private List<UserVetModel> veterinarians;
-        private ObservableCollection<UserVetModel> vetsList;
+        private List<UserVetToShowModel> veterinarians;
+        private ObservableCollection<UserVetToShowModel> vetsList;
+        private PetModel petSelected;
+
+        #endregion
+
+        #region Requests
+        public RequestPicker<AppointmentModel> PostAppointment { get; set; }
         #endregion
         #region Getters/Setters
         public string SelectedDate
@@ -27,24 +34,39 @@ namespace PetShopApp.ViewModels
             get { return selectedDate; }
             set { selectedDate = value; OnPropertyChanged(); }
         }
+        public List<UserVetToShowModel> VetsU
+        {
+            get { return vetsU; }
+            set { vetsU = value; OnPropertyChanged(); }
+        }
         public string SelectedHour
         {
             get { return selectedHour; }
             set { selectedHour = value; OnPropertyChanged(); }
         }
-        public List<UserVetModel> Veterinarians
+        public List<UserVetToShowModel> Veterinarians
         {
             get { return veterinarians; }
             set { veterinarians = value; OnPropertyChanged(); }
         }
-        public ObservableCollection<UserVetModel> VetsList
+        public ObservableCollection<UserVetToShowModel> VetsList
         {
             get { return vetsList; }
             set { vetsList = value; OnPropertyChanged(); }
         }
+
+        public PetModel PetSelected
+        {
+            get { return petSelected; }
+            set { petSelected = value; OnPropertyChanged(); }
+        }
+
+
         #endregion
         #region Commands
         public ICommand SearchVetsCommand { get; set; }
+
+        public ICommand CreateAppointmentCommand { get; set; }
         #endregion
         #region Requests
         public RequestPicker<BaseModel> Getvets { get; set; }
@@ -52,13 +74,29 @@ namespace PetShopApp.ViewModels
         #region Initialization
         public CreateAppointmentViewModel()
         {
+            VetsList = new ObservableCollection<UserVetToShowModel>();
+            Veterinarians = new List<UserVetToShowModel>();
+            InitizalizeRequest();
             InitializeCommands();
+        }
+        public override async Task ConstructorAsync(object parameters)
+        {
+            var petSelected = parameters as PetModel;
+            PetSelected = petSelected;
         }
         #endregion
         #region Methods
+        public async void InitizalizeRequest()
+        {
+
+            string urlPostAppointment = EndPoints.SERVER_URL + EndPoints.CREATE_APPOINTMENT;
+            PostAppointment = new RequestPicker<AppointmentModel>();
+            PostAppointment.StrategyPicker("POST", urlPostAppointment);
+        }
         public void InitializeCommands()
         {
             SearchVetsCommand = new Command(async () => await SearchVets(), () => true);
+            CreateAppointmentCommand = new Command(async () => await CreateApointment(), () => true);
         }
 
         public async Task SearchVets()
@@ -74,7 +112,7 @@ namespace PetShopApp.ViewModels
             {
                 var jsonSerializerSettings = new JsonSerializerSettings();
                 jsonSerializerSettings.MissingMemberHandling = MissingMemberHandling.Ignore;
-                Veterinarians = JsonConvert.DeserializeObject<List<UserVetModel>>(response.Response, jsonSerializerSettings);
+                Veterinarians = JsonConvert.DeserializeObject<List<UserVetToShowModel>>(response.Response, jsonSerializerSettings);
                 foreach (var v in Veterinarians)
                 {
                     VetsList.Add(v);
@@ -86,6 +124,30 @@ namespace PetShopApp.ViewModels
                 Exception e;
             }
 
+        }
+        public async Task CreateApointment()
+        {
+            try
+            {
+                
+                AppointmentModel appointment = new AppointmentModel ()
+                {
+                    Date = SelectedDate,
+                    Description = "",
+                    IdPet = PetSelected.IdPet,
+                    IdVeterinarian = 1,
+
+                };
+                APIResponse response = await PostAppointment.ExecuteStrategy(appointment);
+                if (response.IsSuccess)
+                {
+                    await NavigationService.PopPage();
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
         #endregion

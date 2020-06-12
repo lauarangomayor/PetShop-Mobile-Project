@@ -25,17 +25,17 @@
             <Style TargetType="Button" x:Key="ButtonStyle">
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"></Setter>
 
-                <Setter Property="BackgroundColor" Value="#5EC8EA"></Setter>
-                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="BackgroundColor" Value="#096085"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout  BackgroundColor="White" Padding="0">
+        <StackLayout  BackgroundColor="White" Padding="0,15,0,0">
             <BoxView Style="{StaticResource LineUp}"></BoxView>
             <Label Text="Por favor escriba el día y hora que desea para la cita de su mascota" TextColor="Black" FontSize="Subtitle" HorizontalTextAlignment="Center"></Label>
-            <Frame CornerRadius="0" HeightRequest="240" Padding="0">
-                <StackLayout Padding="0" BackgroundColor="LightGray">
+            <Frame CornerRadius="0" Padding="0">
+                <StackLayout Padding="0" >
                     
                     <StackLayout Padding="13">
                         <Label Text="Día (formato MM-dd-YY):"  HorizontalOptions="Start" TextColor="Black"  Padding="0,0,7,0"></Label>
@@ -46,20 +46,23 @@
                         <Entry Text="{Binding SelectedHour}"    TextColor="Black"  ></Entry>
                     </StackLayout>
                     <StackLayout>
-                        <Button Text="Buscar" BackgroundColor="#096085"  TextColor="White"
+                        <Button Text="Buscar" BackgroundColor="#096085"  TextColor="White" Margin="60"
                                 Command="{Binding SearchVetsCommand}"></Button>
                     </StackLayout>
                 </StackLayout>
             </Frame>
+            <BoxView Style="{StaticResource LineUp}"></BoxView>
             <Frame>
                 <StackLayout>
                     <Label Text="Los veterinarios disponibles son:"  HorizontalOptions="Start" TextColor="Black"  Padding="0,0,8,0"></Label>
                     <Picker x:Name="vetPciker"
-                                    Title="Seleccionar"
-                                    TitleColor="Gray"
-                                    SelectedIndex="{Binding VetChoosed}"
-                                    ItemsSource="{Binding Vets}"
-                                    ItemDisplayBinding="{Binding Name}"/>
+                                    Title="Seleccionar Veterinario"
+                                    TitleColor="Black"
+                                    ItemsSource="{Binding VetsList}"
+                                    ItemDisplayBinding="{Binding User.Name}"/>
+                    
+                    <Button Text="Crear" Style="{StaticResource ButtonStyle}" Margin="40"
+                                Command="{Binding CreateAppointmentCommand}"/>
                 </StackLayout>
             </Frame>
 

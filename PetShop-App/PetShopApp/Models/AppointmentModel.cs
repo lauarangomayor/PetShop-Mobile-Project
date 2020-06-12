@@ -13,19 +13,20 @@ namespace PetShopApp.Models
 
         private string date;
         public string Description { get; set; }
+        public long idPet;
 
-        private UserVetModel vet;
-        public PetModel Pacient { get; set; }
+        public long idVeterinarian;
+
         #endregion
 
         #region Initialize
-        public AppointmentModel(UserVetModel vet)
+        public AppointmentModel()
         {
-            if (vet == null)
+            /*if (vet == null)
             {
                 throw new System.ArgumentException("AppointmentModel received a null vet argument");
             }
-            this.vet = vet;
+            this.vet = vet;*/
         }
         #endregion
 
@@ -35,10 +36,15 @@ namespace PetShopApp.Models
             get { return date; }
             set { date = value; OnPropertyChanged(); }
         }
-        public UserVetModel Vet
+        public long IdPet
         {
-            get { return vet; }
-            set { vet = value; OnPropertyChanged(); }
+            get { return idPet; }
+            set { idPet = value; OnPropertyChanged(); }
+        }
+        public long IdVeterinarian
+        {
+            get { return idVeterinarian; }
+            set { idVeterinarian = value; OnPropertyChanged(); }
         }
         #endregion
     }
