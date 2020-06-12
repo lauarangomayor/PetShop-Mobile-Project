@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="False"
-             x:Class="PetShopApp.Views.CreatePetView">
+             x:Class="PetShopApp.Views.UpdateProductView">
     <ContentPage.Resources>
         <ResourceDictionary>
             <!--Estilos de la pagina-->
@@ -48,33 +48,40 @@
             <StackLayout HorizontalOptions="FillAndExpand" Padding="20,20" VerticalOptions="Center">
                 <Frame Padding="0" Margin="0">
                     <StackLayout BackgroundColor="White" Padding="0" Margin="0">
-                        <Label Text="Creación Mascota" Style="{StaticResource Title}"></Label>
+                        <Label Text="Modificar Producto" Style="{StaticResource Title}"></Label>
                         <BoxView Style="{StaticResource LineUp}"></BoxView>
                     </StackLayout>
                 </Frame>
                 <StackLayout HorizontalOptions="FillAndExpand" Padding="20,20" VerticalOptions="Center">
                     <Label Text="Nombre:" Style="{StaticResource FormLabel}"/>
-                    <Entry Text="{Binding PetName}"/>
-                    <Label Text="Especie:" Style="{StaticResource FormLabel}"/>
-                    <Picker x:Name="speciePicker"
-                                Title="Seleccionar"
-                                TitleColor="Gray"
-                                SelectedIndex="{Binding PetIndexSpecie}"
-                                ItemsSource="{Binding Species}"
-                                ItemDisplayBinding="{Binding Specie}"/>
-                    <Label Text="Fecha de nacimiento:" Style="{StaticResource FormLabel}"/>
-                    <DatePicker MinimumDate="01/01/2000"
-                                MaximumDate="12/31/2020"
-                                Date="{Binding PetBirthdate}"/>
-                    <Label Text="Información general:" Style="{StaticResource FormLabel}"/>
-                    <Editor Text="{Binding PetGeneralInfo}" AutoSize="TextChanges"/>
+                    <Entry Text="{Binding Product.Name}"/>
+                    <Label Text="Descripción:" Style="{StaticResource FormLabel}"/>
+                    <Editor Text="{Binding Product.Description}" AutoSize="TextChanges"/>
+                    <Label Text="Categoría:" Style="{StaticResource FormLabel}"/>
+                    <Picker x:Name="categoryPicker"
+                            TitleColor="Gray"
+                            ItemsSource="{Binding Categories}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedIndex="{Binding ProductIndexCategory}"/>
+                    <Label Text="Cantidad:" Style="{StaticResource FormLabel}"/>
+                    <Entry Keyboard="Numeric" Text="{Binding Product.QuantityAvailable}"/>
+                    <Label Text="Precio:" Style="{StaticResource FormLabel}"/>
+                    <Entry Keyboard="Numeric" Text ="{Binding Product.UnitPrice }"/>
+                    <Label Text="Estado de venta:" Style="{StaticResource FormLabel}"/>
+                    <Picker x:Name="productStatePicker" HorizontalOptions="FillAndExpand"
+                            Title="Seleccionar"
+                            SelectedIndex="{Binding ProductIndexStateProduct}"
+                            TitleColor="Gray"
+                            ItemsSource="{Binding StateProducts}"
+                            ItemDisplayBinding="{Binding Description}"/>
                     <Label Text="Imagen:" Style="{StaticResource FormLabel}"/>
                     <Button Text="Agregar" Command="{Binding UploadImageCommand}" 
                             Style="{StaticResource AuxButtonStyle}"></Button>
-                    <Image Source="{Binding Image}" HorizontalOptions="CenterAndExpand"
+                    <Image Source="{Binding Image}" 
+                           HorizontalOptions="CenterAndExpand"
                            Margin="40"></Image>
-                    <Button Text="Crear" Style="{StaticResource ButtonStyle}" Margin="60"
-                                Command="{Binding CreatePetCommand}"/>
+                    <Button Text="Actualizar" Style="{StaticResource ButtonStyle}" Margin="60"
+                                Command="{Binding UpdateProductCommand}"/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>
