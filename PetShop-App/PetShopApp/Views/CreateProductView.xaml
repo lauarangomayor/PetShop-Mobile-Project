@@ -67,7 +67,7 @@
                     <Label Text="Cantidad:" Style="{StaticResource FormLabel}"/>
                     <Entry Keyboard="Numeric" Text="{Binding ProductQuantityAvailable}"/>
                     <Label Text="Precio:" Style="{StaticResource FormLabel}"/>
-                    <Entry Text ="{Binding ProductUnitPrice }"/>
+                    <Entry Keyboard="Numeric" Text ="{Binding ProductUnitPrice }"/>
                     <Label Text="Estado de venta:" Style="{StaticResource FormLabel}"/>
                     <Picker x:Name="productStatePicker" HorizontalOptions="FillAndExpand"
                                 Title="Seleccionar"

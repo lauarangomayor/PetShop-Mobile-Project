@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              NavigationPage.HasNavigationBar="False"
-             x:Class="PetShopApp.Views.CreatePetView">
+             x:Class="PetShopApp.Views.UpdatePetView">
     <ContentPage.Resources>
         <ResourceDictionary>
             <!--Estilos de la pagina-->
@@ -48,13 +48,13 @@
             <StackLayout HorizontalOptions="FillAndExpand" Padding="20,20" VerticalOptions="Center">
                 <Frame Padding="0" Margin="0">
                     <StackLayout BackgroundColor="White" Padding="0" Margin="0">
-                        <Label Text="Creación Mascota" Style="{StaticResource Title}"></Label>
+                        <Label Text="Modificación Mascota" Style="{StaticResource Title}"></Label>
                         <BoxView Style="{StaticResource LineUp}"></BoxView>
                     </StackLayout>
                 </Frame>
                 <StackLayout HorizontalOptions="FillAndExpand" Padding="20,20" VerticalOptions="Center">
                     <Label Text="Nombre:" Style="{StaticResource FormLabel}"/>
-                    <Entry Text="{Binding PetName}"/>
+                    <Entry Text="{Binding Pet.Name}"/>
                     <Label Text="Especie:" Style="{StaticResource FormLabel}"/>
                     <Picker x:Name="speciePicker"
                                 Title="Seleccionar"
@@ -62,19 +62,20 @@
                                 SelectedIndex="{Binding PetIndexSpecie}"
                                 ItemsSource="{Binding Species}"
                                 ItemDisplayBinding="{Binding Specie}"/>
-                    <Label Text="Fecha de nacimiento:" Style="{StaticResource FormLabel}"/>
+                    <!--<Label Text="Fecha de nacimiento:" Style="{StaticResource FormLabel}"/>
                     <DatePicker MinimumDate="01/01/2000"
-                                MaximumDate="12/31/2020"
-                                Date="{Binding PetBirthdate}"/>
+                                MaximumDate="12/31/2019"
+                                Date="{Binding Pet.Birthdate}"/>-->
                     <Label Text="Información general:" Style="{StaticResource FormLabel}"/>
-                    <Editor Text="{Binding PetGeneralInfo}" AutoSize="TextChanges"/>
+                    <Editor Text="{Binding Pet.GeneralInfo}" AutoSize="TextChanges"/>
                     <Label Text="Imagen:" Style="{StaticResource FormLabel}"/>
                     <Button Text="Agregar" Command="{Binding UploadImageCommand}" 
                             Style="{StaticResource AuxButtonStyle}"></Button>
-                    <Image Source="{Binding Image}" HorizontalOptions="CenterAndExpand"
+                    <Image Source="{Binding Image}" 
+                           HorizontalOptions="CenterAndExpand"
                            Margin="40"></Image>
-                    <Button Text="Crear" Style="{StaticResource ButtonStyle}" Margin="60"
-                                Command="{Binding CreatePetCommand}"/>
+                    <Button Text="Actualizar" Style="{StaticResource ButtonStyle}" Margin="60"
+                                Command="{Binding UpdatePetCommand}"/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>
