@@ -96,7 +96,9 @@ namespace PetShopApp.ViewModels
             //await Settings.ShoppingCartUser.AddItemToCart(PetDetail);
             //Settings.ShoppingCartUser.ShowItemsFromCart();
 
-            NavigationService.PushPage(new CreateAppointmentView());
+
+            await NavigationService.PushPage(new CreateAppointmentView());
+
         }
         private async Task GoToAppointments()
         {

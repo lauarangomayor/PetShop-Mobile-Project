@@ -39,14 +39,15 @@
                     
                     <StackLayout Padding="13">
                         <Label Text="Día (formato MM-dd-YY):"  HorizontalOptions="Start" TextColor="Black"  Padding="0,0,7,0"></Label>
-                        <DatePicker MinimumDate="01/01/2018"
-                            MaximumDate="12/31/2018"
+                        <DatePicker MinimumDate="01/01/2000"
+                            MaximumDate="12/31/2020"
                             Date="{Binding SelectedDate}" />
                         <Label Text="Hora (formato H:mm):"  HorizontalOptions="Start" TextColor="Black"  Padding="0,0,8,0"></Label>
                         <Entry Text="{Binding SelectedHour}"    TextColor="Black"  ></Entry>
                     </StackLayout>
                     <StackLayout>
-                        <Button Text="Buscar" BackgroundColor="#096085"  TextColor="White"></Button>
+                        <Button Text="Buscar" BackgroundColor="#096085"  TextColor="White"
+                                Command="{Binding SearchVetsCommand}"></Button>
                     </StackLayout>
                 </StackLayout>
             </Frame>

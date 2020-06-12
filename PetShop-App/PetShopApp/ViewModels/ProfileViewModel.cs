@@ -24,9 +24,9 @@ namespace PetShopApp.ViewModels
         private UserModel userClient;
         #endregion
         #region Requests
-        public RequestPicker<BaseModel> GetOrders { get; set; }
+        public RequestPicker<OrderModel> GetOrders { get; set; }
 
-        public RequestPicker<BaseModel> GetUserClient { get; set; }
+        public RequestPicker<UserModel> GetUserClient { get; set; }
         #endregion
         #region Commands
 
@@ -63,12 +63,12 @@ namespace PetShopApp.ViewModels
         public async void InitizalizeRequest()
         {
             string urlGetOrders = EndPoints.SERVER_URL + EndPoints.GET_ORDERS_BY_CLIENT + Settings.UId;
-            GetOrders = new RequestPicker<BaseModel>();
+            GetOrders = new RequestPicker<OrderModel>();
             GetOrders.StrategyPicker("GET", urlGetOrders);
             await ListOrders();
 
             string urlGetClient = EndPoints.SERVER_URL + EndPoints.GET_USER_BY_CLIENT + Settings.UId;
-            GetUserClient = new RequestPicker<BaseModel>();
+            GetUserClient = new RequestPicker<UserModel>();
             GetUserClient.StrategyPicker("GET", urlGetClient);
             await UserClientGet();
         }
