@@ -47,6 +47,27 @@ namespace PetShop_Api.Controllers
  
         }
 
+        [HttpGet("getUserByIdClient/{id}")] //http:localhost:5000/user/get/{id}
+        public async Task<ActionResult<UserModel>> GetUserByIdClient(long id)
+        {
+            try
+            {
+                var client = await dBContext.Clients                                                  
+                                            .Include(u => u.User)
+                                            .FirstAsync(v => v.IdClient == id);
+                if (client == null)
+                {
+                    return NotFound(); //Return code 404
+                }
+                return Ok(client.User); //Return code 200
+            }
+            catch(Exception e)
+            {
+                return StatusCode(410);//BD Error code
+            }
+ 
+        }
+
 
 
         [HttpGet("all")] //http://localhost:5000/client/all
