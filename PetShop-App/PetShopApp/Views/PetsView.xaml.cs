@@ -11,13 +11,14 @@ using Xamarin.Forms.Xaml;
 namespace PetShopApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ShopTabbedPageView : TabbedPage
+    public partial class PetsView : ContentPage
     {
-        TabbedPageViewModel context = new TabbedPageViewModel();
-        public ShopTabbedPageView()
+        PetViewModel contex = new PetViewModel();
+        public PetsView()
         {
             InitializeComponent();
-            BindingContext = context;
+            BindingContext = contex;
+        ;
         }
     }
 }

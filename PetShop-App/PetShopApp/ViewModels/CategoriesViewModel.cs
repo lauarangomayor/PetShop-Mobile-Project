@@ -83,7 +83,13 @@ namespace PetShopApp.ViewModels
         }
         public async Task GoToProductByCategory()
         {
+            /*CategoryModel ItemSelected = new CategoryModel();
+            ItemSelected.IdCategory = SelectedCategory.IdCategory;
+            ItemSelected.Name = SelectedCategory.Name;
+            SelectedCategory = null;
+            var i = 0;*/
             await NavigationService.PushPage(new ProductsByCategoryView(), SelectedCategory);
+            
         }
         #endregion
 

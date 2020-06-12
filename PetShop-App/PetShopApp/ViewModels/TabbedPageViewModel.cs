@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PetShopApp.ViewModels
 {
-    public class ShopTabbedPageViewModel : ViewModelBase
+    public class TabbedPageViewModel : ViewModelBase
     {
     }
 }

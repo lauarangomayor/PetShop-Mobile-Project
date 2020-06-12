@@ -10,8 +10,10 @@ namespace PetShopApp.Models
     public class AppointmentModel : BaseModel
     {
         #region Properties
+
         private string date;
         public string Description { get; set; }
+
         private UserVetModel vet;
         public PetModel Pacient { get; set; }
         #endregion
@@ -40,4 +42,5 @@ namespace PetShopApp.Models
         }
         #endregion
     }
+
 }

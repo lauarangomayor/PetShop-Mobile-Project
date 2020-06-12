@@ -24,6 +24,7 @@ namespace PetShopApp.Configuration
         public static readonly string GET_ALL_SPECIES = "Specie/all";
         public static readonly string UPDATE_PRODUCT = "Product/update/";
         public static readonly string UPDATE_PET = "Pet/update/";
+        public static readonly string GET_PETS_BY_CLIENT = "Pet/getPetsByClientId/";
 
 
 

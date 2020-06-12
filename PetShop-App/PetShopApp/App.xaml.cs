@@ -18,7 +18,7 @@ namespace PetShopApp
         {
             //Register Syncfusion license
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjY5Mzk4QDMxMzgyZTMxMmUzMG1MN3U3NURvdEVZU00yaCt3U2N4dHFRQVBjc0I1S1lqdjVMNnkyVUtRTkU9");
-            
+            Device.SetFlags(new string[] { "SwipeView_Experimental", "RadioButton_Experimental" });
             InitializeComponent();
             //MainPage = new NavigationPage(new ShopTabbedPage());
             MainPage = new NavigationPage(new StartPageView());
@@ -40,8 +40,8 @@ namespace PetShopApp
 
         protected override void OnStart()
         {
-            /*Settings.UEmail = "";
-            Settings.UId = "";*/
+            Settings.UEmail = "";
+            Settings.UId = "";
 
             //Settings.listProductsCart = string.Empty;
             
