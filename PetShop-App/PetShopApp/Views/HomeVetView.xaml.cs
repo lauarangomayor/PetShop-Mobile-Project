@@ -1,5 +1,4 @@
-﻿using PetShopApp.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,13 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace PetShopApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ShopTabbedPageView : TabbedPage
+    public partial class HomeVetView : ContentPage
     {
-        TabbedPageViewModel context = new TabbedPageViewModel();
-        public ShopTabbedPageView()
+        public HomeVetView()
         {
             InitializeComponent();
-            BindingContext = context;
         }
     }
 }

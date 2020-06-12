@@ -1,4 +1,5 @@
-﻿using PetShopApp.Views;
+﻿using PetShopApp.Helpers;
+using PetShopApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,7 +25,14 @@ namespace PetShopApp.ViewModels
         #region Methods
         private async Task VetLogin()
         {
-            await NavigationService.PushPage(new LoginView());
+            if (Settings.UEmail == "")
+            {
+                await NavigationService.PushPage(new LoginView());
+            }
+            else
+            {
+                await NavigationService.PushPage(new PetShopTabbedPage());
+            }
         }
 
         private async Task ShopLogin()

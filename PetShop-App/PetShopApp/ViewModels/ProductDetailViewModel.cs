@@ -17,11 +17,12 @@ namespace PetShopApp.ViewModels
     {
 
         #region Commands
-        public ICommand AddProductCommand { get; set; }  
+        public ICommand AddProductCommand { get; set; }
+        public ICommand GoToCartCommand { get; set; }
         #endregion Commands
 
         #region Properties
-            private ProductModel itemDetail;
+        private ProductModel itemDetail;
             private int quantitySelected;
         #endregion Properties
 
@@ -47,17 +48,19 @@ namespace PetShopApp.ViewModels
         #endregion
         #region Initialization
         public ProductDetailViewModel()
-            {
-                   AddProductCommand = new Command(async () => await AddProductToChart(), () => true);
-            }
-            public override async Task ConstructorAsync(object parameters)
-            {
+        {
+                AddProductCommand = new Command(async () => await AddProductToChart(), () => true);
+
+                GoToCartCommand = new Command(async () => await GoToShoppingCart(), () => true);
+        }
+        public override async Task ConstructorAsync(object parameters)
+        {
 
                 
-                var itemDetail = parameters as ProductModel;
-                ItemDetail = itemDetail;
-            }
-            #endregion
+            var itemDetail = parameters as ProductModel;
+            ItemDetail = itemDetail;
+        }
+        #endregion
 
         #region Methods
         private async Task AddProductToChart()
@@ -102,6 +105,11 @@ namespace PetShopApp.ViewModels
 
             }
             //NavigationService.PushPage(new CategoriesView());
+
+        }
+        private async Task GoToShoppingCart()
+        {
+            await NavigationService.PushPage(new ShoppingCartView());
 
         }
 

@@ -28,6 +28,7 @@ namespace PetShopApp.ViewModels
         #endregion
         #region Commands
         public ICommand SelectedItemTappedCommand { get; set; }
+        public ICommand GoToCartCommand { get; set; }
         #endregion 
         #region Getters/Setters
         public ObservableCollection<ProductModel> ProductsList
@@ -76,6 +77,7 @@ namespace PetShopApp.ViewModels
         public void InitializeCommands()
         {
             SelectedItemTappedCommand = new Command(async () => await GoToProductDetails(), () => true);
+            GoToCartCommand = new Command(async () => await GoToShoppingCart(), () => true);
         }
         public async Task ListProducts()
         {
@@ -87,6 +89,7 @@ namespace PetShopApp.ViewModels
                 Products = JsonConvert.DeserializeObject<List<ProductModel>>(response.Response, jsonSerializerSettings);
                 foreach (var p in Products)
                 {
+                    p.UnitPriceString = p.UnitPrice.ToString("N0");
                     ProductsList.Add(p);
                 }
             }
@@ -98,9 +101,16 @@ namespace PetShopApp.ViewModels
         }
         private async Task GoToProductDetails()
         {
+            
             await NavigationService.PushPage(new ProductDetailView(), ProductItem);
+            //ProductItem = null;
 
 
+        }
+        private async Task GoToShoppingCart()
+        {
+            
+            await NavigationService.PushPage(new ShoppingCartView());
 
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetShopApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace PetShopApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PetShopTabbedPage : TabbedPage
     {
+        TabbedPageViewModel context = new TabbedPageViewModel();
         public PetShopTabbedPage()
         {
             InitializeComponent();
