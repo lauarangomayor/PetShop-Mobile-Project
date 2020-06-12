@@ -87,16 +87,16 @@ namespace PetShopApp.ViewModels
         {
             try
             {
-                if (usermodel.Password != null && usermodel.Email!=null && usermodel.Name!=null ) 
+                if (Usermodel.Password != null && Usermodel.Email!=null && Usermodel.Name!=null ) 
                 { 
 
                     Usermodel.UserType = 1;
-                    APIResponse response = await clientCreate.ExecuteStrategy(usermodel);
+                    APIResponse response = await clientCreate.ExecuteStrategy(Usermodel);
                     if (response.IsSuccess)
                     {
                         Login = JsonConvert.DeserializeObject<LoginClientModel>(response.Response);
                         Settings.UId = Login.IdClient.ToString();
-                        Settings.UEmail = Login.Email;
+                        Settings.UEmail = Login.Email.ToString(); 
                         await Application.Current.MainPage.DisplayAlert("Guardado", "Se registro satisfactoriamente", "OK");
 
                         Usermodel.DocumentId = null; //Limpiar campos
